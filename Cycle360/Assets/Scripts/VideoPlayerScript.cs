@@ -9,11 +9,21 @@ public class VideoPlayerScript : MonoBehaviour
 {
     public VideoPlayer video;
     public bool isPlaying;
+    public bool isReady = false;
     public TextMeshProUGUI pauseButton;
     // Start is called before the first frame update
     void Start()
     {
-        isPlaying = true;
+        // isPlaying = true;
+      StartCoroutine(LoadAtStart());
+       
+    }
+
+    IEnumerator LoadAtStart()
+    {
+        yield return new WaitForSeconds(1f);
+        video.Pause();
+        isReady = true;
     }
 
     // Update is called once per frame
@@ -22,7 +32,7 @@ public class VideoPlayerScript : MonoBehaviour
         
     }
 
-    public void ButtonHit()
+    public void PlaybackManager()
     {
         if (isPlaying) 
         { PauseVid(); }
