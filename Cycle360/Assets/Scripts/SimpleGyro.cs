@@ -15,9 +15,9 @@ public class SimpleGyro : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RotationCam.y = Input.gyro.rotationRateUnbiased.y *-1.0f;
+        RotationCam.y = Input.gyro.rotationRateUnbiased.y *-2.0f;
        
-        RotationCam.x = Input.gyro.rotationRateUnbiased.x * -1.0f;
+        RotationCam.x = Input.gyro.rotationRateUnbiased.x * -2.0f;
         transform.Rotate(RotationCam);
     }
 }
