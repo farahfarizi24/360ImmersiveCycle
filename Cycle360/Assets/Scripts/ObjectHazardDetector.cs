@@ -115,6 +115,51 @@ public class ObjectHazardDetector : MonoBehaviour
             
             savingScript.OnPerceptionTestCorrectClick("Practice_1",VPscript.curFrame.ToString(),HazardName,score);
         }
+        if(HazardName == "ParkedCar_Hazard")
+        {
+            int score = 0;
+            //Score is 10 if its the first 1/3, is 5 if its 2/3, 3 if its close to end
+
+            if (VPscript.curFrame >= 18.0f && VPscript.curFrame <= 19.0f)
+            {
+                score = 10;
+            }
+
+            else if (VPscript.curFrame >= 18.9f && VPscript.curFrame <= 19.5f)
+            {
+                score = 5;
+            }
+
+            else
+            {
+                score = 3;
+            }
+
+            savingScript.OnPerceptionTestCorrectClick("Practice_1", VPscript.curFrame.ToString(), HazardName, score);
+        }
+
+        if (HazardName == "SpeedBump_Roundabout_Hazard")
+        {
+            int score = 0;
+            //Score is 10 if its the first 1/3, is 5 if its 2/3, 3 if its close to end
+
+            if (VPscript.curFrame >= 16.0f && VPscript.curFrame <= 19.0f)
+            {
+                score = 10;
+            }
+
+            else if (VPscript.curFrame >= 18.9f && VPscript.curFrame <= 22.0f)
+            {
+                score = 5;
+            }
+
+            else
+            {
+                score = 3;
+            }
+
+            savingScript.OnPerceptionTestCorrectClick("Practice_1", VPscript.curFrame.ToString(), HazardName, score);
+        }
     }
 
 
