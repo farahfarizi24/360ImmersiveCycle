@@ -7,7 +7,7 @@ public class HazardTracker : MonoBehaviour
   //  public Vector3 initialPosition = new Vector3 (-13.0f,53.0f,9.2f);
    // public Vector3 finalPosition = new Vector3(-4.3f,39.4f,-141.8f);
     public float speed=10000.0f;
-    float time = 5;
+    public float time = 5;
     public GameObject Hazard;
     // Start is called before the first frame update
     void Start()
