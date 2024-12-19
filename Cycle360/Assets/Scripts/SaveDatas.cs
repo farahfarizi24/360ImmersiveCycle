@@ -24,12 +24,23 @@ public class SaveDatas : MonoBehaviour
     int TotalIncorrectClick;
     int TotalNumberofClick;
     int TotalScore;
-
+  
+    //for showcase
+   public int TotalCorrectWithinQuestions;
+   public int TotalHazardWithinQuestion;
+   public int TotalHazardOnTheTest;
+    public int TotalCorrectWithinTheTest;
     private void Awake()
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
-        saveFile = Application.persistentDataPath + "/360Cycle.csv";
+       
+
+    }
+
+    public void OnPerceptionTestEnter()
+    {
+        saveFile = Application.persistentDataPath + "/360Cycle-PerceptionTest.csv";
         Debug.Log("File is saved at:" + saveFile);
 
         if (!File.Exists(saveFile))
@@ -37,20 +48,12 @@ public class SaveDatas : MonoBehaviour
 
             sw = File.AppendText(saveFile);
 
-          //  sw.WriteLine("ID," + "Date," + "Test ID," + "Question ID," + "Time," + "Object ID," + "Score,"+ "Total Correct Click,"+
-            //    "Total Incorrect Click," + "Total Number of Click," + "Total Score");
+            sw.WriteLine("ID," + "Date," + "Time," + "Test ID," + "Question ID," + "Video Time," + "Object ID," + "Score," + "Total Correct Click," +
+            "Total Incorrect Click," + "Total Number of Click," + "Total Score");
             sw.Close();
 
         }
-
-    }
-
-    public void OnPerceptionTestEnter()
-    {
-        sw = File.AppendText(saveFile);
-
-        sw.WriteLine("ID," + "Date," + "Time," + "Test ID," + "Question ID," + "Video Time," + "Object ID," + "Score," + "Total Correct Click," +
-            "Total Incorrect Click," + "Total Number of Click," + "Total Score");
+       
         theDate = System.DateTime.Now.ToString("MM/dd/yyyy");
         TestID = "Perception";
         TotalCorrectClick = 0;
@@ -58,7 +61,7 @@ public class SaveDatas : MonoBehaviour
         TotalNumberofClick = 0;
         TotalScore = 0;
        // Debug.Log(theDate + theTime);
-        sw.Close();
+      
     }
 
     public void OnPerceptionTestWrongClick(string VideoTime)

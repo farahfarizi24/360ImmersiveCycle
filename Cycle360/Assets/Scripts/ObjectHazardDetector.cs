@@ -23,26 +23,32 @@ public class ObjectHazardDetector : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (VPscript.isPlaying)
             {
-                
-                if(hit.collider != null)
+                if (Physics.Raycast(ray, out hit))
                 {
-                    Debug.Log("Is hit");
-                   // VPscript.PauseVid();
-                    CorrectBeep.Play();
-                    Debug.Log(hit.collider.gameObject.name);
-                    IfCorrectHazardHit(hit.collider.gameObject.name);
-                 Destroy( hit.collider.gameObject );
+
+                    if (hit.collider != null)
+                    {
+                        Debug.Log("Is hit");
+                        // VPscript.PauseVid();
+                        CorrectBeep.Play();
+                        Debug.Log(hit.collider.gameObject.name);
+                        IfCorrectHazardHit(hit.collider.gameObject.name);
+                        savingScript.TotalCorrectWithinTheTest++;
+                        savingScript.TotalCorrectWithinQuestions++;
+                        Destroy(hit.collider.gameObject);
+
+                    }
 
                 }
+                else
+                {
 
+                    IfWrongCLick();
+                }
             }
-            else
-            {
-
-                IfWrongCLick();
-            }
+          
 
 
         }
@@ -67,7 +73,8 @@ public class ObjectHazardDetector : MonoBehaviour
                     Debug.Log(hit.collider.gameObject.name);
                     IfCorrectHazardHit(hit.collider.gameObject.name);
                     Destroy(hit.collider.gameObject);
-
+                    savingScript.TotalCorrectWithinTheTest++;
+                    savingScript.TotalCorrectWithinQuestions++;
                     //save data 
 
                 }

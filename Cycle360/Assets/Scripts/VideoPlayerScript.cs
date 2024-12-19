@@ -4,9 +4,10 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Video;
-
+using UnityEngine.SceneManagement;
 public class VideoPlayerScript : MonoBehaviour
 {
+    SaveDatas SaveObj;
     public HazardTracker RedCar_hazardTracker;
     public bool HazardisSet_RC;
 
@@ -16,13 +17,19 @@ public class VideoPlayerScript : MonoBehaviour
     public HazardTracker Roundabout_hazardTracker;
     public bool HazardisSet_Roundabout;
 
+    public GameObject BackgroundUI;
+    public TextMeshProUGUI QuestionFeedback;
+    public TextMeshProUGUI TestFeedback;
+    public GameObject NextButton;
+    public GameObject CompleteButton;
+    private int HazardTotalCount;
     public float curFrame;
     public string WhichScene;
     public VideoPlayer video;
     public bool isPlaying;
     public bool isReady = false;
     public int question=0;
-    public TextMeshProUGUI pauseButton;
+  //  public TextMeshProUGUI pauseButton;
     // Start is called before the first frame update
   
 
@@ -59,6 +66,7 @@ public class VideoPlayerScript : MonoBehaviour
         {
             case "perception":
                 PerceptionVP();
+                video.loopPointReached += ShowEndScene;
                 break;
             case "projection":
                 ProjectionVP();
@@ -81,13 +89,12 @@ public class VideoPlayerScript : MonoBehaviour
     {
         video.Pause();
         isPlaying = false;
-        pauseButton.text = "Continue";
+      
     }
     public void ContinueVid()
     {
        video.Play();
         isPlaying = true;
-        pauseButton.text = "Pause";
 
 
     }
@@ -98,6 +105,8 @@ public class VideoPlayerScript : MonoBehaviour
 
     void PerceptionVP()
     {
+        GetSaveFile();
+   
         if (RedCar_hazardTracker != null)
         {
             if (curFrame >= 15.0f && !HazardisSet_RC)
@@ -141,15 +150,22 @@ public class VideoPlayerScript : MonoBehaviour
                 Roundabout_hazardTracker.gameObject.SetActive(true);
                 Roundabout_hazardTracker.StartMove(new Vector3(14.1499996f, 0.200000003f, -7.05999994f)
 , new Vector3(3.07999992f, 0.939999998f, -9.89999962f)
-, 9.0f);
+, 9.0f); SaveObj.TotalHazardWithinQuestion = 3;
+                HazardTotalCount += SaveObj.TotalHazardWithinQuestion;
                 HazardisSet_Roundabout = true;
                 //  question++;
             }
             if (curFrame >= 25.0f && HazardisSet_Roundabout)
+
             {
+                
                 Roundabout_hazardTracker.gameObject.SetActive(false);
             }
         }
+
+       
+        video.loopPointReached += EndofQuestion;
+
 
 
 
@@ -172,5 +188,37 @@ public class VideoPlayerScript : MonoBehaviour
 
     }
     #endregion
+    
 
+
+    public void OnStartLoad()
+    {
+        SceneManager.LoadScene(0);
+    }
+public void ShowEndScene(VideoPlayer vp)
+    {
+        isPlaying = false;
+        SaveObj.TotalHazardOnTheTest = HazardTotalCount;
+        QuestionFeedback.text = "You identified " + SaveObj.TotalCorrectWithinTheTest + " out of " +
+          SaveObj.TotalHazardOnTheTest + " hazards in the video";
+
+    }
+
+    void EndofQuestion(VideoPlayer vp)
+    {
+        GetSaveFile();
+        BackgroundUI.gameObject.SetActive(true);
+        NextButton.gameObject.SetActive(true);
+       TestFeedback.gameObject.SetActive(true);
+        TestFeedback.text = "You identified " + SaveObj.TotalCorrectWithinQuestions + " out of " +
+          SaveObj.TotalHazardWithinQuestion + " hazards in the video";
+
+    }
+
+    void GetSaveFile()
+    {
+
+        GameObject SaveFileObject = GameObject.FindGameObjectWithTag("Manager");
+        SaveObj = SaveFileObject.GetComponent<SaveDatas>();
+    }
 }
