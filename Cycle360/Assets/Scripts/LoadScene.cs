@@ -24,6 +24,12 @@ public class LoadScene : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void LoadComprehensionTest()
+    {
+        SceneManager.LoadScene(3);
+    }
+
+
     public void LoadPerceptionTestInstruction()
     {
         GeneralInstruction.SetActive(false);

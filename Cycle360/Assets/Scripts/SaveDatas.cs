@@ -38,6 +38,54 @@ public class SaveDatas : MonoBehaviour
 
     }
 
+    public void OnComprehensionTestEnter()
+    {
+        saveFile = Application.persistentDataPath + "/360Cycle-ComprehensionTest.csv";
+        Debug.Log("File is saved at:" + saveFile);
+
+        if (!File.Exists(saveFile))
+        {
+
+            sw = File.AppendText(saveFile);
+
+            //Answer rating will be correct or incorrect
+            sw.WriteLine("ID," + "Date," + "Test ID," + "Question ID," + "Response Time,"+ "Answer," + "Answer Rating,"+"Confidence Rating,"+"Total Correct Answer");
+            sw.Close();
+
+        }
+
+        theDate = System.DateTime.Now.ToString("MM/dd/yyyy");
+        TestID = "Comprehension";
+        TotalCorrectClick = 0;
+        TotalIncorrectClick = 0;
+        TotalNumberofClick = 0;
+        TotalScore = 0;
+        // Debug.Log(theDate + theTime);
+    }
+
+    public void OnComprehensionTestCorrect(string ResponseTime, string QuestionID, string Answer, string Confidence)
+    {
+
+        TotalCorrectClick++;
+
+        sw = File.AppendText(saveFile);
+        sw.Write(UID + "," + theDate + "," + "Comprehension" + "," + QuestionID + "," + ResponseTime + "," + Answer + "," + "Correct" + "," + Confidence + "," + TotalCorrectClick +"\n");
+
+        sw.Close();
+    }
+
+
+    public void OnComprehensionTestIncorrect(string ResponseTime, string QuestionID, string Answer, string Confidence) 
+    {
+
+        sw = File.AppendText(saveFile);
+        sw.Write(UID + "," + theDate + "," + "Comprehension" + "," + QuestionID + "," + ResponseTime + "," + Answer + "," + "Incorrect" + "," + Confidence + "," + TotalCorrectClick + "\n");
+
+        sw.Close();
+
+
+    }
+
     public void OnPerceptionTestEnter()
     {
         saveFile = Application.persistentDataPath + "/360Cycle-PerceptionTest.csv";
