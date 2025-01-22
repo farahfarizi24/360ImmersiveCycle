@@ -534,6 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ecd39f2de86d74e9e8bead42816ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ProjTestVP: {fileID: 587685922}
   ProjPrac1: {fileID: 32900000, guid: 14d9a80d39349c141b9c71bdf8d6c4a2, type: 3}
   ProjPrac2:
   - {fileID: 32900000, guid: e96967234490832449ef577a31f05566, type: 3}
@@ -583,6 +584,9 @@ MonoBehaviour:
   - {fileID: 32900000, guid: 362e324ab3e39df4b8a7bd30ef030f31, type: 3}
   - {fileID: 32900000, guid: b9011e0b665c093449c92a110aeffb8e, type: 3}
   - {fileID: 32900000, guid: 60cbeec8fa591f34c8c13d990b853701, type: 3}
+  CurrentVideoNumber: 0
+  SplittedClipNumber: 0
+  TotalClipForThisVideo: 0
 --- !u!1 &616563907
 GameObject:
   m_ObjectHideFlags: 0
