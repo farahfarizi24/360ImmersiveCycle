@@ -6,8 +6,10 @@ using UnityEngine.Video;
 
 public class ProjectionTestCode : MonoBehaviour
 {
-    public VideoPlayer ProjTestVP=null;
-    public VideoPlayer SecondVideoPlayer=null;
+    public VideoPlayer VP_1=null;
+    public VideoPlayer VP_2=null;
+    public VideoPlayer VP_3 = null;
+
     public VideoClip ProjPrac1;
     public VideoClip[] ProjPrac2;
     public VideoClip[] ProjPrac3;
@@ -44,10 +46,10 @@ public class ProjectionTestCode : MonoBehaviour
 
     private void TestTransition()
     {
-        ProjTestVP.clip = ProjPrac2[0];
-        ProjTestVP.Prepare();
-        SecondVideoPlayer.clip = ProjPrac2[1];
-        SecondVideoPlayer.Prepare();
+        VP_1.clip = ProjPrac2[0];
+        VP_1.Prepare();
+        VP_2.clip = ProjPrac2[1];
+        VP_2.Prepare();
         
     }
 
@@ -55,12 +57,12 @@ public class ProjectionTestCode : MonoBehaviour
     void Update()
     {
         // ProjTestVP.loopPointReached += DecideWhatToDoNext;
-        if (ProjTestVP.isPrepared&&!isPlaying) { ProjTestVP.Play(); isPlaying = true; }
+        if (VP_1.isPrepared&&!isPlaying) { VP_1.Play(); isPlaying = true; }
 
-        ProjTestVP.loopPointReached += SwitchVid;
+        VP_1.loopPointReached += SwitchVid;
 
-        if (ProjTestVP.isPlaying) { Debug.Log("First VP playing"); }
-        if (SecondVideoPlayer.isPlaying) { Debug.Log("Second VP is playing"); }
+        if (VP_1.isPlaying) { Debug.Log("First VP playing"); }
+        if (VP_2.isPlaying) { Debug.Log("Second VP is playing"); }
     }
 
 
@@ -68,8 +70,8 @@ public class ProjectionTestCode : MonoBehaviour
     {
         if (!isChanging)
         {
-            SecondVideoPlayer.Play();
-            ProjTestVP.Stop();
+            VP_2.Play();
+            VP_1.Stop();
             isChanging = true;
         }
     }
@@ -82,9 +84,9 @@ public class ProjectionTestCode : MonoBehaviour
             if (CurrentVideoNumber == 1)
             {
                 CurrentVideoNumber++;
-                ProjTestVP.Stop();
+                VP_1.Stop();
 
-                RunCurrentVideo();
+                LoadCurrentVideo();
                 StartCoroutine(CountdownToStartVid());
             }
             else
@@ -105,11 +107,11 @@ public class ProjectionTestCode : MonoBehaviour
                     }
                     else
                     {
-                        ProjTestVP.Stop();
+                        VP_1.Stop();
 
                         SplittedClipNumber = 0;
                         CurrentVideoNumber++;
-                        RunCurrentVideo();
+                        LoadCurrentVideo();
                         StartCoroutine(CountdownToStartVid());
                     }
 
@@ -132,17 +134,17 @@ public class ProjectionTestCode : MonoBehaviour
 
     public void PlayNextClip()
     {
-        if (ProjTestVP.isPlaying)
+        if (VP_1.isPlaying)
         {
          
-            SecondVideoPlayer.Play();
-            ProjTestVP.Stop();
+            VP_2.Play();
+            VP_1.Stop();
             //Play the other one
         }
         else
         {
-            ProjTestVP.Play();
-            SecondVideoPlayer.Stop();
+            VP_1.Play();
+            VP_2.Stop();
 
             //PlayProjTestVP
         }
@@ -152,17 +154,17 @@ public class ProjectionTestCode : MonoBehaviour
     {
 
 
-        if (ProjTestVP.isPlaying)
+        if (VP_1.isPlaying)
         {
-            SecondVideoPlayer.clip = NextClip;
-            SecondVideoPlayer.Prepare();
+            VP_2.clip = NextClip;
+            VP_2.Prepare();
 
             //Play the other one
         }
         else
         {
-            ProjTestVP.clip = NextClip;
-            ProjTestVP.Prepare();
+            VP_1.clip = NextClip;
+            VP_1.Prepare();
             //PlayProjTestVP
         }
 
@@ -173,16 +175,16 @@ public class ProjectionTestCode : MonoBehaviour
 
     IEnumerator CountdownToStartVid()
     {
-        ProjTestVP.Play();
-        yield return new WaitForSeconds(1f);
-        ProjTestVP.Pause();
+      //  VP_1.Play();
+      //  yield return new WaitForSeconds(1f);
+     //   VP_1.Pause();
         //start countdown
         yield return new WaitForSeconds(3f);
-        ProjTestVP.Play();
+        VP_1.Play();
         isChanging = false;
 
     }
-    void RunCurrentVideo()
+    void LoadCurrentVideo()
     {
 
         switch (CurrentVideoNumber) 
@@ -190,68 +192,96 @@ public class ProjectionTestCode : MonoBehaviour
             case 1:
                
 
-                ProjTestVP.clip = ProjPrac1;
+                VP_1.clip = ProjPrac1;
+                VP_2.clip = null;
+                VP_3.clip = null;
+                TotalClipForThisVideo = 1;
                 break;
             case 2:
-                ProjTestVP.clip = ProjPrac2[SplittedClipNumber];
+                VP_1.clip = ProjPrac2[0];
+                VP_2.clip = ProjPrac2[1];
+                VP_3.clip = null;
                 TotalClipForThisVideo = ProjPrac2.Length;
                 
                 break;
 
             case 3:
-                ProjTestVP.clip = ProjPrac3[SplittedClipNumber];
+                VP_1.clip = ProjPrac3[0];
+                VP_2.clip = ProjPrac3[1];
+                VP_3.clip = null;
                 TotalClipForThisVideo = ProjPrac3.Length;
 
 
 
                 break;
-                case 4:
-                ProjTestVP.clip = ProjQ1[SplittedClipNumber];
+                 
+            case 4:
+                VP_1.clip = ProjQ1[0];
+                VP_2.clip = ProjQ1[1];
+                VP_3.clip = ProjQ1[2];
                 TotalClipForThisVideo = ProjQ1.Length;
 
                 break;
-                case 5:
-                ProjTestVP.clip = ProjQ2[SplittedClipNumber];
+            case 5:
+                VP_1.clip = ProjQ2[0];
+                VP_2.clip = ProjQ2[1];
+                VP_3.clip = null ;
                 TotalClipForThisVideo = ProjQ2.Length;
 
                 break;
-                case 6:
-                ProjTestVP.clip = ProjQ3[SplittedClipNumber];
+            case 6:
+                VP_1.clip = ProjQ3[0];
+                VP_2.clip = ProjQ3[1];
+                VP_3.clip = null ;
                 TotalClipForThisVideo = ProjQ3.Length;
 
                 break;
                 case 7:
-                ProjTestVP.clip = ProjQ4[SplittedClipNumber];
+                VP_1.clip = ProjQ4[0];
+                VP_2.clip = ProjQ4[1];
+                VP_3.clip = ProjQ4[2] ;
                 TotalClipForThisVideo = ProjQ4.Length;
 
                 break;
                 case 8:
-                ProjTestVP.clip = ProjQ5[SplittedClipNumber];
+                VP_1.clip = ProjQ5[0];
+                VP_2.clip = ProjQ5[1];
+                VP_3.clip = null ;
                 TotalClipForThisVideo = ProjQ5.Length;
 
                 break;
                 case 9:
-                ProjTestVP.clip = ProjQ6[SplittedClipNumber];
+                VP_1.clip = ProjQ6[0];
+                VP_2.clip = ProjQ6[1];
+                VP_3.clip = ProjQ6[2];
                 TotalClipForThisVideo = ProjQ6.Length;
 
                 break;
                 case 10:
-                ProjTestVP.clip = ProjQ7[SplittedClipNumber];
+                VP_1.clip = ProjQ7[0];
+                VP_2.clip = ProjQ7[1];
+                VP_3.clip = ProjQ7[2];
                 TotalClipForThisVideo = ProjQ7.Length;
 
                 break;
                 case 11:
-                ProjTestVP.clip = ProjQ8[SplittedClipNumber];
+                VP_1.clip = ProjQ8[0];
+                VP_2.clip = ProjQ8[1];
+                VP_3.clip = ProjQ8[2];
                 TotalClipForThisVideo = ProjQ8.Length;
 
                 break;
                 case 12:
-                ProjTestVP.clip = ProjQ9[SplittedClipNumber];
+                VP_1.clip = ProjQ9[0];
+                VP_2.clip = ProjQ9[1];
+                VP_3.clip = ProjQ9[2];
                 TotalClipForThisVideo = ProjQ9.Length;
 
                 break;
                 case 13:
-                ProjTestVP.clip = ProjQ10[SplittedClipNumber];
+                VP_1.clip = ProjQ10[0];
+                VP_2.clip = ProjQ10[1];
+                VP_3.clip = ProjQ10[2];
                 TotalClipForThisVideo = ProjQ10.Length;
 
                 break;
@@ -261,6 +291,16 @@ public class ProjectionTestCode : MonoBehaviour
 
         }
 
+        PrepareVideoToPlay();
+        StartCoroutine(CountdownToStartVid());
 
+
+    }
+
+    void PrepareVideoToPlay()
+    {
+        VP_1.Prepare();
+        VP_2.Prepare();
+        VP_3.Prepare();
     }
 }
