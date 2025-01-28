@@ -6,7 +6,8 @@ using UnityEngine.Video;
 
 public class ProjectionTestCode : MonoBehaviour
 {
-    public VideoPlayer ProjTestVP;
+    public VideoPlayer ProjTestVP=null;
+    public VideoPlayer SecondVideoPlayer=null;
     public VideoClip ProjPrac1;
     public VideoClip[] ProjPrac2;
     public VideoClip[] ProjPrac3;
@@ -25,21 +26,52 @@ public class ProjectionTestCode : MonoBehaviour
     private int TotalVideo = 13;
     public int TotalClipForThisVideo;
     public bool isChanging=false;
+    public bool isPlaying = false;
     // Start is called before the first frame update
     void Start()
     {
         SplittedClipNumber = 0;
         CurrentVideoNumber = 1;
-        RunCurrentVideo();
-        StartCoroutine(CountdownToStartVid());
+       // RunCurrentVideo();
+        //StartCoroutine(CountdownToStartVid());
+        TestTransition();
+    }
 
+
+    //https://discussions.unity.com/t/how-to-play-video-from-adressable-assetbundle-on-android/744900/13
+    //s https://discussions.unity.com/t/create-obb-with-video-bigger-than-2-gb-for-android-assetbundle/681923/9
+    //https://www.mp4compress.com/
+
+    private void TestTransition()
+    {
+        ProjTestVP.clip = ProjPrac2[0];
+        ProjTestVP.Prepare();
+        SecondVideoPlayer.clip = ProjPrac2[1];
+        SecondVideoPlayer.Prepare();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        ProjTestVP.loopPointReached += DecideWhatToDoNext;
+        // ProjTestVP.loopPointReached += DecideWhatToDoNext;
+        if (ProjTestVP.isPrepared&&!isPlaying) { ProjTestVP.Play(); isPlaying = true; }
 
+        ProjTestVP.loopPointReached += SwitchVid;
+
+        if (ProjTestVP.isPlaying) { Debug.Log("First VP playing"); }
+        if (SecondVideoPlayer.isPlaying) { Debug.Log("Second VP is playing"); }
+    }
+
+
+    private void SwitchVid (VideoPlayer source)
+    {
+        if (!isChanging)
+        {
+            SecondVideoPlayer.Play();
+            ProjTestVP.Stop();
+            isChanging = true;
+        }
     }
 
     private void DecideWhatToDoNext(VideoPlayer source)
@@ -61,13 +93,14 @@ public class ProjectionTestCode : MonoBehaviour
                 {
                     if (SplittedClipNumber <= TotalClipForThisVideo-1)
                     {
-                        ProjTestVP.Stop();
-
-                        SplittedClipNumber++;
+                       
+                        PlayNextClip();
+                        //PrepareVP()
+                       /* SplittedClipNumber++;
                         Debug.Log(SplittedClipNumber.ToString());
                         RunCurrentVideo();
                         ProjTestVP.Play();
-                       
+                       */
                         //StartCoroutine(CountdownToStartVid());
                     }
                     else
@@ -94,6 +127,45 @@ public class ProjectionTestCode : MonoBehaviour
             }
         }
       
+    }
+
+
+    public void PlayNextClip()
+    {
+        if (ProjTestVP.isPlaying)
+        {
+         
+            SecondVideoPlayer.Play();
+            ProjTestVP.Stop();
+            //Play the other one
+        }
+        else
+        {
+            ProjTestVP.Play();
+            SecondVideoPlayer.Stop();
+
+            //PlayProjTestVP
+        }
+    }
+
+    public void PrepareVP(VideoClip NextClip)
+    {
+
+
+        if (ProjTestVP.isPlaying)
+        {
+            SecondVideoPlayer.clip = NextClip;
+            SecondVideoPlayer.Prepare();
+
+            //Play the other one
+        }
+        else
+        {
+            ProjTestVP.clip = NextClip;
+            ProjTestVP.Prepare();
+            //PlayProjTestVP
+        }
+
     }
 
   
