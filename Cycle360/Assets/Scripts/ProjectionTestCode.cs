@@ -24,7 +24,7 @@ public class ProjectionTestCode : MonoBehaviour
     public VideoClip[] ProjQ9;
     public VideoClip[] ProjQ10;
     public int CurrentVideoNumber; //13 video, 3 prac 10 final
-    public int SplittedClipNumber;
+ //   public int SplittedClipNumber;
     private int TotalVideo = 13;
     public int TotalClipForThisVideo;
     public bool isChanging=false;
@@ -32,11 +32,12 @@ public class ProjectionTestCode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SplittedClipNumber = 0;
+   //     SplittedClipNumber = 0;
         CurrentVideoNumber = 1;
+        LoadCurrentVideo();
        // RunCurrentVideo();
         //StartCoroutine(CountdownToStartVid());
-        TestTransition();
+       
     }
 
 
@@ -44,91 +45,73 @@ public class ProjectionTestCode : MonoBehaviour
     //s https://discussions.unity.com/t/create-obb-with-video-bigger-than-2-gb-for-android-assetbundle/681923/9
     //https://www.mp4compress.com/
 
-    private void TestTransition()
-    {
-        VP_1.clip = ProjPrac2[0];
-        VP_1.Prepare();
-        VP_2.clip = ProjPrac2[1];
-        VP_2.Prepare();
-        
-    }
-
+  
     // Update is called once per frame
     void Update()
     {
         // ProjTestVP.loopPointReached += DecideWhatToDoNext;
-        if (VP_1.isPrepared&&!isPlaying) { VP_1.Play(); isPlaying = true; }
-
+       // if (VP_1.isPrepared&&!isPlaying) { VP_1.Play(); isPlaying = true; }
+       if(VP_1.isPlaying) 
         VP_1.loopPointReached += SwitchVid;
-
+       if(VP_2.isPlaying)
+            VP_2.loopPointReached += SwitchVid;
+       if(VP_3.isPlaying)
+            VP_3.loopPointReached += SwitchVid;
         if (VP_1.isPlaying) { Debug.Log("First VP playing"); }
         if (VP_2.isPlaying) { Debug.Log("Second VP is playing"); }
+        if (VP_3.isPlaying) { Debug.Log("Third VP is playing"); }
     }
 
 
     private void SwitchVid (VideoPlayer source)
     {
+        Debug.Log("Switch Vid encountered");
         if (!isChanging)
         {
-            VP_2.Play();
-            VP_1.Stop();
-            isChanging = true;
-        }
-    }
-
-    private void DecideWhatToDoNext(VideoPlayer source)
-    {
-        if (!isChanging)
-        {
-            isChanging = true;
-            if (CurrentVideoNumber == 1)
+            if (source== VP_1)
             {
-                CurrentVideoNumber++;
-                VP_1.Stop();
-
-                LoadCurrentVideo();
-                StartCoroutine(CountdownToStartVid());
-            }
-            else
-            {
-                if (CurrentVideoNumber != TotalVideo)
+                Debug.Log("Source is VP1");
+                if (TotalClipForThisVideo==1)
                 {
-                    if (SplittedClipNumber <= TotalClipForThisVideo-1)
-                    {
-                       
-                        PlayNextClip();
-                        //PrepareVP()
-                       /* SplittedClipNumber++;
-                        Debug.Log(SplittedClipNumber.ToString());
-                        RunCurrentVideo();
-                        ProjTestVP.Play();
-                       */
-                        //StartCoroutine(CountdownToStartVid());
-                    }
-                    else
-                    {
-                        VP_1.Stop();
-
-                        SplittedClipNumber = 0;
-                        CurrentVideoNumber++;
-                        LoadCurrentVideo();
-                        StartCoroutine(CountdownToStartVid());
-                    }
-
-
-                    //check which is currently active;
-                    //add split clip number if they're not at the end
-                    //add video number 
+                    CurrentVideoNumber++;
+                    Debug.Log("Next video is" + CurrentVideoNumber);
+                    LoadCurrentVideo();
 
                 }
                 else
                 {
-                    //EndingScene
+                
+                    VP_2.Play();
                 }
+                VP_1.Stop();
+                isChanging = true;
+            }
+            else if (VP_2.isPlaying)
+            {
+                if(TotalClipForThisVideo==3)
+                {
+                    VP_3.Play();
+                }
+                else
+                {
+                    CurrentVideoNumber++;
+                    LoadCurrentVideo();
+                }
+                VP_2.Stop();
+                isChanging = true;
+            }
+            else if (VP_3.isPlaying)
+            {
+                VP_3.Stop();
+                
+                    CurrentVideoNumber++;
+                    LoadCurrentVideo();
+                
+                isChanging = true;
 
             }
+        
         }
-      
     }
 
 
@@ -170,9 +153,8 @@ public class ProjectionTestCode : MonoBehaviour
 
     }
 
+
   
-
-
     IEnumerator CountdownToStartVid()
     {
       //  VP_1.Play();
@@ -198,6 +180,7 @@ public class ProjectionTestCode : MonoBehaviour
                 TotalClipForThisVideo = 1;
                 break;
             case 2:
+             
                 VP_1.clip = ProjPrac2[0];
                 VP_2.clip = ProjPrac2[1];
                 VP_3.clip = null;

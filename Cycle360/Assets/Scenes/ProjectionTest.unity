@@ -501,7 +501,7 @@ VideoPlayer:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
   m_WaitForFirstFrame: 1
@@ -534,19 +534,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ecd39f2de86d74e9e8bead42816ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjTestVP: {fileID: 587685922}
-  SecondVideoPlayer: {fileID: 1935061370}
+  VP_1: {fileID: 587685922}
+  VP_2: {fileID: 1935061370}
+  VP_3: {fileID: 981150136}
   ProjPrac1: {fileID: 32900000, guid: 14d9a80d39349c141b9c71bdf8d6c4a2, type: 3}
   ProjPrac2:
-  - {fileID: 32900000, guid: ad809cece47f2af49a57e7194d3558de, type: 3}
-  - {fileID: 32900000, guid: d31de434e49a4114bb94c72aca188600, type: 3}
+  - {fileID: 32900000, guid: b9840e77c01b33343881ff7fd5ac0007, type: 3}
+  - {fileID: 32900000, guid: f0f76872475bf7141a53599485a99915, type: 3}
   ProjPrac3:
-  - {fileID: 32900000, guid: ab17b3b92408c9e4691efd75f516bcfc, type: 3}
-  - {fileID: 32900000, guid: 4b64d8c67b09aae42a19f5da6fc211aa, type: 3}
+  - {fileID: 32900000, guid: c8f1e6070cc2c224eb6e13cb41f9a949, type: 3}
+  - {fileID: 32900000, guid: 61594e7bd46bf0e4e9663888dfdaf8a5, type: 3}
   ProjQ1:
-  - {fileID: 32900000, guid: 637f75671b650ce48ba9297e6d42b8f1, type: 3}
-  - {fileID: 32900000, guid: 04f8c9ea03796d8409c0a473694d3ddd, type: 3}
-  - {fileID: 32900000, guid: ee3e0d8fe56d63d4da0021ce0b82031a, type: 3}
+  - {fileID: 32900000, guid: dde97900d42c500418787db2203f2f0e, type: 3}
+  - {fileID: 32900000, guid: a6ad3f5c328d73d449209edbc03d82da, type: 3}
+  - {fileID: 32900000, guid: c0a1b40f4c6481840a87c9bb2b71c0b2, type: 3}
   ProjQ2:
   - {fileID: 32900000, guid: 707554aaa3751ae4f8a61e4a94d08dec, type: 3}
   - {fileID: 32900000, guid: 4b9b7b2fbae759e48a249528ce83380e, type: 3}
@@ -581,7 +582,6 @@ MonoBehaviour:
   - {fileID: 32900000, guid: 0279814c0501bce43919d446d2683c89, type: 3}
   - {fileID: 32900000, guid: 96a47de1bd8e5f44b96d6fc858de724e, type: 3}
   CurrentVideoNumber: 0
-  SplittedClipNumber: 0
   TotalClipForThisVideo: 0
   isChanging: 0
   isPlaying: 0
@@ -1194,7 +1194,7 @@ GameObject:
   - component: {fileID: 981150137}
   - component: {fileID: 981150136}
   m_Layer: 0
-  m_Name: ThirdVideoPlayer (1)
+  m_Name: ThirdVideoPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1966,7 +1966,7 @@ VideoPlayer:
   m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
-  m_WaitForFirstFrame: 1
+  m_WaitForFirstFrame: 0
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
 --- !u!4 &1935061371
