@@ -205,7 +205,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 31539927}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 587685922}
+        m_TargetAssemblyTypeName: UnityEngine.Video.VideoPlayer, UnityEngine
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 587685924}
+        m_TargetAssemblyTypeName: ProjTestVer2, Assembly-CSharp
+        m_MethodName: OnStopButtonPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &31539927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -536,9 +560,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clip:
   - {fileID: 32900000, guid: 14d9a80d39349c141b9c71bdf8d6c4a2, type: 3}
+  - {fileID: 32900000, guid: c4f93e511e0dac94e90d3c73db688dbb, type: 3}
+  - {fileID: 32900000, guid: bb0a5fe92147b744eb2b6c8ba08004f8, type: 3}
+  - {fileID: 32900000, guid: b9890047d90d15140b042c54e5291292, type: 3}
+  - {fileID: 32900000, guid: 928d25a3115257045a6019fd9870fb45, type: 3}
+  - {fileID: 32900000, guid: 707fedb97c5efd7409ccffcfc1f8667a, type: 3}
+  - {fileID: 32900000, guid: a9bf6c78467bf5f47b77733f8a2497c1, type: 3}
+  - {fileID: 32900000, guid: d7817b2d8766a8443b55a1f4c872d558, type: 3}
+  - {fileID: 32900000, guid: 3857b1c50b05cd441b875b4de04d46ad, type: 3}
+  - {fileID: 32900000, guid: 8539af3e8a0b80d45928e9a6506105ff, type: 3}
+  - {fileID: 32900000, guid: f5068a675d0b8eb4a8725e2599845b17, type: 3}
+  - {fileID: 32900000, guid: 2ccfe05fcd8d036428918a10a8ca69b5, type: 3}
+  - {fileID: 32900000, guid: 24eba164413c8a549941c97845de0abd, type: 3}
   CurrentClipNumber: 0
+  TimerText: {fileID: 1581809550}
+  CountdownTimer: 0
   VP: {fileID: 587685922}
   isChanging: 0
+  QuestionID: 
+  totalScore: 0
+  ThisQuestionScore: 0
+  curVidTime: 0
+  ResOutcome: 
 --- !u!1 &616563907
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,18 +840,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 31539924}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 972805902}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -1368,9 +1399,9 @@ RectTransform:
   - {fileID: 375526689}
   - {fileID: 2085764657}
   - {fileID: 671370495}
+  - {fileID: 1581809548}
   - {fileID: 31539925}
   - {fileID: 972805903}
-  - {fileID: 1581809548}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1389,14 +1420,13 @@ GameObject:
   - component: {fileID: 1581809548}
   - component: {fileID: 1581809551}
   - component: {fileID: 1581809550}
-  - component: {fileID: 1581809549}
   m_Layer: 5
   m_Name: CountdownTimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1581809548
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1416,22 +1446,6 @@ RectTransform:
   m_AnchoredPosition: {x: -344, y: 280}
   m_SizeDelta: {x: 326.1, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1581809549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1581809547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec6472345e01dcd408193e55489457d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VPScript: {fileID: 0}
-  TimeLeft: 3
-  TimerOn: 0
-  TimerTxt: {fileID: 1581809550}
 --- !u!114 &1581809550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1452,7 +1466,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1462,7 +1476,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1485,7 +1499,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535

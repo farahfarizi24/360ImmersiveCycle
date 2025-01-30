@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.Video;
@@ -8,6 +9,8 @@ public class ProjTestVer2 : MonoBehaviour
 {
     public VideoClip[] clip;//There will be 13 video clip 
     public int CurrentClipNumber;
+    public TMP_Text TimerText;
+    public int CountdownTimer;
     public VideoPlayer VP;
     public bool isChanging=false;
     SaveDatas savingScript;
@@ -16,6 +19,7 @@ public class ProjTestVer2 : MonoBehaviour
     public int ThisQuestionScore;
     public float curVidTime;
     public string ResOutcome;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +31,9 @@ public class ProjTestVer2 : MonoBehaviour
         totalScore = 0;
         ThisQuestionScore = 0;
         ResOutcome = "";
+        TimerText.text = "";
+        CountdownTimer = 0;
+
     }
 
     // Update is called once per frame
@@ -47,6 +54,8 @@ public class ProjTestVer2 : MonoBehaviour
 
             isChanging = true;
             VP.Stop();
+            OnNoButtonPress();
+
             CurrentClipNumber++;
             LoadClip();
         }
@@ -54,6 +63,8 @@ public class ProjTestVer2 : MonoBehaviour
         if(CurrentClipNumber == 13)
         {
             isChanging = true;
+            OnNoButtonPress();
+
             VP.Stop();
             //SHOWCASE END SCREEN
         }
@@ -65,9 +76,9 @@ public class ProjTestVer2 : MonoBehaviour
         savingScript.OnProjectionTestResponse(QuestionID, "No Response", "NA", 0,curVidTime);
     }
 
-    private void OnStopButtonPress()
+    public void OnStopButtonPress()
     {
-       
+
         CalculateScore();
 
         //CalculateScore
@@ -80,8 +91,17 @@ public class ProjTestVer2 : MonoBehaviour
         totalScore += ThisQuestionScore;
 
         savingScript.OnProjectionTestResponse(QuestionID, "Stop", ResOutcome, ThisQuestionScore,curVidTime);
-        CurrentClipNumber++;
-        LoadClip();
+        if (CurrentClipNumber == 13) 
+        {
+            VP.Stop();
+            //ENDING SCENE
+        }
+        else
+        {
+            CurrentClipNumber++;
+            LoadClip();
+        }
+        
     }
 
     public int CalculateScore()
@@ -158,10 +178,23 @@ public class ProjTestVer2 : MonoBehaviour
     }
     IEnumerator CountdownToStartVid()
     {
+        while(CountdownTimer > 0)
+        {
+            TimerText.text = CountdownTimer.ToString();
+            yield return new WaitForSeconds(1f);
+            CountdownTimer--;
+        }
+        TimerText.text = "Go!";
         //Provide 3 seconds break before Starting to play video
-        yield return new WaitForSeconds(3f);
+        //yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
+        TimerText.text = "";
+
         VP.Play();
         isChanging = false;
+        CountdownTimer = 3;
+        StopCoroutine(CountdownToStartVid());
+
 
     }
     public void LoadClip()
