@@ -137,6 +137,42 @@ public class SaveDatas : MonoBehaviour
         sw.Close();
     }
 
+    public void OnProjectionTestEnter()
+    {
+        saveFile = Application.persistentDataPath + "/360Cycle-ProjectionTest.csv";
+        Debug.Log("File is saved at:" + saveFile);
+
+        if (!File.Exists(saveFile))
+        {
+            
+            sw = File.AppendText(saveFile);
+
+            //Answer rating will be correct or incorrect
+            sw.WriteLine("ID," + "Date," +"Time," + "Test ID," + "Question ID," + "Response Time," + "Response," + "Response Outcome," + "Response Score," + "Total Score");
+            //Test ID: Projection, Response:stop or no response: response outcomeNA: correct, early, late, did not respond, number of point (prac and real is separated)
+            sw.Close();
+
+        }
+
+        theDate = System.DateTime.Now.ToString("MM/dd/yyyy");
+        TestID = "Projection";
+        TotalScore = 0;
+    }
+
+
+    public void OnProjectionTestResponse(string QuestionID, string Response, string ResponseOutcome, int CurrentPoints, float VidTime)
+    {
+        sw = File.AppendText(saveFile);
+        string theTime = System.DateTime.Now.ToString("hh:mm:ss");
+        TotalCorrectClick++;
+        TotalNumberofClick++;
+        TotalScore += CurrentPoints;
+
+        sw.Write(UID + "," + theDate + "," + theTime +  "," + TestID + "," + QuestionID + "," + VidTime + ","+ Response + "," + ResponseOutcome + "," + CurrentPoints + ","
+            +TotalScore + "\n");
+        sw.Close();
+    }
+   
 
 
 

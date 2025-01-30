@@ -465,7 +465,7 @@ GameObject:
   - component: {fileID: 587685922}
   - component: {fileID: 587685924}
   m_Layer: 0
-  m_Name: FirstVideoPlayer
+  m_Name: VideoPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -479,7 +479,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 587685921}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: ad809cece47f2af49a57e7194d3558de, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 14d9a80d39349c141b9c71bdf8d6c4a2, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -531,60 +531,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 587685921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25ecd39f2de86d74e9e8bead42816ef4, type: 3}
+  m_Script: {fileID: 11500000, guid: b4bd6842a71f5424dbf5a8393cf1a604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VP_1: {fileID: 587685922}
-  VP_2: {fileID: 1935061370}
-  VP_3: {fileID: 981150136}
-  ProjPrac1: {fileID: 32900000, guid: 14d9a80d39349c141b9c71bdf8d6c4a2, type: 3}
-  ProjPrac2:
-  - {fileID: 32900000, guid: b9840e77c01b33343881ff7fd5ac0007, type: 3}
-  - {fileID: 32900000, guid: f0f76872475bf7141a53599485a99915, type: 3}
-  ProjPrac3:
-  - {fileID: 32900000, guid: c8f1e6070cc2c224eb6e13cb41f9a949, type: 3}
-  - {fileID: 32900000, guid: 61594e7bd46bf0e4e9663888dfdaf8a5, type: 3}
-  ProjQ1:
-  - {fileID: 32900000, guid: dde97900d42c500418787db2203f2f0e, type: 3}
-  - {fileID: 32900000, guid: a6ad3f5c328d73d449209edbc03d82da, type: 3}
-  - {fileID: 32900000, guid: c0a1b40f4c6481840a87c9bb2b71c0b2, type: 3}
-  ProjQ2:
-  - {fileID: 32900000, guid: 707554aaa3751ae4f8a61e4a94d08dec, type: 3}
-  - {fileID: 32900000, guid: 4b9b7b2fbae759e48a249528ce83380e, type: 3}
-  ProjQ3:
-  - {fileID: 32900000, guid: fe3c61a6e59de8f4bb8cf22285c64dff, type: 3}
-  - {fileID: 32900000, guid: 5d3083485c1fa6e45b882a25bdcdec32, type: 3}
-  ProjQ4:
-  - {fileID: 32900000, guid: 5028af845a9d0da4a848a9015e7d4b83, type: 3}
-  - {fileID: 32900000, guid: 003e997c3aae6d34abc9ef454329e2fd, type: 3}
-  - {fileID: 32900000, guid: ce32ccd88b4e43147a13a959fd65d923, type: 3}
-  ProjQ5:
-  - {fileID: 32900000, guid: ee45c87536c49c44c9bad363cf592599, type: 3}
-  - {fileID: 32900000, guid: 8078580b4769f4d45a0aaaf411aa92af, type: 3}
-  ProjQ6:
-  - {fileID: 32900000, guid: e0c80c5aa040fbc42b48784cbdc58217, type: 3}
-  - {fileID: 32900000, guid: accad6db19476384397410218b18c59d, type: 3}
-  - {fileID: 32900000, guid: f8ea7d0f3f10fb74896c0f8a84fb7d8d, type: 3}
-  ProjQ7:
-  - {fileID: 32900000, guid: 6958cf386fc4abd418d47c9484210f6c, type: 3}
-  - {fileID: 32900000, guid: 4f177f618468eab4badd910f2c391ce8, type: 3}
-  - {fileID: 32900000, guid: c84c63e966e60724b85eb71847e57ee5, type: 3}
-  ProjQ8:
-  - {fileID: 32900000, guid: c50c6a71b40fea34aaf11ef2a70a1b26, type: 3}
-  - {fileID: 32900000, guid: 44779f67ece6dfb4f985d7a5d3951ed2, type: 3}
-  - {fileID: 32900000, guid: 1cd4ffff1d1e2d74ba18ef2dc4da979f, type: 3}
-  ProjQ9:
-  - {fileID: 32900000, guid: 9defc50ca0756c24e808fed7ead03d08, type: 3}
-  - {fileID: 32900000, guid: c148112f4a910394c9c9b0d4d3be5366, type: 3}
-  - {fileID: 32900000, guid: 6d077d6c689bc824387f70920e6f408d, type: 3}
-  ProjQ10:
-  - {fileID: 32900000, guid: 7fad7727d03ecf04188fe3e2cdb70d98, type: 3}
-  - {fileID: 32900000, guid: 0279814c0501bce43919d446d2683c89, type: 3}
-  - {fileID: 32900000, guid: 96a47de1bd8e5f44b96d6fc858de724e, type: 3}
-  CurrentVideoNumber: 0
-  TotalClipForThisVideo: 0
+  clip:
+  - {fileID: 32900000, guid: 14d9a80d39349c141b9c71bdf8d6c4a2, type: 3}
+  CurrentClipNumber: 0
+  VP: {fileID: 587685922}
   isChanging: 0
-  isPlaying: 0
 --- !u!1 &616563907
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,74 +1137,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 974585164}
   m_CullTransparentMesh: 1
---- !u!1 &981150135
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 981150137}
-  - component: {fileID: 981150136}
-  m_Layer: 0
-  m_Name: ThirdVideoPlayer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!328 &981150136
-VideoPlayer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 981150135}
-  m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 14d9a80d39349c141b9c71bdf8d6c4a2, type: 3}
-  m_TargetCameraAlpha: 1
-  m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 8400000, guid: 4559fa32a925af94eb6c63aa8edc7c39, type: 2}
-  m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 2
-  m_AspectRatio: 2
-  m_DataSource: 0
-  m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 1
-  m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 0
-  m_SkipOnDrop: 1
-  m_Looping: 0
-  m_WaitForFirstFrame: 1
-  m_FrameReadyEventEnabled: 0
-  m_VideoShaders: []
---- !u!4 &981150137
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 981150135}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 709.5001, y: 244.73279, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1345062936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,74 +1802,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -82}
   m_SizeDelta: {x: 215.04, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1935061368
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1935061371}
-  - component: {fileID: 1935061370}
-  m_Layer: 0
-  m_Name: SecondVideoPlayer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!328 &1935061370
-VideoPlayer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1935061368}
-  m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 14d9a80d39349c141b9c71bdf8d6c4a2, type: 3}
-  m_TargetCameraAlpha: 1
-  m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 8400000, guid: 4559fa32a925af94eb6c63aa8edc7c39, type: 2}
-  m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 2
-  m_AspectRatio: 2
-  m_DataSource: 0
-  m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 1
-  m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 0
-  m_SkipOnDrop: 1
-  m_Looping: 0
-  m_WaitForFirstFrame: 0
-  m_FrameReadyEventEnabled: 0
-  m_VideoShaders: []
---- !u!4 &1935061371
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1935061368}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 709.5001, y: 244.73279, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2085764656
 GameObject:
   m_ObjectHideFlags: 0
@@ -2125,8 +1943,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 638053807}
   - {fileID: 587685923}
-  - {fileID: 1935061371}
-  - {fileID: 981150137}
   - {fileID: 434445303}
   - {fileID: 1490395347}
   - {fileID: 616563910}
