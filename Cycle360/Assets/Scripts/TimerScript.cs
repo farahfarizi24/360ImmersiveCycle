@@ -12,7 +12,7 @@ public class TimerScript : MonoBehaviour
     void Start()
     {
         TimerTxt.text = "";
-       
+        TimeLeft = 3;
     }
 
     private void Update()
@@ -21,7 +21,7 @@ public class TimerScript : MonoBehaviour
         {
             VPScript.isReady = false;
             TimerOn = true;
-
+            
             StartCoroutine(countdownTimer());
         }
     }
@@ -36,6 +36,7 @@ public class TimerScript : MonoBehaviour
         TimerTxt.text = "Go!";
         yield return new WaitForSeconds(1f);
         startVid();
+        TimeLeft = 3;
         StopCoroutine(countdownTimer());
     }
 
