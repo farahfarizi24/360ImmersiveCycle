@@ -17,11 +17,17 @@ public class VideoPlayerScript : MonoBehaviour
     public HazardTracker Roundabout_hazardTracker;
     public bool HazardisSet_Roundabout;
 
+    public HazardTracker[] Prac2Hazards;
+    public bool[] Prac2HazardisSet;
+
+    public HazardTracker[] Prac3Hazards;
+    public bool[] Prac3HazardisSet;
+
     public GameObject BackgroundUI;
     public GameObject Instruction_1;
     public GameObject Instruction_2;
     public GameObject IntermissionScene;
-    public TextMeshProUGUI QuestionFeedback;
+    public TextMeshProUGUI FinalFeedback;
     public TextMeshProUGUI TestFeedback;
     public GameObject NextButton;
     public GameObject CompleteButton;
@@ -49,7 +55,7 @@ public class VideoPlayerScript : MonoBehaviour
     public void SetStartComponents()
     {
         PlayerObject.transform.eulerAngles = new Vector3 (0.0f,90.0f,0.0f);
-        CurPlayingClip = 0;
+        //CurPlayingClip = 0;
         HazardisSet_RC = false;
         RedCar_hazardTracker.gameObject.SetActive(false);
         HazardisSet_PC = false;
@@ -90,15 +96,23 @@ public class VideoPlayerScript : MonoBehaviour
             if (CurPlayingClip >= Projectionclips.Length-1) 
             {//NextButton.gameObject.SetActive(false);
                
-                QuestionFeedback.gameObject.SetActive(false) ;
-                TestFeedback.gameObject.SetActive(true) ;
+                FinalFeedback.gameObject.SetActive(false) ;
+                TestFeedback.gameObject.SetActive(false) ;
                 //FinalScene
             }
             else
-            {TestFeedback.gameObject.SetActive(false);
+            {
+                SaveObj.TotalCorrectWithinQuestions = 0;
+                SaveObj.TotalHazardWithinQuestion = 0;
+
+
+
+                TestFeedback.gameObject.SetActive(false);
                 BackgroundUI.gameObject.SetActive(false);
 
                 NextButton.gameObject.SetActive(false);
+                //SetHazardAllToNull and BoolTo false
+                //
                 CurPlayingClip++;
 
                 if(CurPlayingClip >= 1)
@@ -135,7 +149,7 @@ public class VideoPlayerScript : MonoBehaviour
         Debug.Log("Time:" + curFrame);
     
                 PerceptionVP();
-                video.loopPointReached += ShowEndScene;
+         //       video.loopPointReached += ShowEndScene;
             
         
     }
@@ -242,8 +256,75 @@ public class VideoPlayerScript : MonoBehaviour
 
                 break;
                 case 1:
+
+
+                Debug.Log("Prac 2 is active");
+                if ( Prac2Hazards[0]!=null)
+                {
+                    if (curFrame >= 7.7f && !Prac2HazardisSet[0])
+                    {
+
+                        Prac2Hazards[0].gameObject.SetActive(true);
+                        Prac2Hazards[0].StartMove(new Vector3(43.5f, -7.8f, - 151.2f), 
+                            new Vector3(65.7f, -29.387f, -46.4487f), 1.8f);
+                        Prac2HazardisSet[0] = true;
+                        //   question++;
+                    }
+                    if (curFrame >= 9.5f && Prac2HazardisSet[0])
+                    {
+                        Prac2Hazards[0].gameObject.SetActive(false);
+                    }
+                }
+
+                if (  Prac2Hazards[1] != null)
+                {
+                    if (curFrame >= 10.0f && !Prac2HazardisSet[1])
+                    {
+
+                        Prac2Hazards[1].gameObject.SetActive(true);
+                        Prac2Hazards[1].StartMove(new Vector3(-13.6f, -3.0f, -60.3f), new Vector3(-26.0f, -3.0f, -172.0f), 3.0f);
+                        Prac2HazardisSet[1] = true;
+                        //   question++;
+                    }
+                    if (curFrame >= 18.1f && Prac2HazardisSet[1])
+                    {
+                        Prac2Hazards[1].gameObject.SetActive(false);
+                    }
+                }
+                if ( Prac2Hazards[2] != null)
+                {
+                    if (curFrame >= 16.0f && !Prac2HazardisSet[2])
+                    {
+
+                        Prac2Hazards[2].gameObject.SetActive(true);
+                        Prac2Hazards[2].StartMove(new Vector3(-13.6f, -3.0f, -60.3f), new Vector3(-26.0f, -3.0f, -172.0f), 3.0f);
+                        Prac2HazardisSet[2] = true;
+                        //   question++;
+                    }
+                    if (curFrame >= 21.0f && Prac2HazardisSet[2])
+                    {
+                        Prac2Hazards[2].gameObject.SetActive(false);
+                    }
+                }
+                if ( Prac2Hazards[3] != null)
+                {
+                    if (curFrame >= 14.0f && !Prac2HazardisSet[3])
+                    {
+
+                        Prac2Hazards[3].gameObject.SetActive(true);
+                        Prac2Hazards[3].StartMove(new Vector3(-13.6f, -3.0f, -60.3f), new Vector3(-26.0f, -3.0f, -172.0f), 3.0f);
+                        Prac2HazardisSet[3] = true;
+                        //   question++;
+                    }
+                    if (curFrame >= 23.0f && Prac2HazardisSet[3])
+                    {
+                        Prac2Hazards[3].gameObject.SetActive(false);
+                    }
+                }
+
                 break;
                 case 2:
+                Debug.Log("Prac 3 is active");
                 break;
         }
 
@@ -273,21 +354,38 @@ public class VideoPlayerScript : MonoBehaviour
  
 public void ShowEndScene(VideoPlayer vp)
     {
-        isPlaying = false;
+        FinalFeedback.gameObject.SetActive(true);
         SaveObj.TotalHazardOnTheTest = HazardTotalCount;
-        QuestionFeedback.text = "You identified " + SaveObj.TotalCorrectWithinTheTest + " out of " +
-          SaveObj.TotalHazardOnTheTest + " hazards in the video";
+        if (CurPlayingClip == 2)
+        {
+            FinalFeedback.text = "You identified " + SaveObj.TotalCorrectWithinTheTest + " out of " +
+     SaveObj.TotalHazardOnTheTest + " hazards in the practice test.";
+            NextButton.GetComponentInChildren<TMP_Text>().text = "Start Test";
+        }
+        else
+        {
+            NextButton.GetComponentInChildren<TMP_Text>().text = "Complete Test";
+        }
+   
+      
 
     }
 
     void EndofQuestion(VideoPlayer vp)
     {
         GetSaveFile();
+        isPlaying = false;
+
         BackgroundUI.gameObject.SetActive(true);
         NextButton.gameObject.SetActive(true);
        TestFeedback.gameObject.SetActive(true);
         TestFeedback.text = "You identified " + SaveObj.TotalCorrectWithinQuestions + " out of " +
           SaveObj.TotalHazardWithinQuestion + " hazards in the video";
+
+        if(CurPlayingClip==2 || CurPlayingClip == 13)
+        {
+            ShowEndScene(vp);
+        }
 
     }
 
