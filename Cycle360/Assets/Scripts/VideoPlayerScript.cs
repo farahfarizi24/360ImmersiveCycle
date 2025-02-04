@@ -282,8 +282,8 @@ public class VideoPlayerScript : MonoBehaviour
                     {
 
                         Prac2Hazards[1].gameObject.SetActive(true);
-                        Prac2Hazards[1].StartMove(new Vector3(-71.99998474121094f, -9.98709487915f, -438.77f), 
-                            new Vector3(1.5f, -53.087f, -32.27f), 7.8f);
+                        Prac2Hazards[1].StartMove(new Vector3(-32.7f, -1.19f, -142.54f), 
+                            new Vector3(-12.06f, -14.02f, -65.47f), 8.0f);
                         Prac2HazardisSet[1] = true;
                         //   question++;
                     }
@@ -298,12 +298,12 @@ public class VideoPlayerScript : MonoBehaviour
                     {
 
                         Prac2Hazards[2].gameObject.SetActive(true);
-                        Prac2Hazards[2].StartMove(new Vector3(-218.499984f, 99.11289978f, -181.67f), 
-                            new Vector3(6.1f, -11.287f, -110.27f), 5.0f);
+                        Prac2Hazards[2].StartMove(new Vector3(-152.99f, -5.67f, -244.257f), 
+                            new Vector3(-13.49f, -10.72f, -110.633f),7.5f);
                         Prac2HazardisSet[2] = true;
                         //   question++;
                     }
-                    if (curFrame >= 21.0f && Prac2HazardisSet[2])
+                    if (curFrame >= 22.0f && Prac2HazardisSet[2])
                     {
                         Prac2Hazards[2].gameObject.SetActive(false);
                     }
@@ -314,7 +314,8 @@ public class VideoPlayerScript : MonoBehaviour
                     {
 
                         Prac2Hazards[3].gameObject.SetActive(true);
-                        Prac2Hazards[3].StartMove(new Vector3(-13.6f, -3.0f, -60.3f), new Vector3(-26.0f, -3.0f, -172.0f), 3.0f);
+                        Prac2Hazards[3].StartMove(new Vector3(-46.99f, 14.01f, -532.77f), 
+                            new Vector3(-8.89f, 9.41f, -125.77f), 9.0f);
                         Prac2HazardisSet[3] = true;
                         //   question++;
                     }
