@@ -3,23 +3,31 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UIElements;
 using UnityEngine.Video;
 
 public class ProjTestVer2 : MonoBehaviour
 {
     public VideoClip[] clip;//There will be 13 video clip 
+    public GameObject PlayerObject;
     public int CurrentClipNumber;
     public TMP_Text TimerText;
     public int CountdownTimer;
     public VideoPlayer VP;
     public bool isChanging=false;
+    public bool isReady = false;
     SaveDatas savingScript;
     public string QuestionID;
     public int totalScore;
     public int ThisQuestionScore;
     public float curVidTime;
     public string ResOutcome;
-
+    public GameObject InstructionText;
+    public GameObject NextButton;
+    public GameObject StopButton;
+    public GameObject BackgrounUI;
+    public GameObject FinalFeedback;
+    public GameObject QuestionFeedback;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,13 +35,13 @@ public class ProjTestVer2 : MonoBehaviour
         savingScript = SaveFileObject.GetComponent<SaveDatas>();
         savingScript.OnProjectionTestEnter();
         CurrentClipNumber = 1;
-        LoadClip();
+       // LoadClip();
         totalScore = 0;
         ThisQuestionScore = 0;
         ResOutcome = "";
         TimerText.text = "";
-        CountdownTimer = 0;
-
+        CountdownTimer = 3;
+        StartCoroutine(LoadAtStart());
     }
 
     // Update is called once per frame
@@ -55,16 +63,26 @@ public class ProjTestVer2 : MonoBehaviour
             isChanging = true;
             VP.Stop();
             OnNoButtonPress();
-
+            StopButton.SetActive(false);
+            NextButton.SetActive(true);
+            QuestionFeedback.SetActive(true);
+            BackgrounUI.SetActive(true);    
             CurrentClipNumber++;
             LoadClip();
+
         }
 
         if(CurrentClipNumber == 13)
         {
             isChanging = true;
             OnNoButtonPress();
+            StopButton.SetActive(false);
+            NextButton.GetComponent<TMP_Text>().text = "Finish Test";
+            NextButton.SetActive(true);
 
+            QuestionFeedback.SetActive(true);
+            FinalFeedback.SetActive(true);
+            BackgrounUI.SetActive(true);
             VP.Stop();
             //SHOWCASE END SCREEN
         }
@@ -74,12 +92,50 @@ public class ProjTestVer2 : MonoBehaviour
     private void OnNoButtonPress()
     {
         savingScript.OnProjectionTestResponse(QuestionID, "No Response", "NA", 0,curVidTime);
+        totalScore += 0;
+        StopButton.gameObject.SetActive(false);
+    
+        //savingScript.OnProjectionTestResponse(QuestionID, "Stop", ResOutcome, ThisQuestionScore, curVidTime);
+        if (CurrentClipNumber == 13)
+        {
+            VP.Stop();
+            //ENDING SCENE
+        }
+        else
+        {
+            CurrentClipNumber++;
+            LoadClip();
+        }
     }
+    public void ConfigureNextButton()
+    {
+        if (CurrentClipNumber == 1)
+        {
+            NextButton.GetComponentInChildren<TMP_Text>().text = "Start Practice";
 
+        }
+        else
+        {
+            NextButton.GetComponentInChildren<TMP_Text>().text = "Next";
+
+        }
+        if (CurrentClipNumber == 4)
+        {
+            NextButton.GetComponentInChildren<TMP_Text>().text = "Start Projection Test";
+        }
+        else
+        {
+            NextButton.GetComponentInChildren<TMP_Text>().text = "Next";
+
+        }
+     
+      
+    }
     public void OnStopButtonPress()
     {
 
         CalculateScore();
+        StopButton.gameObject.SetActive(false);
 
         //CalculateScore
         //CalculateTotalScore
@@ -90,17 +146,39 @@ public class ProjTestVer2 : MonoBehaviour
         // They will not score any points if they respond before the time window or after the time window
         totalScore += ThisQuestionScore;
 
+
         savingScript.OnProjectionTestResponse(QuestionID, "Stop", ResOutcome, ThisQuestionScore,curVidTime);
-        if (CurrentClipNumber == 13) 
+
+
+        if (!isChanging && CurrentClipNumber != 13)
         {
+
+            isChanging = true;
             VP.Stop();
-            //ENDING SCENE
-        }
-        else
-        {
+         
+            StopButton.SetActive(false);
+            NextButton.SetActive(true);
+            QuestionFeedback.SetActive(true);
+            BackgrounUI.SetActive(true);
             CurrentClipNumber++;
             LoadClip();
+
         }
+
+        if (CurrentClipNumber == 13)
+        {
+            isChanging = true;
+            StopButton.SetActive(false);
+            NextButton.GetComponent<TMP_Text>().text = "Finish Test";
+            NextButton.SetActive(true);
+
+            QuestionFeedback.SetActive(true);
+            FinalFeedback.SetActive(true);
+            BackgrounUI.SetActive(true);
+            VP.Stop();
+            //SHOWCASE END SCREEN
+        }
+
         
     }
 
@@ -180,6 +258,7 @@ public class ProjTestVer2 : MonoBehaviour
     {
         while(CountdownTimer > 0)
         {
+            Debug.Log("Timer start");
             TimerText.text = CountdownTimer.ToString();
             yield return new WaitForSeconds(1f);
             CountdownTimer--;
@@ -189,7 +268,7 @@ public class ProjTestVer2 : MonoBehaviour
         //yield return new WaitForSeconds(3f);
         yield return new WaitForSeconds(1f);
         TimerText.text = "";
-
+        StopButton.gameObject.SetActive(true);
         VP.Play();
         isChanging = false;
         CountdownTimer = 3;
@@ -197,11 +276,61 @@ public class ProjTestVer2 : MonoBehaviour
 
 
     }
+
+    public void OnNextButtonPressed()
+    {
+        if (InstructionText.activeSelf)
+        {
+            NextButton.gameObject.SetActive(false);
+            BackgrounUI.gameObject.SetActive(false);
+            InstructionText.gameObject.SetActive(false );
+            //  LoadClip();    IEnumerator CountdownToStartVid()
+            StartCoroutine(CountdownToStartVid());
+
+        }
+        else if (QuestionFeedback.gameObject.activeSelf)
+        {
+            NextButton.gameObject.SetActive(false);
+            BackgrounUI.gameObject.SetActive(false);
+            QuestionFeedback.gameObject.SetActive(false);
+            FinalFeedback.gameObject.SetActive(false);
+            if (CurrentClipNumber == 13)
+            {
+                //END
+                Application.Quit();
+            }
+            else
+            {
+                StartCoroutine(CountdownToStartVid());
+            }
+        }
+    }
+    IEnumerator LoadAtStart()
+    {
+        VP.Play();
+        yield return new WaitForSeconds(0.5f);
+        VP.Pause();
+        isReady = true;
+        if(CurrentClipNumber == 1)
+        {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+
+        }
+        if (CurrentClipNumber >= 2)
+        {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
+
+        }
+    }
     public void LoadClip()
     {
         ThisQuestionScore = 0;
+        ConfigureNextButton();
+
         VP.clip = clip[CurrentClipNumber - 1];
         VP.Prepare();
+
+       // StartCoroutine(LoadAtStart());
         if (CurrentClipNumber <= 3)
         {
             QuestionID="Practice" + CurrentClipNumber.ToString();
@@ -211,6 +340,7 @@ public class ProjTestVer2 : MonoBehaviour
            int  tempID = CurrentClipNumber - 3;
             QuestionID = tempID.ToString();
         }
-        StartCoroutine(CountdownToStartVid());
+        StartCoroutine(LoadAtStart());
+        //StartCoroutine(CountdownToStartVid());
     }
 }
