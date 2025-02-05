@@ -8,6 +8,7 @@ using UnityEngine.Video;
 
 public class ProjTestVer2 : MonoBehaviour
 {
+    //https://discussions.unity.com/t/playing-large-video-files-in-gear-vr-in-unity-project/673596/4
     public VideoClip[] clip;//There will be 13 video clip 
     public GameObject PlayerObject;
     public int CurrentClipNumber;

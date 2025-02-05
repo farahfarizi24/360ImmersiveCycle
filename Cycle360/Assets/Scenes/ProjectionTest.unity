@@ -284,7 +284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &147600071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,19 +567,17 @@ VideoPlayer:
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 1
+  m_AudioOutputMode: 0
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
   m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 0
-  m_SkipOnDrop: 1
+  m_SkipOnDrop: 0
   m_Looping: 0
-  m_WaitForFirstFrame: 1
+  m_WaitForFirstFrame: 0
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
 --- !u!4 &587685923
@@ -613,16 +611,6 @@ MonoBehaviour:
   - {fileID: 32900000, guid: 14d9a80d39349c141b9c71bdf8d6c4a2, type: 3}
   - {fileID: 32900000, guid: c4f93e511e0dac94e90d3c73db688dbb, type: 3}
   - {fileID: 32900000, guid: bb0a5fe92147b744eb2b6c8ba08004f8, type: 3}
-  - {fileID: 32900000, guid: b9890047d90d15140b042c54e5291292, type: 3}
-  - {fileID: 32900000, guid: 928d25a3115257045a6019fd9870fb45, type: 3}
-  - {fileID: 32900000, guid: 707fedb97c5efd7409ccffcfc1f8667a, type: 3}
-  - {fileID: 32900000, guid: a9bf6c78467bf5f47b77733f8a2497c1, type: 3}
-  - {fileID: 32900000, guid: d7817b2d8766a8443b55a1f4c872d558, type: 3}
-  - {fileID: 32900000, guid: 0707ba54fce40fa40b2d8aee27f664ae, type: 3}
-  - {fileID: 32900000, guid: 8916db0f1eb143a40b6e709fcb5a1f62, type: 3}
-  - {fileID: 32900000, guid: f5068a675d0b8eb4a8725e2599845b17, type: 3}
-  - {fileID: 32900000, guid: 2ccfe05fcd8d036428918a10a8ca69b5, type: 3}
-  - {fileID: 32900000, guid: 24eba164413c8a549941c97845de0abd, type: 3}
   PlayerObject: {fileID: 434445301}
   CurrentClipNumber: 0
   TimerText: {fileID: 1581809550}

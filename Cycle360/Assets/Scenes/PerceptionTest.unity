@@ -1741,19 +1741,17 @@ VideoPlayer:
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 1
+  m_AudioOutputMode: 0
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
   m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 0
-  m_SkipOnDrop: 1
+  m_SkipOnDrop: 0
   m_Looping: 0
-  m_WaitForFirstFrame: 1
+  m_WaitForFirstFrame: 0
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
 --- !u!4 &1530920189
@@ -1816,7 +1814,7 @@ MonoBehaviour:
   CurPlayingClip: 0
   Projectionclips:
   - {fileID: 32900000, guid: fda0c174a671e064998774a2c7056835, type: 3}
-  - {fileID: 32900000, guid: 5131df9a0d9f6514187af0fa7cc84558, type: 3}
+  - {fileID: 32900000, guid: f71f847002e419b47a9ebed3b05190d4, type: 3}
   - {fileID: 32900000, guid: 9ebe7abfab7967b4eba7418b1185a825, type: 3}
   PlayerObject: {fileID: 1750846833}
 --- !u!1 &1551912238
