@@ -318,9 +318,12 @@ public class VideoPlayerScript : MonoBehaviour
                             new Vector3(-8.89f, 9.41f, -125.77f), 9.0f);
                         Prac2HazardisSet[3] = true;
                         //   question++;
+                        SaveObj.TotalHazardWithinQuestion = 4;
+                        HazardTotalCount = 12;
                     }
                     if (curFrame >= 23.0f && Prac2HazardisSet[3])
                     {
+                     
                         Prac2Hazards[3].gameObject.SetActive(false);
                     }
                 }
@@ -328,6 +331,79 @@ public class VideoPlayerScript : MonoBehaviour
                 break;
                 case 2:
                 Debug.Log("Prac 3 is active");
+        
+
+
+                if (Prac3Hazards[0] != null)
+                {//Ped_By_Car
+                    if (curFrame >= 2.0f && !Prac3HazardisSet[0])
+                    {
+
+                        Prac3Hazards[0].gameObject.SetActive(true);
+                        Prac3Hazards[0].StartMove(new Vector3(67.0f, -2.0f, -230.0f),
+                            new Vector3(55.0f, -14.6f, -114.69f), 11.0f);
+                        Prac3HazardisSet[0] = true;
+                        //   question++;
+                    }
+                    if (curFrame >= 13.0f && Prac3HazardisSet[0])
+                    {
+                        Prac3Hazards[0].gameObject.SetActive(false);
+                    }
+                }
+
+                if (Prac3Hazards[1] != null)
+                {//Ped_Looking_To_Cross
+                    if (curFrame >= 8.0f && !Prac3HazardisSet[1])
+                    {
+
+                        Prac3Hazards[1].gameObject.SetActive(true);
+                        Prac3Hazards[1].StartMove(new Vector3(-1.29f, -0.97f, -88.34f),
+                            new Vector3(-20.39f, -2.7f, -64.4f), 13.0f);
+                        Prac3HazardisSet[1] = true;
+                        //   question++;
+                    }
+                    if (curFrame >= 17.0f && Prac3HazardisSet[1])
+                    {
+                        Prac3Hazards[1].gameObject.SetActive(false);
+                    }
+                }
+                if (Prac3Hazards[2] != null)
+                {
+                    //CarParallelPark
+                    if (curFrame >= 17.0f && !Prac3HazardisSet[2])
+                    {
+
+                        Prac3Hazards[2].gameObject.SetActive(true);
+                        Prac3Hazards[2].StartMove(new Vector3(47.0f, -5.987f, -235.867f),
+                            new Vector3(38.3f, -10.72f, -141.7f), 10.0f);
+                        Prac3HazardisSet[2] = true;
+                        //   question++;
+                    }
+                    if (curFrame >= 27.0f && Prac3HazardisSet[2])
+                    {
+                        Prac3Hazards[2].gameObject.SetActive(false);
+                    }
+                }
+                if (Prac3Hazards[3] != null)
+                {//LightCar
+                    if (curFrame >= 27.0f && !Prac3HazardisSet[3])
+                    {
+
+                        Prac3Hazards[3].gameObject.SetActive(true);
+                        Prac3Hazards[3].StartMove(new Vector3(54.0f, -11.0f, -215.92f),
+                            new Vector3(41.2f, -8.0f, -69.5f), 5.0f);
+                        Prac3HazardisSet[3] = true;
+
+                        SaveObj.TotalHazardWithinQuestion = 4;
+                        HazardTotalCount = 11;
+                        //   question++;
+                    }
+                    if (curFrame >= 32.0f && Prac3HazardisSet[3])
+                    {
+                        Prac3Hazards[3].gameObject.SetActive(false);
+                    }
+                }
+
                 break;
         }
 
