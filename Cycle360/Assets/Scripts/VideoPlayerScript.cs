@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
+using System.IO;
 public class VideoPlayerScript : MonoBehaviour
 {
     SaveDatas SaveObj;
@@ -33,6 +34,7 @@ public class VideoPlayerScript : MonoBehaviour
     public GameObject CompleteButton;
     private int HazardTotalCount;
     public float curFrame;
+    public string RootPath;
    // public string WhichScene;
     public VideoPlayer video;
     public bool isPlaying;
@@ -40,20 +42,39 @@ public class VideoPlayerScript : MonoBehaviour
     public int CurPlayingClip=0;
     public VideoClip[] Projectionclips;
     public GameObject PlayerObject;
+
   //  public TextMeshProUGUI pauseButton;
     // Start is called before the first frame update
   
 
     void Start()
     {
+      
         SetStartComponents();
 
     }
 
+    //This code is unused, but it is the base of reading video from a file
+    public void RetrieveClips()
+    {
+        RootPath = Application.persistentDataPath;
+        for(int i = 0; i <=3; i++)
+        {
+            string tempPath = Path.Combine(RootPath, "Perception_test_P" + i + ".mp4");
+            if (File.Exists(tempPath))
+            {
+                video.url = tempPath;
+                // for testing
+                //work
+                //video.Play();
+            }
+        }
 
-
+    }
     public void SetStartComponents()
     {
+        RootPath = Application.persistentDataPath;
+
         PlayerObject.transform.eulerAngles = new Vector3 (0.0f,90.0f,0.0f);
         //CurPlayingClip = 0;
         HazardisSet_RC = false;
@@ -93,7 +114,7 @@ public class VideoPlayerScript : MonoBehaviour
         }
        else  if (TestFeedback.gameObject.activeSelf)
         {
-            if (CurPlayingClip >= Projectionclips.Length-1) 
+            if (CurPlayingClip ==13) 
             {//NextButton.gameObject.SetActive(false);
                
                 FinalFeedback.gameObject.SetActive(false) ;
@@ -164,7 +185,10 @@ public class VideoPlayerScript : MonoBehaviour
     
     public void LoadVid()
     {
-        video.clip = Projectionclips[CurPlayingClip];
+        int VidToPlay = CurPlayingClip + 1;
+        string tempPath = Path.Combine(RootPath, "Perception_Test_" + VidToPlay + ".mp4");
+        video.url = tempPath;
+        //video.clip = Projectionclips[CurPlayingClip];
         video.Prepare();
         StartCoroutine(LoadAtStart());
     }

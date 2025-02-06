@@ -9,6 +9,8 @@ using UnityEngine.Video;
 public class ProjTestVer2 : MonoBehaviour
 {
     //https://discussions.unity.com/t/playing-large-video-files-in-gear-vr-in-unity-project/673596/4
+    //https://discussions.unity.com/t/retrieving-and-playing-a-video-file-stored-locally-on-an-android-vr-headset-oculus-quest/224309/3
+
     public VideoClip[] clip;//There will be 13 video clip 
     public GameObject PlayerObject;
     public int CurrentClipNumber;
@@ -44,6 +46,7 @@ public class ProjTestVer2 : MonoBehaviour
         CountdownTimer = 3;
         StartCoroutine(LoadAtStart());
     }
+
 
     // Update is called once per frame
     void Update()
