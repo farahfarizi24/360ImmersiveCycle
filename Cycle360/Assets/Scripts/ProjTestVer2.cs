@@ -103,13 +103,6 @@ public class ProjTestVer2 : MonoBehaviour
     }
 
 
-    private void OnNoButtonPress()
-    {
-        savingScript.OnProjectionTestResponse(QuestionID, "No Response", "NA", 0,curVidTime);
-        totalScore += 0;
-        StopButton.gameObject.SetActive(false);
-        EndofVid();
-    }
     public void ConfigureNextButton()
     {
         if (CurrentClipNumber == 1)
@@ -264,6 +257,21 @@ public class ProjTestVer2 : MonoBehaviour
 
         }
         return ThisQuestionScore;
+    }
+
+    public void CalculateScore(float timeGap, float TimeWhenHit, float MarkingStartTime)
+    {
+        float score = TimeWhenHit-MarkingStartTime;
+        score = score / timeGap;
+        if(score <= 1)
+        {
+            score = score * 10;
+
+        }
+        else
+        {
+            score = 0;
+        }
     }
     IEnumerator CountdownToStartVid()
     {
