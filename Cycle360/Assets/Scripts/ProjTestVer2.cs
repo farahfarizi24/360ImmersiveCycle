@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
@@ -26,27 +27,43 @@ public class ProjTestVer2 : MonoBehaviour
     public float curVidTime;
     public string ResOutcome;
     public GameObject InstructionText;
+    public GameObject SetDeviceInstruction;
     public GameObject NextButton;
     public GameObject StopButton;
-    public GameObject BackgrounUI;
+    public GameObject BackgroundUI;
     public GameObject FinalFeedback;
     public GameObject QuestionFeedback;
+    public string RootPath;
+    public bool VideoBeingPrepared;
     // Start is called before the first frame update
     void Start()
     {
+        SetStartComponent();
+      
+    }
+
+    public void SetStartComponent()
+    {
+        VideoBeingPrepared = false;
         GameObject SaveFileObject = GameObject.FindGameObjectWithTag("Manager");
         savingScript = SaveFileObject.GetComponent<SaveDatas>();
         savingScript.OnProjectionTestEnter();
         CurrentClipNumber = 1;
-       // LoadClip();
+        // LoadClip();
         totalScore = 0;
         ThisQuestionScore = 0;
         ResOutcome = "";
         TimerText.text = "";
         CountdownTimer = 3;
-        StartCoroutine(LoadAtStart());
+        RootPath = Application.persistentDataPath;
+        // StartCoroutine(LoadAtStart());
+        SetDeviceInstruction.gameObject.SetActive(false);
+        isReady = false ;
+        InstructionText.gameObject.SetActive(true);
+        NextButton.GetComponentInChildren<TMP_Text>().text = "Start";
+        NextButton.gameObject.SetActive(true);
+        BackgroundUI.gameObject.SetActive(true);
     }
-
 
     // Update is called once per frame
     void Update()
@@ -57,11 +74,20 @@ public class ProjTestVer2 : MonoBehaviour
 
         }
         curVidTime = (float)VP.time;
+        if (VP.isPrepared && VideoBeingPrepared)
+        {
+            StartCoroutine(LoadAtStart());
+            VideoBeingPrepared=false;
+        }
+        if (isReady)
+        {
+            StartCoroutine(CountdownToStartVid());
+        }
     }
 
     private void SwitchVid(VideoPlayer player)
     {
-        if (!isChanging && CurrentClipNumber!=13)
+        if (VP.isPlaying && CurrentClipNumber!=13)
         {
 
             isChanging = true;
@@ -69,14 +95,15 @@ public class ProjTestVer2 : MonoBehaviour
             OnNoButtonPress();
             StopButton.SetActive(false);
             NextButton.SetActive(true);
+            NextButton.GetComponentInChildren<TMP_Text>().text = "Next";
             QuestionFeedback.SetActive(true);
-            BackgrounUI.SetActive(true);    
+            BackgroundUI.SetActive(true);    
             CurrentClipNumber++;
-            LoadClip();
+           // LoadClip();
 
         }
 
-        if(CurrentClipNumber == 13)
+        if(VP.isPlaying && CurrentClipNumber == 13)
         {
             isChanging = true;
             OnNoButtonPress();
@@ -86,7 +113,7 @@ public class ProjTestVer2 : MonoBehaviour
 
             QuestionFeedback.SetActive(true);
             FinalFeedback.SetActive(true);
-            BackgrounUI.SetActive(true);
+            BackgroundUI.SetActive(true);
             VP.Stop();
             //SHOWCASE END SCREEN
         }
@@ -153,37 +180,45 @@ public class ProjTestVer2 : MonoBehaviour
 
         savingScript.OnProjectionTestResponse(QuestionID, "Stop", ResOutcome, ThisQuestionScore,curVidTime);
 
+        EndofVid();
+
+        
+    }
+
+    public void EndofVid()
+    {
 
         if (!isChanging && CurrentClipNumber != 13)
         {
 
             isChanging = true;
             VP.Stop();
-         
+
             StopButton.SetActive(false);
+            NextButton.GetComponentInChildren<TMP_Text>().text = "Next";
+
             NextButton.SetActive(true);
             QuestionFeedback.SetActive(true);
-            BackgrounUI.SetActive(true);
+            BackgroundUI.SetActive(true);
             CurrentClipNumber++;
-            LoadClip();
+           // LoadClip();
 
         }
 
-        if (CurrentClipNumber == 13)
+        if (!isChanging && CurrentClipNumber == 13)
         {
             isChanging = true;
+            VP.Stop();
             StopButton.SetActive(false);
-            NextButton.GetComponent<TMP_Text>().text = "Finish Test";
+            NextButton.GetComponentInChildren<TMP_Text>().text = "Finish Test";
             NextButton.SetActive(true);
 
             QuestionFeedback.SetActive(true);
             FinalFeedback.SetActive(true);
-            BackgrounUI.SetActive(true);
-            VP.Stop();
+            BackgroundUI.SetActive(true);
+            
             //SHOWCASE END SCREEN
         }
-
-        
     }
 
     public int CalculateScore()
@@ -262,6 +297,8 @@ public class ProjTestVer2 : MonoBehaviour
     {
         while(CountdownTimer > 0)
         {
+            isReady = false;
+
             Debug.Log("Timer start");
             TimerText.text = CountdownTimer.ToString();
             yield return new WaitForSeconds(1f);
@@ -285,53 +322,74 @@ public class ProjTestVer2 : MonoBehaviour
     {
         if (InstructionText.activeSelf)
         {
-            NextButton.gameObject.SetActive(false);
-            BackgrounUI.gameObject.SetActive(false);
-            InstructionText.gameObject.SetActive(false );
+            NextButton.GetComponentInChildren<TMP_Text>().text = "Start Practice Test";
+
+            NextButton.gameObject.SetActive(true);
+            BackgroundUI.gameObject.SetActive(true);
+            InstructionText.gameObject.SetActive(false);
+            SetDeviceInstruction.gameObject.SetActive(true);
             //  LoadClip();    IEnumerator CountdownToStartVid()
-            StartCoroutine(CountdownToStartVid());
+          //  StartCoroutine(CountdownToStartVid());
+
+        }else if (SetDeviceInstruction.gameObject.activeSelf)
+        {
+            NextButton.gameObject.SetActive(false);
+          //  BackgroundUI.gameObject.SetActive(false);
+            SetDeviceInstruction.gameObject.SetActive(false);
+            LoadClip();
 
         }
         else if (QuestionFeedback.gameObject.activeSelf)
         {
-            NextButton.gameObject.SetActive(false);
-            BackgrounUI.gameObject.SetActive(false);
-            QuestionFeedback.gameObject.SetActive(false);
-            FinalFeedback.gameObject.SetActive(false);
+           
             if (CurrentClipNumber == 13)
             {
+                NextButton.gameObject.SetActive(false);
+                BackgroundUI.gameObject.SetActive(false);
+                QuestionFeedback.gameObject.SetActive(false);
+                FinalFeedback.gameObject.SetActive(false);
                 //END
                 Application.Quit();
             }
             else
             {
-                StartCoroutine(CountdownToStartVid());
+                QuestionFeedback.gameObject.SetActive(false);
+
+                SetDeviceInstruction.gameObject.SetActive(true );
+                NextButton.GetComponentInChildren<TMP_Text>().text = "Continue";
+                //StartCoroutine(CountdownToStartVid());
             }
         }
     }
     IEnumerator LoadAtStart()
     {
-        VP.Play();
-        yield return new WaitForSeconds(0.5f);
-        VP.Pause();
-        isReady = true;
-        if(CurrentClipNumber == 1)
-        {
-            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+       
+            if (CurrentClipNumber == 1)
+            {
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
 
-        }
-        if (CurrentClipNumber >= 2)
-        {
-            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
+            }
+            if (CurrentClipNumber >= 2)
+            {
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
 
-        }
+            }
+            VP.Play();
+            yield return new WaitForSeconds(0.2f);
+            VP.Pause();
+
+            BackgroundUI.gameObject.SetActive(false);
+
+            isReady = true;
+        
+       
+        
     }
     public void LoadClip()
     {
         ThisQuestionScore = 0;
-        ConfigureNextButton();
-
-        VP.clip = clip[CurrentClipNumber - 1];
+        string tempPath = Path.Combine(RootPath, "Projection_Test_" + CurrentClipNumber + ".mp4");
+        VP.url = tempPath;
         VP.Prepare();
 
        // StartCoroutine(LoadAtStart());
@@ -344,7 +402,8 @@ public class ProjTestVer2 : MonoBehaviour
            int  tempID = CurrentClipNumber - 3;
             QuestionID = tempID.ToString();
         }
-        StartCoroutine(LoadAtStart());
+        VideoBeingPrepared = true;
+      //  StartCoroutine(LoadAtStart());
         //StartCoroutine(CountdownToStartVid());
     }
 }

@@ -10,6 +10,7 @@ public class ProjectionTestCode : MonoBehaviour
     public VideoPlayer VP_2=null;
     public VideoPlayer VP_3 = null;
 
+    public VideoPlayer VP;
     public VideoClip ProjPrac1;
     public VideoClip[] ProjPrac2;
     public VideoClip[] ProjPrac3;
