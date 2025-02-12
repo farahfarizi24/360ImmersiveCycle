@@ -87,36 +87,19 @@ public class ProjTestVer2 : MonoBehaviour
 
     private void SwitchVid(VideoPlayer player)
     {
-        if (VP.isPlaying && CurrentClipNumber!=13)
+        if (!isChanging)
         {
-
-            isChanging = true;
-            VP.Stop();
-            OnNoButtonPress();
-            StopButton.SetActive(false);
-            NextButton.SetActive(true);
-            NextButton.GetComponentInChildren<TMP_Text>().text = "Next";
-            QuestionFeedback.SetActive(true);
-            BackgroundUI.SetActive(true);    
-            CurrentClipNumber++;
-           // LoadClip();
-
+            savingScript.OnProjectionTestResponse(QuestionID, "No Response", "NA", 0, curVidTime);
+            totalScore += 0;
+            StopButton.gameObject.SetActive(false);
+            EndofVid();
+            // isChanging = true;
+         //   OnNoButtonPress();
         }
 
-        if(VP.isPlaying && CurrentClipNumber == 13)
-        {
-            isChanging = true;
-            OnNoButtonPress();
-            StopButton.SetActive(false);
-            NextButton.GetComponent<TMP_Text>().text = "Finish Test";
-            NextButton.SetActive(true);
+      
 
-            QuestionFeedback.SetActive(true);
-            FinalFeedback.SetActive(true);
-            BackgroundUI.SetActive(true);
-            VP.Stop();
-            //SHOWCASE END SCREEN
-        }
+
     }
 
 
@@ -125,18 +108,7 @@ public class ProjTestVer2 : MonoBehaviour
         savingScript.OnProjectionTestResponse(QuestionID, "No Response", "NA", 0,curVidTime);
         totalScore += 0;
         StopButton.gameObject.SetActive(false);
-    
-        //savingScript.OnProjectionTestResponse(QuestionID, "Stop", ResOutcome, ThisQuestionScore, curVidTime);
-        if (CurrentClipNumber == 13)
-        {
-            VP.Stop();
-            //ENDING SCENE
-        }
-        else
-        {
-            CurrentClipNumber++;
-            LoadClip();
-        }
+        EndofVid();
     }
     public void ConfigureNextButton()
     {
