@@ -260,10 +260,12 @@ public class ProjTestVer2 : MonoBehaviour
             if(ButtonPressTime < startTime)
             {
                 ResOutcome = "Early";
+                QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You responded too early";
             }
             else
             {
                 ResOutcome = "Very late";
+                QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You responded too late";
             }
             return;
         }
@@ -273,19 +275,22 @@ public class ProjTestVer2 : MonoBehaviour
 
             ThisQuestionScore = 10.0f;
             ResOutcome = "Correct";
-
+            QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You responded correctly and in a safe manner, well done";
             return;
         }
         if (ButtonPressTime == endTime)
         {
             ThisQuestionScore = 1.0f;
             ResOutcome = "Late";
+            QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You responded late";
             return;
         }
           
 
         ThisQuestionScore = 10 - 9 * (ButtonPressTime - startTime) / (endTime - startTime);
         ResOutcome = "Correct";
+        QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You responded correctly and in a safe manner, well done";
+
         return;
     }
     IEnumerator CountdownToStartVid()
