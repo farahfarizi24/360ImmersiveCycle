@@ -24,7 +24,7 @@ public class SaveDatas : MonoBehaviour
     int TotalIncorrectClick;
     int TotalNumberofClick;
     int TotalScore;
-  
+    float ProjTestTotalScore;
     //for showcase
    public int TotalCorrectWithinQuestions;
    public int TotalHazardWithinQuestion;
@@ -160,16 +160,16 @@ public class SaveDatas : MonoBehaviour
     }
 
 
-    public void OnProjectionTestResponse(string QuestionID, string Response, string ResponseOutcome, int CurrentPoints, float VidTime)
+    public void OnProjectionTestResponse(string QuestionID, string Response, string ResponseOutcome, float CurrentPoints, float VidTime)
     {
         sw = File.AppendText(saveFile);
         string theTime = System.DateTime.Now.ToString("hh:mm:ss");
         TotalCorrectClick++;
         TotalNumberofClick++;
-        TotalScore += CurrentPoints;
+        ProjTestTotalScore += CurrentPoints;
 
         sw.Write(UID + "," + theDate + "," + theTime +  "," + TestID + "," + QuestionID + "," + VidTime + ","+ Response + "," + ResponseOutcome + "," + CurrentPoints + ","
-            +TotalScore + "\n");
+            +ProjTestTotalScore + "\n");
         sw.Close();
     }
    

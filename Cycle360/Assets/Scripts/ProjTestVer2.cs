@@ -22,9 +22,10 @@ public class ProjTestVer2 : MonoBehaviour
     public bool isReady = false;
     SaveDatas savingScript;
     public string QuestionID;
-    public int totalScore;
-    public int ThisQuestionScore;
+    public float totalScore;
+    public float ThisQuestionScore;
     public float curVidTime;
+    public float buttonHitTime;
     public string ResOutcome;
     public GameObject InstructionText;
     public GameObject SetDeviceInstruction;
@@ -129,10 +130,10 @@ public class ProjTestVer2 : MonoBehaviour
     }
     public void OnStopButtonPress()
     {
+        buttonHitTime = curVidTime;
 
         CalculateScore();
         StopButton.gameObject.SetActive(false);
-
         //CalculateScore
         //CalculateTotalScore
         // Within the correct time window for the response
@@ -186,72 +187,64 @@ public class ProjTestVer2 : MonoBehaviour
         }
     }
 
-    public int CalculateScore()
+    public float CalculateScore()
     {
       
         switch (CurrentClipNumber)
         {
             case 1:
-                if(curVidTime>=25.0f && curVidTime <= 28.0f)
-                {
-                    ThisQuestionScore = 10;
-                    ResOutcome = "Correct";
-                    
-                }else if(curVidTime<=24.9)
-                {
-                    ThisQuestionScore = 0;
-                    ResOutcome = "Early";
-                }
-                else
-                {
-                    ThisQuestionScore = 0;
-                    ResOutcome = "Late";
-                }
+
+                CalculateScore(25.0f,28.0f,buttonHitTime);
                 break;
 
 
                 case 2:
-
-                if (curVidTime >= 7.0f && curVidTime <= 10.0f)
-                {
-                    ThisQuestionScore = 10;
-                    ResOutcome = "Correct";
-
-                }
-                else if (curVidTime <= 9.9f)
-                {
-                    ThisQuestionScore = 0;
-                    ResOutcome = "Early";
-                }
-                else
-                {
-                    ThisQuestionScore = 0;
-                    ResOutcome = "Late";
-                }
+                CalculateScore(7.0f, 10.0f, buttonHitTime);
                 break;
-                break;
+                
                 case 3:
+                CalculateScore(16.0f, 18.0f, buttonHitTime);
+
                 break;
                 case 4:
+                CalculateScore(15.0f, 18.0f, buttonHitTime);
+
                 break;
             case 5:
+                CalculateScore(10.0f, 13.0f, buttonHitTime);
+
                 break;
                 case 6:
+                CalculateScore(13.0f, 16.0f, buttonHitTime);
 
                 break;
                 case 7:
+                CalculateScore(12.0f, 17.0f, buttonHitTime);
+
                 break;
                 case 8:
+                CalculateScore(11.0f, 13.0f, buttonHitTime);
+
                 break;
                 case 9:
+                CalculateScore(19.0f, 22.0f, buttonHitTime);
+
                 break;
                 case 10:
+                CalculateScore(20.0f, 22.0f, buttonHitTime);
+
                 break;
                 case 11:
+                CalculateScore(14.0f, 15.0f, buttonHitTime);
+
                 break;
                 case 12:
+                CalculateScore(13.0f, 16.0f, buttonHitTime);
+
                 break;
                 case 13:
+                CalculateScore(14.0f, 17.0f, buttonHitTime);
+
                 break;
 
 
@@ -259,19 +252,41 @@ public class ProjTestVer2 : MonoBehaviour
         return ThisQuestionScore;
     }
 
-    public void CalculateScore(float timeGap, float TimeWhenHit, float MarkingStartTime)
+    public void CalculateScore(float startTime, float endTime, float ButtonPressTime)
     {
-        float score = TimeWhenHit-MarkingStartTime;
-        score = score / timeGap;
-        if(score <= 1)
+        if (ButtonPressTime < startTime || ButtonPressTime > endTime)
         {
-            score = score * 10;
+            ThisQuestionScore = 0.0f;
+            if(ButtonPressTime < startTime)
+            {
+                ResOutcome = "Early";
+            }
+            else
+            {
+                ResOutcome = "Very late";
+            }
+            return;
+        }
+            
+        if (ButtonPressTime == startTime)
+        {
 
+            ThisQuestionScore = 10.0f;
+            ResOutcome = "Correct";
+
+            return;
         }
-        else
+        if (ButtonPressTime == endTime)
         {
-            score = 0;
+            ThisQuestionScore = 1.0f;
+            ResOutcome = "Late";
+            return;
         }
+          
+
+        ThisQuestionScore = 10 - 9 * (ButtonPressTime - startTime) / (endTime - startTime);
+        ResOutcome = "Correct";
+        return;
     }
     IEnumerator CountdownToStartVid()
     {
