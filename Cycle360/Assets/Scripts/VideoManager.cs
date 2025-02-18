@@ -12,6 +12,8 @@ public class VideoManager : MonoBehaviour
     public float curVideoTime;
     public VideoPlayer VPlayer; 
     public bool isPlaying;
+    public int CurrentClipNumber;
+
     public string VideoID;
     public string CorrectAnswer;
     public bool ChoiceASelected;
@@ -19,6 +21,7 @@ public class VideoManager : MonoBehaviour
     public bool ChoiceCSelected;
     public bool ChoiceDSelected;
     public bool IsCorrect;
+    public bool VideoIsPreparing;
     public float timer;
     public float ResponseTime;
     public GameObject QObj;
@@ -30,8 +33,11 @@ public class VideoManager : MonoBehaviour
     public Slider ConfidenceSlider;
     public TextMeshProUGUI AnswerStatus;
     string NextVideo;
+    public string RootPath;
+
     public GameObject NextObject;
     public GameObject BackgroundImage;
+    public GameObject DeviceInstructions;
     int score;
     int totalQuestion;
     // Start is called before the first frame update
@@ -40,11 +46,27 @@ public class VideoManager : MonoBehaviour
 
         //3seconds freeze frame
         //After the freeze frame done GetSaveFile();
-       VideoID = "Practice_1";
-        IsCorrect = false;
-        GetSaveFile();  
-        TurnOffAllChoice();
+      
+       SetStartComponent();
 }
+
+    public void SetStartComponent()
+    {
+        VideoIsPreparing = false;
+        IsCorrect = false;
+        GetSaveFile();
+        TurnOffAllChoice();
+        CurrentClipNumber = 1;
+        RootPath = Application.persistentDataPath;
+        score = 0;
+        totalQuestion = 13;
+        QObj.SetActive(false);
+        AnswerStatus.gameObject.SetActive(false);
+        NextObject.SetActive(true);
+        BackgroundImage.SetActive(true);
+
+        DeviceInstructions.SetActive(false );
+    }
 
 
 
