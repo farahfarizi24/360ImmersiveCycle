@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 public class VideoManager : MonoBehaviour
 {
     public SaveDatas saveDatas;
@@ -30,7 +31,7 @@ public class VideoManager : MonoBehaviour
     public TextMeshProUGUI ChoiceText_2;
     public TextMeshProUGUI ChoiceText_3;
     public TextMeshProUGUI ChoiceText_4;
-    public Slider ConfidenceSlider;
+    public UnityEngine.UI.Slider ConfidenceSlider;
     public TextMeshProUGUI AnswerStatus;
     string NextVideo;
     public string RootPath;
@@ -38,6 +39,7 @@ public class VideoManager : MonoBehaviour
     public GameObject NextObject;
     public GameObject BackgroundImage;
     public GameObject DeviceInstructions;
+    public GameObject IntroductionText;
     int score;
     int totalQuestion;
     // Start is called before the first frame update
@@ -87,11 +89,11 @@ public class VideoManager : MonoBehaviour
 
     void UpdateVideo()
     {
-        switch (VideoID)
+        switch (CurrentClipNumber)
         
         {
 
-            case "Practice_1":
+            case 1:
                 //Need to write which vid here
 
                 QuestionText.text = "What should you do at the upcoming junction?";
@@ -108,13 +110,12 @@ public class VideoManager : MonoBehaviour
                 { 
                   
                     TimerStart();
-                    //Complete if it is completed or else write the ID;
-                    NextVideo = "Complete";
+                  
                 }
                 
                 break;
 
-            case "Complete":
+            case 2:
 
                 FinalResult();
                 break;
@@ -126,6 +127,67 @@ public class VideoManager : MonoBehaviour
 
 
         
+    }
+
+    public void OnNextButtonPressed()
+    {
+        if (IntroductionText.activeSelf)
+        {
+
+        }
+        else if (DeviceInstructions.activeSelf)
+        {
+            NextObject.gameObject.SetActive(false);
+            DeviceInstructions.SetActive(false);
+            BackgroundImage.SetActive(false);
+            LoadClip();
+
+        }
+        else if (AnswerStatus.gameObject.activeSelf)
+        {
+            if (CurrentClipNumber == 13)
+            {
+                NextObject.gameObject.SetActive(false);
+                
+            }
+            else
+            {
+
+                AnswerStatus.gameObject.SetActive(false);
+                DeviceInstructions.gameObject.SetActive(true);
+                NextObject.GetComponentInChildren<TMP_Text>().text = "Continue";
+            }
+        }
+    }
+
+    IEnumerator LoadAtStart()
+    {
+
+        if (CurrentClipNumber == 1)
+        {
+          //  PlayerObject.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+
+        }
+        if (CurrentClipNumber >= 2)
+        {
+         //   PlayerObject.transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
+
+        }
+        VPlayer.Play();
+        yield return new WaitForSeconds(0.2f);
+        VPlayer.Pause();
+
+        BackgroundImage.gameObject.SetActive(false);
+
+       // isReady = true;
+
+
+
+    }
+
+    public void LoadClip()
+    {
+
     }
 
     public void GetResponseTime()
