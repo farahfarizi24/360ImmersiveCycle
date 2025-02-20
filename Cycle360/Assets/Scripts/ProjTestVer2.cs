@@ -388,7 +388,7 @@ public class ProjTestVer2 : MonoBehaviour
     public void LoadClip()
     {
         ThisQuestionScore = 0;
-        string tempPath = Path.Combine(RootPath, "Projection_Test_" + CurrentClipNumber + ".mp4");
+        string tempPath = Path.Combine(RootPath, "ProjectionTest" + CurrentClipNumber + ".mp4");
         VP.url = tempPath;
         VP.Prepare();
 

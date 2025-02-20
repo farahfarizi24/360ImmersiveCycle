@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using System.IO;
 public class VideoManager : MonoBehaviour
 {
     public SaveDatas saveDatas;
@@ -23,7 +24,8 @@ public class VideoManager : MonoBehaviour
     public bool ChoiceDSelected;
     public bool IsCorrect;
     public bool VideoIsPreparing;
-    public float timer;
+    public bool isReady;
+    public int timer=3;
     public float ResponseTime;
     public GameObject QObj;
     public TextMeshProUGUI QuestionText;
@@ -40,6 +42,8 @@ public class VideoManager : MonoBehaviour
     public GameObject BackgroundImage;
     public GameObject DeviceInstructions;
     public GameObject IntroductionText;
+    public GameObject StartObject;
+    public TMP_Text TimerObject;
     int score;
     int totalQuestion;
     // Start is called before the first frame update
@@ -60,11 +64,12 @@ public class VideoManager : MonoBehaviour
         TurnOffAllChoice();
         CurrentClipNumber = 1;
         RootPath = Application.persistentDataPath;
+        NextObject.SetActive(false);
         score = 0;
         totalQuestion = 13;
         QObj.SetActive(false);
         AnswerStatus.gameObject.SetActive(false);
-        NextObject.SetActive(true);
+        isReady = false;    
         BackgroundImage.SetActive(true);
 
         DeviceInstructions.SetActive(false );
@@ -76,6 +81,17 @@ public class VideoManager : MonoBehaviour
     void Update()
     {   curVideoTime = (float)VPlayer.time;
         UpdateVideo();
+      
+        if (VPlayer.isPrepared && VideoIsPreparing)
+        {
+            StartCoroutine(LoadAtStart());
+            VideoIsPreparing = false;
+            isReady = true;
+        }
+        if (isReady && VPlayer.isPrepared)
+        {
+            StartCoroutine(CountdownToStartVid());
+        }
     }
 
 
@@ -106,12 +122,7 @@ public class VideoManager : MonoBehaviour
 
                 VPlayer.loopPointReached += PauseVid;
 
-                if (curVideoTime >= 11.9f)
-                { 
-                  
-                    TimerStart();
-                  
-                }
+              
                 
                 break;
 
@@ -128,12 +139,38 @@ public class VideoManager : MonoBehaviour
 
         
     }
+    IEnumerator CountdownToStartVid()
+    {
+        while (timer > 0)
+        {
+            isReady = false;
 
+            Debug.Log("Timer start");
+            TimerObject.text = timer.ToString();
+            yield return new WaitForSeconds(1f);
+            timer--;
+        }
+        TimerObject.text = "Go!";
+        //Provide 3 seconds break before Starting to play video
+        //yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
+        TimerObject.text = "";
+        //StopButton.gameObject.SetActive(true);
+        VPlayer.Play();
+        // = false;
+        timer = 3;
+        StopCoroutine(CountdownToStartVid());
+
+
+    }
     public void OnNextButtonPressed()
     {
         if (IntroductionText.activeSelf)
         {
-
+            IntroductionText.SetActive(false);
+            NextObject.gameObject.SetActive(true);
+            DeviceInstructions.SetActive(true);
+            StartObject.SetActive(false );
         }
         else if (DeviceInstructions.activeSelf)
         {
@@ -187,17 +224,29 @@ public class VideoManager : MonoBehaviour
 
     public void LoadClip()
     {
+        score = 0;
+        string tempPath = Path.Combine(RootPath, "ComprehensionTest" + CurrentClipNumber + ".mp4");
+        VPlayer.url = tempPath;
+        VPlayer.Prepare();
 
+        // StartCoroutine(LoadAtStart());
+        if (CurrentClipNumber <= 3)
+        {
+            VideoID = "Practice" + CurrentClipNumber.ToString();
+        }
+        else
+        {
+            int tempID = CurrentClipNumber - 3;
+            VideoID = tempID.ToString();
+        }
+        VideoIsPreparing = true;
     }
 
     public void GetResponseTime()
     {
         ResponseTime = Time.deltaTime;
     }
-    public void TimerStart()
-    {
-        timer += Time.deltaTime;
-    }
+   
 
     public void PauseVid(VideoPlayer vp)
     {

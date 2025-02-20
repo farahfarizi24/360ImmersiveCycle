@@ -18,7 +18,7 @@ public class SaveDatas : MonoBehaviour
     public string UID;
     public string theDate;
     public string TestID;
-
+    public TMP_Text SavePathText;
     //For perception test
     int TotalCorrectClick;
     int TotalIncorrectClick;
@@ -35,6 +35,7 @@ public class SaveDatas : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
        
+        SavePathText.text = Application.persistentDataPath;
 
     }
 

@@ -186,7 +186,7 @@ public class VideoPlayerScript : MonoBehaviour
     public void LoadVid()
     {
         int VidToPlay = CurPlayingClip + 1;
-        string tempPath = Path.Combine(RootPath, "Perception_Test_" + VidToPlay + ".mp4");
+        string tempPath = Path.Combine(RootPath, "PerceptionTest" + VidToPlay + ".mp4");
         video.url = tempPath;
         //video.clip = Projectionclips[CurPlayingClip];
         video.Prepare();
