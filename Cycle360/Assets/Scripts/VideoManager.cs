@@ -63,6 +63,8 @@ public class VideoManager : MonoBehaviour
         GetSaveFile();
         TurnOffAllChoice();
         CurrentClipNumber = 1;
+        timer = 3;
+
         RootPath = Application.persistentDataPath;
         NextObject.SetActive(false);
         score = 0;
@@ -85,11 +87,13 @@ public class VideoManager : MonoBehaviour
         if (VPlayer.isPrepared && VideoIsPreparing)
         {
             StartCoroutine(LoadAtStart());
-            VideoIsPreparing = false;
-            isReady = true;
+           // VideoIsPreparing = false;
         }
-        if (isReady && VPlayer.isPrepared)
+        if (isReady)
         {
+          isReady = false;
+            NextObject.SetActive(false);
+            timer = 3;
             StartCoroutine(CountdownToStartVid());
         }
     }
@@ -128,7 +132,151 @@ public class VideoManager : MonoBehaviour
 
             case 2:
 
+                QuestionText.text = "What junction are you approaching?";
+                ChoiceText_1.text = "a) T Junction";
+                ChoiceText_2.text = "b) Roundabout";
+                ChoiceText_3.text = "c) Crossroads";
+                ChoiceText_4.text = "d) I am not approaching a junction";
+
+                CorrectAnswer = "B";
+
+                VPlayer.loopPointReached += PauseVid;
+
+                break;
+            case 3:
+
+                QuestionText.text = "Is it safe to pass the cyclist in front?";
+
+                ChoiceText_1.text = "a) Yes, there is no oncoming traffic and no cyclist close behind";
+                ChoiceText_2.text = "b) No, there is an oncoming cyclist";
+                ChoiceText_3.text = "c) No, there is an oncoming runner";
+                ChoiceText_4.text = "d) No, there is a cyclist behind who is about to overtake";
+
+                CorrectAnswer = "D";
+                VPlayer.loopPointReached += PauseVid;
+
+                break;
+            case 4:
+
+                QuestionText.text = "Why should you slow down for this corner?";
+
+                ChoiceText_1.text = "a) There is a car pulling out on to the road on the corner";
+                ChoiceText_2.text = "b) There is a parked car immediately after the corner on your side of the road";
+                ChoiceText_3.text = "c) There is cyclist ahead slowing to take the corner";
+                ChoiceText_4.text = "d) There is an intersection immediately after the corner";
+
+
+
+                CorrectAnswer = "A";
+                VPlayer.loopPointReached += PauseVid;
+
+                break;
+            case 5:
+
+                QuestionText.text = "Why are the vehicles in front indicating to merge in to the lane you're in?";
+
+                ChoiceText_1.text = "a) The two lanes are merging in to one lane";
+                ChoiceText_2.text = "b) There is an upcoming junction and the vehicles are planning to turn left";
+                ChoiceText_3.text = "c) There is upcoming roadwork in the right-hand lane";
+                ChoiceText_4.text = "d) There is a stopped vehicle in the right-hand lane waiting to turn right";
+
+
+                
+
+                CorrectAnswer = "D";
+                VPlayer.loopPointReached += PauseVid;
+                break;
+            case 6:
+
+                QuestionText.text = "Is it safe to move round the cyclist who stopped?";
+
+                ChoiceText_1.text = "a) Yes, there is no oncoming traffic and no cyclist close behind";
+                ChoiceText_2.text = "b) No, there is an oncoming cyclist";
+                ChoiceText_3.text = "c) No, there is a cyclist behind who is about to overtake";
+                ChoiceText_4.text = "d) No, the cyclist who stopped is across both lanes so there is not enough space to pass";
+
+
+
+
+                CorrectAnswer = "A";
+                VPlayer.loopPointReached += PauseVid;
+                break;
+            case 7:
+
+                QuestionText.text = "Based on the road markings, which lane should you be in if you want to turn left at the intersection?";
+
+                ChoiceText_1.text = "a) Either the left hand lane or the cycle lane ";
+                ChoiceText_2.text = "b) The left hand lane with the other vehicles";
+                ChoiceText_3.text = "c) The bike lane as cyclists should stay in this lane";
+                ChoiceText_4.text = "d) The right hand lane with the other vehicles";
+
+                CorrectAnswer = "B";
+                VPlayer.loopPointReached += PauseVid;
+                break;
+            case 8:
+
+                QuestionText.text = "What should you do when approaching the shared path?";
+
+
+                ChoiceText_1.text = "a) Speed up to get in front of the pedestrians ";
+                ChoiceText_2.text = "b) Sound a bell to make sure the pedestrians see you and continue at the same speed";
+                ChoiceText_3.text = "c) Slow down and ensure you give way to pedestrians if appropriate";
+                ChoiceText_4.text = "d) Continue at same speed because pedestrians have to give way to cyclists";
+           
+                CorrectAnswer = "C";
+                VPlayer.loopPointReached += PauseVid;
+                break;
+            case 9:
+
+                QuestionText.text = "The bike lane has ended, what should you do?";
+
+                ChoiceText_1.text = "a) Check behind and merge right to join the traffic when safe";
+                ChoiceText_2.text = "b) Continue straight and use the bus lane as this is allowed";
+                ChoiceText_3.text = "c) Use the sidewalk as this is allowed";
+                ChoiceText_4.text = "d) Dismount and walk until the bike lane reappears";
+
+                CorrectAnswer = "B";
+                VPlayer.loopPointReached += PauseVid;
+                break;
+            case 10:
+
+                QuestionText.text = "";
+
+
+
+
+
+                CorrectAnswer = "B";
+                VPlayer.loopPointReached += PauseVid;
+                break;
+            case 11:
+
+                QuestionText.text = "";
+
+
+
+                CorrectAnswer = "";
+                VPlayer.loopPointReached += PauseVid;
+                break;
+            case 12:
+
+                QuestionText.text = "";
+
+
+
+                CorrectAnswer = "";
+                VPlayer.loopPointReached += PauseVid;
+                break;
+            case 13:
+
+                QuestionText.text = "";
+
+
+
+                CorrectAnswer = "";
+                VPlayer.loopPointReached += PauseVid;
                 FinalResult();
+
                 break;
         
         
@@ -145,9 +293,10 @@ public class VideoManager : MonoBehaviour
         {
             isReady = false;
 
-            Debug.Log("Timer start");
+            Debug.Log("Timer start " + timer);
             TimerObject.text = timer.ToString();
             yield return new WaitForSeconds(1f);
+            
             timer--;
         }
         TimerObject.text = "Go!";
@@ -157,7 +306,7 @@ public class VideoManager : MonoBehaviour
         TimerObject.text = "";
         //StopButton.gameObject.SetActive(true);
         VPlayer.Play();
-        // = false;
+       // isReady = false;
         timer = 3;
         StopCoroutine(CountdownToStartVid());
 
@@ -168,20 +317,44 @@ public class VideoManager : MonoBehaviour
         if (IntroductionText.activeSelf)
         {
             IntroductionText.SetActive(false);
+            NextObject.GetComponentInChildren<TMP_Text>().text = "Next";
+
             NextObject.gameObject.SetActive(true);
             DeviceInstructions.SetActive(true);
             StartObject.SetActive(false );
         }
+        else if (QuestionText.gameObject.activeSelf)
+        {
+            NextObject.GetComponentInChildren<TMP_Text>().text = "Record Answer";
+            NextObject.gameObject.SetActive(true);
+            QuestionText.gameObject.SetActive(false);
+            ConfidenceSlider.gameObject.SetActive(true);
+
+        }
         else if (DeviceInstructions.activeSelf)
         {
+            //NextObject.GetComponentInChildren<TMP_Text>().text = "Next";
+
             NextObject.gameObject.SetActive(false);
             DeviceInstructions.SetActive(false);
             BackgroundImage.SetActive(false);
             LoadClip();
+           //
+           //isReady = true;
+        }
 
+        else if (ConfidenceSlider.gameObject.activeSelf)
+        {
+            NextObject.GetComponentInChildren<TMP_Text>().text = "Next";
+
+            ConfidenceSlider.gameObject.SetActive(false);
+            AnswerStatus.gameObject.SetActive(true);
+            NextObject.gameObject.SetActive(true);
+            CheckIfAnswerIsCorrect();
         }
         else if (AnswerStatus.gameObject.activeSelf)
         {
+            //THERE ARE TWO HERE RECHECK;
             if (CurrentClipNumber == 13)
             {
                 NextObject.gameObject.SetActive(false);
@@ -193,6 +366,9 @@ public class VideoManager : MonoBehaviour
                 AnswerStatus.gameObject.SetActive(false);
                 DeviceInstructions.gameObject.SetActive(true);
                 NextObject.GetComponentInChildren<TMP_Text>().text = "Continue";
+                NextObject.gameObject.SetActive(true);
+
+
             }
         }
     }
@@ -210,14 +386,16 @@ public class VideoManager : MonoBehaviour
          //   PlayerObject.transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
 
         }
+        VideoIsPreparing = false;
+
         VPlayer.Play();
         yield return new WaitForSeconds(0.2f);
         VPlayer.Pause();
-
+      //  isReady = true;
         BackgroundImage.gameObject.SetActive(false);
 
-       // isReady = true;
-
+        isReady = true;
+        IsCorrect = false;
 
 
     }
@@ -268,10 +446,7 @@ public class VideoManager : MonoBehaviour
 
 
     }
-    public void ChangeVideoClip()
-    {
-
-    }
+  
 
    
 
@@ -281,11 +456,16 @@ public class VideoManager : MonoBehaviour
         if (ChoiceASelected && CorrectAnswer == "A")
         {
            OnCorrectAnswer();
+            IsCorrect = true;
+
         }
+      
+      
 
         if (ChoiceBSelected && CorrectAnswer == "B")
         {
              OnCorrectAnswer();
+            IsCorrect = true;
 
 
         }
@@ -293,16 +473,18 @@ public class VideoManager : MonoBehaviour
         if (ChoiceCSelected && CorrectAnswer == "C")
         {
             OnCorrectAnswer();
+            IsCorrect = true;
 
         }
 
         if (ChoiceDSelected && CorrectAnswer == "D")
         {
             OnCorrectAnswer();
+            IsCorrect = true;
 
 
         }
-
+       
         if (!IsCorrect) 
         
         {
@@ -316,9 +498,13 @@ public class VideoManager : MonoBehaviour
 
         }
         ConfidenceSlider.gameObject.SetActive(false);
-
-        VideoID = NextVideo;
+        CurrentClipNumber++;
+       // VideoID = NextVideo;
         totalQuestion++;
+        //DeviceInstructions.gameObject.SetActive(true);
+        AnswerStatus.gameObject.SetActive(true);
+        BackgroundImage.gameObject.SetActive(true);
+        NextObject.gameObject.SetActive(true);
         //OTHERWISE IT IS INCORRECT
     }
 
