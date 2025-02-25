@@ -68,7 +68,7 @@ public class VideoManager : MonoBehaviour
         RootPath = Application.persistentDataPath;
         NextObject.SetActive(false);
         score = 0;
-        totalQuestion = 13;
+        totalQuestion = 0;
         QObj.SetActive(false);
         AnswerStatus.gameObject.SetActive(false);
         isReady = false;    
@@ -348,9 +348,17 @@ public class VideoManager : MonoBehaviour
             NextObject.GetComponentInChildren<TMP_Text>().text = "Next";
 
             ConfidenceSlider.gameObject.SetActive(false);
-            AnswerStatus.gameObject.SetActive(true);
             NextObject.gameObject.SetActive(true);
+
+            
             CheckIfAnswerIsCorrect();
+            if (CurrentClipNumber-1 == 3 || CurrentClipNumber-1==13)
+            {
+                // FinalResult
+                FinalResult();
+            }
+            AnswerStatus.gameObject.SetActive(true);
+
         }
         else if (AnswerStatus.gameObject.activeSelf)
         {
@@ -531,7 +539,8 @@ public class VideoManager : MonoBehaviour
 
     public void FinalResult()
     {
-        AnswerStatus.text = "You got "+ score +" out of " + totalQuestion + "right!";
+   
+        AnswerStatus.text = AnswerStatus.text + "\n"+ "You got "+ score +" out of " + totalQuestion + "right!";
         NextObject.SetActive(true);
     }
 
