@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6678966
 RectTransform:
   m_ObjectHideFlags: 0
@@ -353,7 +353,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 587685924}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProjTestVer2, Assembly-CSharp
         m_MethodName: OnStopButtonPress
         m_Mode: 1
@@ -435,6 +435,7 @@ MonoBehaviour:
   UID: 44
   theDate: 
   TestID: 44
+  SavePathText: {fileID: 0}
   TotalCorrectWithinQuestions: 0
   TotalHazardWithinQuestion: 0
   TotalHazardOnTheTest: 0
@@ -873,30 +874,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 587685921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4bd6842a71f5424dbf5a8393cf1a604, type: 3}
+  m_Script: {fileID: 11500000, guid: ca8598df2b510324d9db5de463d98472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clip: []
-  PlayerObject: {fileID: 434445301}
+  saveDatas: {fileID: 0}
+  curVideoTime: 0
+  VPlayer: {fileID: 587685922}
+  isPlaying: 0
   CurrentClipNumber: 0
-  TimerText: {fileID: 1581809550}
-  CountdownTimer: 3
-  VP: {fileID: 587685922}
-  isChanging: 0
+  VideoID: 
+  CorrectAnswer: 
+  IsCorrect: 0
+  VideoIsPreparing: 0
   isReady: 0
-  QuestionID: 
-  totalScore: 0
-  ThisQuestionScore: 0
-  curVidTime: 0
-  ResOutcome: 
-  InstructionText: {fileID: 2085764656}
-  SetDeviceInstruction: {fileID: 6678965}
-  NextButton: {fileID: 671370494}
-  StopButton: {fileID: 31539924}
-  BackgroundUI: {fileID: 375526686}
-  FinalFeedback: {fileID: 1430830668}
-  QuestionFeedback: {fileID: 1470170590}
+  timer: 3
+  ResponseTime: 0
+  Hazards: []
   RootPath: 
+  PlayerObject: {fileID: 434445301}
+  NextObject: {fileID: 671370494}
+  BackgroundImage: {fileID: 375526686}
+  DeviceInstructions: {fileID: 6678965}
+  IntroductionText_1: {fileID: 2085764656}
+  TimerObject: {fileID: 1581809550}
+  AnswerFeedback: {fileID: 1470170590}
 --- !u!1 &616563907
 GameObject:
   m_ObjectHideFlags: 0
@@ -1072,7 +1073,7 @@ GameObject:
   - component: {fileID: 671370497}
   - component: {fileID: 671370496}
   m_Layer: 5
-  m_Name: StartPracticeButton
+  m_Name: NextButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1143,8 +1144,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 587685924}
-        m_TargetAssemblyTypeName: ProjTestVer2, Assembly-CSharp
-        m_MethodName: OnNextButtonPressed
+        m_TargetAssemblyTypeName: PercTest2, Assembly-CSharp
+        m_MethodName: NextButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2009,12 +2010,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Watch each video clip and imagine it is you cycling. At some point during
-    the video you will need to STOP in response to a hazard. You're required to click
-    and hold the STOP button as if squeezing the brakes on a bike. \n\nYou need to
-    respond within a specific time window to ensure you respond safely to the situation
-    - make sure you don't respond too early or too late as this is unpredictable
-    riding and can be dangerous."
+  m_text: "Watch each video clip and imagine it is you cycling. At a certain point
+    the video will freeze and you have five seconds to click on critical information
+    sources in the environment - these may be hazards or potential hazards. \n\nYou
+    should try to click the hazards as quickly and as accurately as possible."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2127,7 +2126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2085764657
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2168,7 +2167,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Projection Test
+  m_text: Alternative Perception Test
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
