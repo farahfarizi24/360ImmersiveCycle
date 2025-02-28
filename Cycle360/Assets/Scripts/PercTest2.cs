@@ -24,7 +24,9 @@ public class PercTest2 : MonoBehaviour
     public bool isReady;
     public int timer = 3;
     public float ResponseTime;
-    public GameObject[] Hazards;
+    public GameObject[] Prac1_Hazards;//Hazards0-4 Q1
+    public GameObject[] Prac2_Hazards;
+    public GameObject[] Prac3_Hazards;
     public string RootPath;
 
     public GameObject PlayerObject;
