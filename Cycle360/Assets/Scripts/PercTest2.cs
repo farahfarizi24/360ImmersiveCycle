@@ -35,6 +35,7 @@ public class PercTest2 : MonoBehaviour
     public GameObject BackgroundImage;
     public GameObject DeviceInstructions;
     public GameObject IntroductionText_1;
+    public GameObject ResetScenarioObject;
   //  public GameObject IntroductionText_2;
     public TMP_Text TimerObject;
     public GameObject AnswerFeedback;
@@ -86,6 +87,7 @@ public class PercTest2 : MonoBehaviour
         TimerObject.text = "";
         //StopButton.gameObject.SetActive(true);
         VPlayer.Play();
+        ResetScenarioObject.SetActive(true);
         // isReady = false;
         timer = 3;
         StopCoroutine(CountdownToStartVid());
@@ -215,6 +217,16 @@ public void showResult()
         }
     }
 
+    public void ResetScenario()
+    {
+        VPlayer.Stop();
+        isPlaying = false;
+        DeviceInstructions.SetActive(true);
+        NextObject.SetActive(true);
+        BackgroundImage.SetActive(true);
+        ResetScenarioObject.SetActive(false);
+    }
+
     IEnumerator LoadAtStart()
     {
         VideoIsPreparing = false;
@@ -231,7 +243,7 @@ public void showResult()
     {
         VPlayer.Pause();
         isPlaying = false;
-
+        ResetScenarioObject.SetActive(false);
     }
     void PerceptionVP()
     {

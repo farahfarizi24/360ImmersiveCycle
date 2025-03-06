@@ -22,8 +22,6 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
             RaycastHit hit;
 
-            if (VPscript.isPlaying)
-            {
                 if (Physics.Raycast(ray, out hit))
                 {
 
@@ -49,7 +47,7 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
 
                     IfWrongCLick();
                 }
-            }
+            
 
 
 
