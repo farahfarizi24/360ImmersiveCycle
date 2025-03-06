@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ObjectHazardAlternateDetector : MonoBehaviour
 {
-    public VideoPlayerScript VPscript;
+    public PercTest2 VPscript;
     public AudioSource CorrectBeep;
     SaveDatas savingScript;
     // Update is called once per frame
-    public GameObject[] Prac1Hazards;
+   // public GameObject[] Prac1Hazards;
     private void Awake()
     {
         GameObject SaveFileObject = GameObject.FindGameObjectWithTag("Manager");
@@ -33,7 +33,10 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
                         // VPscript.PauseVid();
                         CorrectBeep.Play();
                         Debug.Log(hit.collider.gameObject.name);
-                        IfCorrectHazardHit(hit.collider.gameObject.name);
+                        IfCorrectHazardHit(hit.collider.transform.parent.name);
+                        GameObject ParentObj = hit.collider.transform.parent.gameObject;
+                        ParentObj.GetComponent<MeshRenderer>().enabled = true;
+                       // IfCorrectHazardHit(hit.collider.gameObject.name);
                         savingScript.TotalCorrectWithinTheTest++;
                         savingScript.TotalCorrectWithinQuestions++;
                         Destroy(hit.collider.gameObject);
@@ -70,7 +73,10 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
 
                     CorrectBeep.Play();
                     Debug.Log(hit.collider.gameObject.name);
-                    IfCorrectHazardHit(hit.collider.gameObject.name);
+                    IfCorrectHazardHit(hit.collider.transform.parent.name);
+                    GameObject ParentObj = hit.collider.transform.parent.gameObject;
+                    ParentObj.GetComponent<MeshRenderer>().enabled = true;
+                    //   IfCorrectHazardHit(hit.collider.gameObject.name);
                     Destroy(hit.collider.gameObject);
                     savingScript.TotalCorrectWithinTheTest++;
                     savingScript.TotalCorrectWithinQuestions++;
@@ -100,17 +106,17 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
         //  GameObject SaveFileObject = GameObject.FindGameObjectWithTag("Manager");
         //  savingScript = SaveFileObject.GetComponent<SaveDatas>();
 
-        if (HazardName == "RedCar_Hazard")
+        if (HazardName == "RedCar")
         {
             int score = 0;
             //Score is 10 if its the first 1/3, is 5 if its 2/3, 3 if its close to end
 
-            if (VPscript.curFrame >= 15.0f && VPscript.curFrame <= 18.4f)
+            if (VPscript.curVideoTime >= 15.0f && VPscript.curVideoTime <= 18.4f)
             {
                 score = 10;
             }
 
-            else if (VPscript.curFrame >= 18.3f && VPscript.curFrame <= 21.7f)
+            else if (VPscript.curVideoTime >= 18.3f && VPscript.curVideoTime <= 21.7f)
             {
                 score = 5;
             }
@@ -120,19 +126,21 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
                 score = 3;
             }
 
-            savingScript.OnPerceptionTestCorrectClick("Practice_1", VPscript.curFrame.ToString(), HazardName, score);
+
+            VPscript.score++;
+            savingScript.OnPerceptionTestCorrectClick("Practice_1", VPscript.curVideoTime.ToString(), HazardName, score);
         }
-        if (HazardName == "ParkedCar_Hazard")
+        if (HazardName == "Roundabout")
         {
             int score = 0;
             //Score is 10 if its the first 1/3, is 5 if its 2/3, 3 if its close to end
 
-            if (VPscript.curFrame >= 18.0f && VPscript.curFrame <= 19.0f)
+            if (VPscript.curVideoTime >= 18.0f && VPscript.curVideoTime <= 19.0f)
             {
                 score = 10;
             }
 
-            else if (VPscript.curFrame >= 18.9f && VPscript.curFrame <= 19.5f)
+            else if (VPscript.curVideoTime >= 18.9f && VPscript.curVideoTime <= 19.5f)
             {
                 score = 5;
             }
@@ -141,21 +149,22 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
             {
                 score = 3;
             }
+            VPscript.score++;
 
-            savingScript.OnPerceptionTestCorrectClick("Practice_1", VPscript.curFrame.ToString(), HazardName, score);
+            savingScript.OnPerceptionTestCorrectClick("Practice_1", VPscript.curVideoTime.ToString(), HazardName, score);
         }
 
-        if (HazardName == "SpeedBump_Roundabout_Hazard")
+        if (HazardName == "CarBraking")
         {
             int score = 0;
             //Score is 10 if its the first 1/3, is 5 if its 2/3, 3 if its close to end
 
-            if (VPscript.curFrame >= 16.0f && VPscript.curFrame <= 19.0f)
+            if (VPscript.curVideoTime >= 16.0f && VPscript.curVideoTime <= 19.0f)
             {
                 score = 10;
             }
 
-            else if (VPscript.curFrame >= 18.9f && VPscript.curFrame <= 22.0f)
+            else if (VPscript.curVideoTime >= 18.9f && VPscript.curVideoTime <= 22.0f)
             {
                 score = 5;
             }
@@ -164,14 +173,112 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
             {
                 score = 3;
             }
+            VPscript.score++;
 
-            savingScript.OnPerceptionTestCorrectClick("Practice_1", VPscript.curFrame.ToString(), HazardName, score);
+            savingScript.OnPerceptionTestCorrectClick("Practice_1", VPscript.curVideoTime.ToString(), HazardName, score);
+        }
+
+        if (HazardName == "ParkedGreyCar")
+        {
+            int score = 0;
+            //Score is 10 if its the first 1/3, is 5 if its 2/3, 3 if its close to end
+
+            if (VPscript.curVideoTime >= 16.0f && VPscript.curVideoTime <= 19.0f)
+            {
+                score = 10;
+            }
+
+            else if (VPscript.curVideoTime >= 18.9f && VPscript.curVideoTime <= 22.0f)
+            {
+                score = 5;
+            }
+
+            else
+            {
+                score = 3;
+            }
+            VPscript.score++;
+
+            savingScript.OnPerceptionTestCorrectClick("Practice_1", VPscript.curVideoTime.ToString(), HazardName, score);
+        }
+
+
+        ///Q2
+        ///
+        if (HazardName == "Roundabout_P2")
+        {
+            int score = 0;
+            //Score is 10 if its the first 1/3, is 5 if its 2/3, 3 if its close to end
+
+            if (VPscript.curVideoTime >= 16.0f && VPscript.curVideoTime <= 19.0f)
+            {
+                score = 10;
+            }
+
+            else if (VPscript.curVideoTime >= 18.9f && VPscript.curVideoTime <= 22.0f)
+            {
+                score = 5;
+            }
+
+            else
+            {
+                score = 3;
+            }
+            VPscript.score++;
+
+            savingScript.OnPerceptionTestCorrectClick("Practice_2", VPscript.curVideoTime.ToString(), HazardName, score);
+        }
+        if (HazardName == "Pedestrian_P2")
+        {
+            int score = 0;
+            //Score is 10 if its the first 1/3, is 5 if its 2/3, 3 if its close to end
+
+            if (VPscript.curVideoTime >= 16.0f && VPscript.curVideoTime <= 19.0f)
+            {
+                score = 10;
+            }
+
+            else if (VPscript.curVideoTime >= 18.9f && VPscript.curVideoTime <= 22.0f)
+            {
+                score = 5;
+            }
+
+            else
+            {
+                score = 3;
+            }
+            VPscript.score++;
+
+            savingScript.OnPerceptionTestCorrectClick("Practice_2", VPscript.curVideoTime.ToString(), HazardName, score);
+        }
+        if (HazardName == "Speedbump_P2")
+        {
+            int score = 0;
+            //Score is 10 if its the first 1/3, is 5 if its 2/3, 3 if its close to end
+
+            if (VPscript.curVideoTime >= 16.0f && VPscript.curVideoTime <= 19.0f)
+            {
+                score = 10;
+            }
+
+            else if (VPscript.curVideoTime >= 18.9f && VPscript.curVideoTime <= 22.0f)
+            {
+                score = 5;
+            }
+
+            else
+            {
+                score = 3;
+            }
+            VPscript.score++;
+
+            savingScript.OnPerceptionTestCorrectClick("Practice_2", VPscript.curVideoTime.ToString(), HazardName, score);
         }
     }
 
 
     public void IfWrongCLick()
     {
-        savingScript.OnPerceptionTestWrongClick(VPscript.curFrame.ToString());
+        savingScript.OnPerceptionTestWrongClick(VPscript.curVideoTime.ToString());
     }
 }

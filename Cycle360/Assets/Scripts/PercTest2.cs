@@ -24,11 +24,12 @@ public class PercTest2 : MonoBehaviour
     public bool isReady;
     public int timer = 3;
     public float ResponseTime;
+    public GameObject[] HazardContainer;
     public GameObject[] Prac1_Hazards;//Hazards0-4 Q1
     public GameObject[] Prac2_Hazards;
     public GameObject[] Prac3_Hazards;
     public string RootPath;
-
+    public GameObject CompleteAnswerButton;
     public GameObject PlayerObject;
     public GameObject NextObject;
     public GameObject BackgroundImage;
@@ -37,8 +38,8 @@ public class PercTest2 : MonoBehaviour
   //  public GameObject IntroductionText_2;
     public TMP_Text TimerObject;
     public GameObject AnswerFeedback;
-    int score;
-    int totalQuestion;
+    public int score;
+    public int totalQuestion;
     // Start is called before the first frame update
     void Start()
     {
@@ -113,7 +114,16 @@ public class PercTest2 : MonoBehaviour
         CurrentClipNumber = 1;
     }
 
+public void showResult()
+    {
+        HazardContainer[CurrentClipNumber - 1].SetActive(false);
 
+        CompleteAnswerButton.SetActive(false);
+        BackgroundImage.SetActive(true);
+        AnswerFeedback.GetComponent<TMP_Text>().text = "You detected " + score + " from " + totalQuestion + " hazards";
+        AnswerFeedback.SetActive(true);
+        NextObject.SetActive(true);
+    }
     public void NextButtonClicked()
     {
         if (IntroductionText_1.activeSelf)
@@ -152,9 +162,7 @@ public class PercTest2 : MonoBehaviour
 
 
                 AnswerFeedback.gameObject.SetActive(false);
-                BackgroundImage.gameObject.SetActive(false);
-
-                NextObject.gameObject.SetActive(false);
+                DeviceInstructions.SetActive(true);
                 //SetHazardAllToNull and BoolTo false
                 //
                 CurrentClipNumber++;
@@ -164,7 +172,6 @@ public class PercTest2 : MonoBehaviour
                     PlayerObject.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
                 }
 
-                LoadVid();
             }
 
 
@@ -177,6 +184,7 @@ public class PercTest2 : MonoBehaviour
 
     public void LoadVid()
     {
+        score = 0;
         string tempPath = Path.Combine(RootPath, "PerceptionTest" + CurrentClipNumber + ".mp4");
         VPlayer.url = tempPath;
         VPlayer.Prepare();
@@ -193,6 +201,18 @@ public class PercTest2 : MonoBehaviour
         }
         VideoIsPreparing = true;
 
+        if (CurrentClipNumber == 1)
+        {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
+        }
+        if (CurrentClipNumber == 2)
+        {
+             PlayerObject.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+        }
+        if (CurrentClipNumber == 3)
+        {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+        }
     }
 
     IEnumerator LoadAtStart()
@@ -222,12 +242,52 @@ public class PercTest2 : MonoBehaviour
             case 1:
                 if (curVideoTime >= 19.0f && VPlayer.isPlaying)
                 {
+                    HazardContainer[CurrentClipNumber - 1].SetActive(true);
+
                     PauseVid();
+
+                    for (int i = 0; i < Prac1_Hazards.Length; i++)
+                    {
+                        Prac1_Hazards[i].SetActive(true);
+                    }
+                    totalQuestion = Prac1_Hazards.Length;
+                    CompleteAnswerButton.SetActive(true);
                 }
                 break;
             case 2:
+
+                if (curVideoTime >= 17.0f && VPlayer.isPlaying)
+                {
+                    HazardContainer[CurrentClipNumber - 1].SetActive(true);
+
+                    PauseVid();
+
+                    for (int i = 0; i < Prac2_Hazards.Length; i++)
+                    {
+                        Prac2_Hazards[i].SetActive(true);
+                    }
+                    totalQuestion = Prac2_Hazards.Length;
+
+                    CompleteAnswerButton.SetActive(true);
+                }
+
+
                 break;
             case 3:
+                if (curVideoTime >= 17.0f && VPlayer.isPlaying)
+                {
+                    HazardContainer[CurrentClipNumber - 1].SetActive(true);
+
+                    PauseVid();
+
+                    for (int i = 0; i < Prac3_Hazards.Length; i++)
+                    {
+                        Prac3_Hazards[i].SetActive(true);
+                    }
+                    totalQuestion = Prac3_Hazards.Length;
+
+                    CompleteAnswerButton.SetActive(true);
+                }
                 break;
             case 4:
                 break;
