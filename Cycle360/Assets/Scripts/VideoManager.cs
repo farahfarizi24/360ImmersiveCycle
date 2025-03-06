@@ -37,6 +37,7 @@ public class VideoManager : MonoBehaviour
     public TextMeshProUGUI AnswerStatus;
     string NextVideo;
     public string RootPath;
+    public GameObject ResetButton;
 
     public GameObject NextObject;
     public GameObject BackgroundImage;
@@ -308,9 +309,20 @@ public class VideoManager : MonoBehaviour
         VPlayer.Play();
        // isReady = false;
         timer = 3;
+        ResetButton.SetActive(true);
+
         StopCoroutine(CountdownToStartVid());
 
 
+    }
+    public void ResetScenario()
+    {
+        VPlayer.Stop();
+        isPlaying = false;
+        DeviceInstructions.SetActive(true);
+        NextObject.SetActive(true);
+        BackgroundImage.SetActive(true);
+        ResetButton.SetActive(false);
     }
     public void OnNextButtonPressed()
     {
@@ -443,7 +455,7 @@ public class VideoManager : MonoBehaviour
         ChoiceText_2.gameObject.SetActive(true);
         ChoiceText_3.gameObject.SetActive(true);
         ChoiceText_4.gameObject.SetActive(true);
-
+        ResetButton.SetActive(false);
        // VPlayer.Pause();
         isPlaying = false;
     }

@@ -42,10 +42,12 @@ public class VideoPlayerScript : MonoBehaviour
     public int CurPlayingClip=0;
     public VideoClip[] Projectionclips;
     public GameObject PlayerObject;
-
-  //  public TextMeshProUGUI pauseButton;
+    public GameObject DeviceInstruction;
+    public GameObject ResetButton;
+   
+    //  public TextMeshProUGUI pauseButton;
     // Start is called before the first frame update
-  
+
 
     void Start()
     {
@@ -88,7 +90,8 @@ public class VideoPlayerScript : MonoBehaviour
         IntermissionScene.gameObject.SetActive(false);
         NextButton.gameObject.SetActive(true);
         NextButton.gameObject.GetComponentInChildren <TextMeshProUGUI>().text = "Next";
-
+        DeviceInstruction.SetActive(false);
+        ResetButton.SetActive(false);
     isReady = false;
         curFrame = 0;
         isPlaying = false;
@@ -106,13 +109,19 @@ public class VideoPlayerScript : MonoBehaviour
         else if (Instruction_2.activeSelf) 
         {
             Instruction_2.SetActive(false);
-            NextButton.gameObject.SetActive(false);
-            BackgroundUI.gameObject.SetActive(false);
-            LoadVid();
+            DeviceInstruction.SetActive(true);
 
 
         }
-       else  if (TestFeedback.gameObject.activeSelf)
+        else if (DeviceInstruction.activeSelf)
+        {
+            NextButton.gameObject.SetActive(false);
+            DeviceInstruction.SetActive(false);
+            BackgroundUI.SetActive(false);
+            LoadVid();
+
+        }
+        else  if (TestFeedback.gameObject.activeSelf)
         {
             if (CurPlayingClip ==13) 
             {//NextButton.gameObject.SetActive(false);
@@ -129,9 +138,8 @@ public class VideoPlayerScript : MonoBehaviour
 
 
                 TestFeedback.gameObject.SetActive(false);
-                BackgroundUI.gameObject.SetActive(false);
+                DeviceInstruction.SetActive(true);
 
-                NextButton.gameObject.SetActive(false);
                 //SetHazardAllToNull and BoolTo false
                 //
                 CurPlayingClip++;
@@ -141,7 +149,7 @@ public class VideoPlayerScript : MonoBehaviour
                     PlayerObject.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
                 }
 
-                LoadVid();
+               
             }
       
             
@@ -150,7 +158,15 @@ public class VideoPlayerScript : MonoBehaviour
             //Load next;
         }
     }
-
+    public void ResetScenario()
+    {
+        video.Stop();
+        isPlaying = false;
+        DeviceInstruction.SetActive(true);
+        NextButton.SetActive(true);
+        BackgroundUI.SetActive(true);
+        ResetButton.SetActive(false);
+    }
     IEnumerator LoadAtStart()
     {
         yield return new WaitForSeconds(1f);
@@ -180,7 +196,9 @@ public class VideoPlayerScript : MonoBehaviour
     {
         if (isPlaying) 
         { PauseVid(); }
-        else { ContinueVid(); }
+        else { ContinueVid();
+            ResetButton.SetActive(true);
+        }
     }
     
     public void LoadVid()
@@ -196,7 +214,8 @@ public class VideoPlayerScript : MonoBehaviour
     {
         video.Pause();
         isPlaying = false;
-      
+        ResetButton.SetActive(false);
+
     }
     public void ContinueVid()
     {

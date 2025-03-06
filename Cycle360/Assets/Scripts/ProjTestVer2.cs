@@ -36,6 +36,7 @@ public class ProjTestVer2 : MonoBehaviour
     public GameObject QuestionFeedback;
     public string RootPath;
     public bool VideoBeingPrepared;
+    public GameObject ResetButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -64,6 +65,7 @@ public class ProjTestVer2 : MonoBehaviour
         NextButton.GetComponentInChildren<TMP_Text>().text = "Start";
         NextButton.gameObject.SetActive(true);
         BackgroundUI.gameObject.SetActive(true);
+        ResetButton.SetActive(false);
     }
 
     // Update is called once per frame
@@ -142,7 +144,7 @@ public class ProjTestVer2 : MonoBehaviour
         // down to 1 point if they respond just in time.
         // They will not score any points if they respond before the time window or after the time window
         totalScore += ThisQuestionScore;
-
+        ResetButton.SetActive(false);
 
         savingScript.OnProjectionTestResponse(QuestionID, "Stop", ResOutcome, ThisQuestionScore,curVidTime);
 
@@ -293,6 +295,14 @@ public class ProjTestVer2 : MonoBehaviour
 
         return;
     }
+    public void ResetScenario()
+    {
+        VP.Stop();
+        SetDeviceInstruction.SetActive(true);
+        NextButton.SetActive(true);
+        BackgroundUI.SetActive(true);
+        ResetButton.SetActive(false);
+    }
     IEnumerator CountdownToStartVid()
     {
         while(CountdownTimer > 0)
@@ -313,6 +323,7 @@ public class ProjTestVer2 : MonoBehaviour
         VP.Play();
         isChanging = false;
         CountdownTimer = 3;
+        ResetButton.SetActive(true);
         StopCoroutine(CountdownToStartVid());
 
 

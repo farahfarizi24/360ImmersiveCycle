@@ -44,6 +44,7 @@ public class TimerScript : MonoBehaviour
     public void startVid()
     {
         VPScript.PlaybackManager();
+        
         TimerTxt.text = "";
     }
     
