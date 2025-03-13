@@ -116,14 +116,15 @@ public class VideoManager : MonoBehaviour
 
             case 1:
                 //Need to write which vid here
+                
+                QuestionText.text = "What intersection are you approaching?";
+                ChoiceText_1.text = "a) T Junction";
+                ChoiceText_2.text = "b) Roundabout";
+                ChoiceText_3.text = "c) Crossroads";
+                ChoiceText_4.text = "d) I am not approaching a junction";
 
-                QuestionText.text = "What should you do at the upcoming junction?";
-                ChoiceText_1.text = "a) Stop because there was a Give Way sign";
-                ChoiceText_2.text = "b) Go straight over because the light was about to turn Green";
-                ChoiceText_3.text = "c) Stop because the light was about to turn Red";
-                ChoiceText_4.text = "d) Go straight over because the light was on Yellow and there was time";
-
-                CorrectAnswer = "C";
+                CorrectAnswer = "B";
+           
 
                 VPlayer.loopPointReached += PauseVid;
 
@@ -133,18 +134,6 @@ public class VideoManager : MonoBehaviour
 
             case 2:
 
-                QuestionText.text = "What junction are you approaching?";
-                ChoiceText_1.text = "a) T Junction";
-                ChoiceText_2.text = "b) Roundabout";
-                ChoiceText_3.text = "c) Crossroads";
-                ChoiceText_4.text = "d) I am not approaching a junction";
-
-                CorrectAnswer = "B";
-
-                VPlayer.loopPointReached += PauseVid;
-
-                break;
-            case 3:
 
                 QuestionText.text = "Is it safe to pass the cyclist in front?";
 
@@ -154,21 +143,34 @@ public class VideoManager : MonoBehaviour
                 ChoiceText_4.text = "d) No, there is a cyclist behind who is about to overtake";
 
                 CorrectAnswer = "D";
+
+                VPlayer.loopPointReached += PauseVid;
+
+                break;
+            case 3:
+
+                QuestionText.text = "The bike lane has ended, is it legal to ride in the bus lane?";
+
+                ChoiceText_1.text = "a) Yes, cyclists can ride in all bus lanes across Australia";
+                ChoiceText_2.text = "b) No, cyclists are never allowed to ride in bus lanes";
+                ChoiceText_3.text = "c) It depends, cyclists can use bus lanes but only during peak hours";
+                ChoiceText_4.text = "d) It depends, there are different laws for riding in bus lanes in the different the states and territories";
+
+
+                CorrectAnswer = "D";
                 VPlayer.loopPointReached += PauseVid;
 
                 break;
             case 4:
-
-                QuestionText.text = "Why should you slow down for this corner?";
-
-                ChoiceText_1.text = "a) There is a car pulling out on to the road on the corner";
-                ChoiceText_2.text = "b) There is a parked car immediately after the corner on your side of the road";
-                ChoiceText_3.text = "c) There is cyclist ahead slowing to take the corner";
-                ChoiceText_4.text = "d) There is an intersection immediately after the corner";
+                QuestionText.text = "What should you do when approaching the shared path intersection?";
 
 
+                ChoiceText_1.text = "a) Speed up to get in front of the pedestrians ";
+                ChoiceText_2.text = "b) Sound a bell to make sure the pedestrians see you and continue at the same speed";
+                ChoiceText_3.text = "c) Slow down and ensure you give way to pedestrians if appropriate";
+                ChoiceText_4.text = "d) Continue at same speed because pedestrians have to give way to cyclists";
 
-                CorrectAnswer = "A";
+                CorrectAnswer = "C";
                 VPlayer.loopPointReached += PauseVid;
 
                 break;
@@ -189,20 +191,19 @@ public class VideoManager : MonoBehaviour
                 break;
             case 6:
 
-                QuestionText.text = "Is it safe to move round the cyclist who stopped?";
 
-                ChoiceText_1.text = "a) Yes, there is no oncoming traffic and no cyclist close behind";
-                ChoiceText_2.text = "b) No, there is an oncoming cyclist";
-                ChoiceText_3.text = "c) No, there is a cyclist behind who is about to overtake";
-                ChoiceText_4.text = "d) No, the cyclist who stopped is across both lanes so there is not enough space to pass";
+                QuestionText.text = "Is it safe to enter the roundabout?";
 
-
-
+                ChoiceText_1.text = "a) Yes, because the car the car entering the roundabout from the right is taking the first exit so there is space to enter the roundabout safely";
+                ChoiceText_2.text = "b) No, because the car entering the roundabout from the right is going straight and has right of way";
+                ChoiceText_3.text = "c) No, because there is a car behind about to overtake you before the roundabout";
+                ChoiceText_4.text = "d) No, because the car entering the roundabout from the left has right of way";
 
                 CorrectAnswer = "A";
                 VPlayer.loopPointReached += PauseVid;
                 break;
             case 7:
+
 
                 QuestionText.text = "Based on the road markings, which lane should you be in if you want to turn left at the intersection?";
 
@@ -216,65 +217,79 @@ public class VideoManager : MonoBehaviour
                 break;
             case 8:
 
-                QuestionText.text = "What should you do when approaching the shared path?";
+                QuestionText.text = "Why should you slow down for this corner? ";
 
 
-                ChoiceText_1.text = "a) Speed up to get in front of the pedestrians ";
-                ChoiceText_2.text = "b) Sound a bell to make sure the pedestrians see you and continue at the same speed";
-                ChoiceText_3.text = "c) Slow down and ensure you give way to pedestrians if appropriate";
-                ChoiceText_4.text = "d) Continue at same speed because pedestrians have to give way to cyclists";
-           
-                CorrectAnswer = "C";
+                ChoiceText_1.text = "a) There is a car pulling out on to the road on the corner";
+                ChoiceText_2.text = "b) There is a parked car immediately after the corner on your side of the road";
+                ChoiceText_3.text = "c) There is cyclist ahead slowing to take the corner";
+                ChoiceText_4.text = "d) There is an intersection immediately after the corner";
+       
+
+                CorrectAnswer = "A";
                 VPlayer.loopPointReached += PauseVid;
                 break;
             case 9:
 
-                QuestionText.text = "The bike lane has ended, what should you do?";
-
-                ChoiceText_1.text = "a) Check behind and merge right to join the traffic when safe";
-                ChoiceText_2.text = "b) Continue straight and use the bus lane as this is allowed";
-                ChoiceText_3.text = "c) Use the sidewalk as this is allowed";
-                ChoiceText_4.text = "d) Dismount and walk until the bike lane reappears";
-
-                CorrectAnswer = "B";
+                QuestionText.text = "Is it safe to move round the cyclist who stopped?";
+     
+                ChoiceText_1.text = "a) Yes, there is no oncoming traffic and no cyclist close behind";
+                ChoiceText_2.text = "b) No, there is an oncoming cyclist";
+                ChoiceText_3.text = "c) No, there is a cyclist behind who is about to overtake";
+                ChoiceText_4.text = "d) No, there is not enough space to pass";
+                 
+                CorrectAnswer = "A";
                 VPlayer.loopPointReached += PauseVid;
                 break;
             case 10:
 
-                QuestionText.text = "";
+                QuestionText.text = "Who has right of way in this scenario?";
+
+                ChoiceText_1.text = "a) The cyclist has right of way because the car is entering their lane";
+                ChoiceText_2.text = "b) The car has right of way because it is a Stop junction";
+                ChoiceText_3.text = "c) The pedestrian has right of way because it is a pedestrian crossing";
+                ChoiceText_4.text = "d) The car overtaking the cyclists because they will be the first to the intersection";
 
 
-
-
-
-                CorrectAnswer = "B";
+              CorrectAnswer = "B";
                 VPlayer.loopPointReached += PauseVid;
                 break;
             case 11:
 
-                QuestionText.text = "";
+                QuestionText.text = "What should you do at the upcoming intersection?";
 
-
-
-                CorrectAnswer = "";
+                ChoiceText_1.text = "a) Stop because there was a Give Way sign";
+                ChoiceText_2.text = "b) Go straight over because the light was about to turn Green";
+                ChoiceText_3.text = "c) Stop because the light was about to turn Red";
+                ChoiceText_4.text = "d) Go straight over because the light was on Yellow and there was time";
+        
+                CorrectAnswer = "C";
                 VPlayer.loopPointReached += PauseVid;
                 break;
             case 12:
 
-                QuestionText.text = "";
+                QuestionText.text = "Is it safe to pass the dogwalker in front?";
 
+                ChoiceText_1.text = "a) Yes, because the pedestrian has crossed the path with the dog in front of them on a lead";
+                ChoiceText_2.text = "b) No, because the pedestrian dropped something in the path and is about to retrieve it";
+                ChoiceText_3.text = "c) No, because the pedestrian has a second dog and the lead is across the path";
+                ChoiceText_4.text = "d) No, because the dog is off the lead and is about to run across the path";
 
-
-                CorrectAnswer = "";
+                CorrectAnswer = "C";
                 VPlayer.loopPointReached += PauseVid;
                 break;
             case 13:
 
-                QuestionText.text = "";
+                QuestionText.text = "Can you go straight ahead?";
 
+                ChoiceText_1.text = "a) Yes, bicyclists are excepted ahead because there is a bike lane";
+                ChoiceText_2.text = "b) No, all traffic must turn left because it is a one - way street ahead";
+                ChoiceText_3.text = "c) No, only cars are excepted ahead because there is no bike lane";
+                ChoiceText_4.text = "d) Yes, all traffic can go straight ahead";
 
+    
 
-                CorrectAnswer = "";
+                CorrectAnswer = "A";
                 VPlayer.loopPointReached += PauseVid;
                 FinalResult();
 

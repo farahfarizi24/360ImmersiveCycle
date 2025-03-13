@@ -981,7 +981,7 @@ MonoBehaviour:
   QuestionFeedback: {fileID: 1470170590}
   RootPath: 
   VideoBeingPrepared: 0
-  ResetButton: {fileID: 0}
+  ResetButton: {fileID: 254525095}
 --- !u!1 &616563907
 GameObject:
   m_ObjectHideFlags: 0

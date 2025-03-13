@@ -196,56 +196,56 @@ public class ProjTestVer2 : MonoBehaviour
         {
             case 1:
 
-                CalculateScore(25.0f,28.0f,buttonHitTime);
+                CalculateScore(13.0f,16.0f,buttonHitTime);
                 break;
 
 
                 case 2:
-                CalculateScore(7.0f, 10.0f, buttonHitTime);
+                CalculateScore(8.0f, 10.0f, buttonHitTime);
                 break;
                 
                 case 3:
-                CalculateScore(16.0f, 18.0f, buttonHitTime);
+                CalculateScore(9.0f, 12.0f, buttonHitTime);
 
                 break;
                 case 4:
-                CalculateScore(15.0f, 18.0f, buttonHitTime);
+                CalculateScore(9.0f, 11.0f, buttonHitTime);
 
                 break;
             case 5:
-                CalculateScore(10.0f, 13.0f, buttonHitTime);
+                CalculateScore(8.0f, 10.0f, buttonHitTime);
 
                 break;
                 case 6:
-                CalculateScore(13.0f, 16.0f, buttonHitTime);
+                CalculateScore(13.0f, 15.0f, buttonHitTime);
 
                 break;
                 case 7:
-                CalculateScore(12.0f, 17.0f, buttonHitTime);
+                CalculateScore(7.0f, 10.0f, buttonHitTime);
 
                 break;
                 case 8:
-                CalculateScore(11.0f, 13.0f, buttonHitTime);
+                CalculateScore(8.0f, 10.0f, buttonHitTime);
 
                 break;
                 case 9:
-                CalculateScore(19.0f, 22.0f, buttonHitTime);
+                CalculateScore(14.0f, 16.0f, buttonHitTime);
 
                 break;
                 case 10:
-                CalculateScore(20.0f, 22.0f, buttonHitTime);
+                CalculateScore(11.0f, 13.0f, buttonHitTime);
 
                 break;
                 case 11:
-                CalculateScore(14.0f, 15.0f, buttonHitTime);
+                CalculateScore(8.0f, 10.0f, buttonHitTime);
 
                 break;
                 case 12:
-                CalculateScore(13.0f, 16.0f, buttonHitTime);
+                CalculateScore(13.0f, 15.0f, buttonHitTime);
 
                 break;
                 case 13:
-                CalculateScore(14.0f, 17.0f, buttonHitTime);
+                CalculateScore(11.0f, 13.0f, buttonHitTime);
 
                 break;
 
@@ -374,17 +374,14 @@ public class ProjTestVer2 : MonoBehaviour
     }
     IEnumerator LoadAtStart()
     {
+        //ADJUST PLAYER ROTATION
        
             if (CurrentClipNumber == 1)
             {
-                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 45.0f, 0.0f);
 
             }
-            if (CurrentClipNumber >= 2)
-            {
-                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
-
-            }
+          
             VP.Play();
             yield return new WaitForSeconds(0.2f);
             VP.Pause();
