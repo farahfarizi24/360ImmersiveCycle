@@ -20,10 +20,10 @@ public class SaveDatas : MonoBehaviour
     public string TestID;
     public TMP_Text SavePathText;
     //For perception test
-    int TotalCorrectClick;
-    int TotalIncorrectClick;
-    int TotalNumberofClick;
-    int TotalScore;
+    public int TotalCorrectClick;
+    public int TotalIncorrectClick;
+   public int TotalNumberofClick;
+   public int TotalScore;
     float ProjTestTotalScore;
     //for showcase
    public int TotalCorrectWithinQuestions;

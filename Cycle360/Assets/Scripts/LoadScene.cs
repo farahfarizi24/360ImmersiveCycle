@@ -21,7 +21,7 @@ public class LoadScene : MonoBehaviour
 
     public void LoadPerceptionTest()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(4);
     }
 
     public void LoadComprehensionTest()

@@ -118,13 +118,32 @@ public class PercTest2 : MonoBehaviour
 
 public void showResult()
     {
+        ResetScenarioObject.SetActive(false);
+
         HazardContainer[CurrentClipNumber - 1].SetActive(false);
 
         CompleteAnswerButton.SetActive(false);
         BackgroundImage.SetActive(true);
-        AnswerFeedback.GetComponent<TMP_Text>().text = "You detected " + score + " from " + totalQuestion + " hazards";
+        if (CurrentClipNumber == 3)
+        {
+            int efficiency = saveDatas.TotalCorrectClick / saveDatas.TotalNumberofClick * 100;
+
+            AnswerFeedback.GetComponent<TMP_Text>().text = "You detected " + score + " from " + totalQuestion + " hazards" + "\n" +
+              saveDatas.TotalCorrectClick + "hazards correctly identified out of 10 Hazards in the test. Your efficiency is " + efficiency +"%";
+               
+            //ADD overall efficiency
+
+
+        }
+        else
+        {
+            AnswerFeedback.GetComponent<TMP_Text>().text = "You detected " + score + " from " + totalQuestion + " hazards";
+
+        }
         AnswerFeedback.SetActive(true);
         NextObject.SetActive(true);
+
+        
     }
     public void NextButtonClicked()
     {
@@ -147,12 +166,14 @@ public void showResult()
         }
 
         else if (AnswerFeedback.gameObject.activeSelf)
-        {
-            if (CurrentClipNumber == 13)
+        { //TO CHANGE LATER-> This will switch to Dynamic Perception Test when triggered
+          
+            if (CurrentClipNumber == 3)
             {
 
                 //Add more in the feedback
                 AnswerFeedback.gameObject.SetActive(false);
+                SceneManager.LoadScene(1);
                 //NextButton.gameObject.SetActive(false);
                 //FinalScene
             }
@@ -186,6 +207,7 @@ public void showResult()
 
     public void LoadVid()
     {
+       
         score = 0;
         string tempPath = Path.Combine(RootPath, "PerceptionTest" + CurrentClipNumber + ".mp4");
         VPlayer.url = tempPath;
@@ -243,7 +265,6 @@ public void showResult()
     {
         VPlayer.Pause();
         isPlaying = false;
-        ResetScenarioObject.SetActive(false);
     }
     void PerceptionVP()
     {

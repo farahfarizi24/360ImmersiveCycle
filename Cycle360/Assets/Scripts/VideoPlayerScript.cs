@@ -516,5 +516,7 @@ public void ShowEndScene(VideoPlayer vp)
 
         GameObject SaveFileObject = GameObject.FindGameObjectWithTag("Manager");
         SaveObj = SaveFileObject.GetComponent<SaveDatas>();
+        SaveObj.TotalCorrectWithinQuestions = 0;
+        SaveObj.TotalHazardWithinQuestion = 0;
     }
 }

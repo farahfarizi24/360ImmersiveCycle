@@ -164,6 +164,7 @@ public class ProjTestVer2 : MonoBehaviour
 
             StopButton.SetActive(false);
             NextButton.GetComponentInChildren<TMP_Text>().text = "Next";
+            ResetButton.SetActive(false);
 
             NextButton.SetActive(true);
             QuestionFeedback.SetActive(true);
@@ -180,6 +181,7 @@ public class ProjTestVer2 : MonoBehaviour
             StopButton.SetActive(false);
             NextButton.GetComponentInChildren<TMP_Text>().text = "Finish Test";
             NextButton.SetActive(true);
+            ResetButton.SetActive(false);
 
             QuestionFeedback.SetActive(true);
             FinalFeedback.SetActive(true);
@@ -376,13 +378,30 @@ public class ProjTestVer2 : MonoBehaviour
     {
         //ADJUST PLAYER ROTATION
        
-            if (CurrentClipNumber == 1)
+            if (CurrentClipNumber == 1|| CurrentClipNumber==2 || CurrentClipNumber == 5
+            || CurrentClipNumber == 6 || CurrentClipNumber == 7 || CurrentClipNumber == 8
+            || CurrentClipNumber == 9 || CurrentClipNumber == 10 || CurrentClipNumber == 11
+            || CurrentClipNumber == 12 || CurrentClipNumber == 13)
             {
-                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 45.0f, 0.0f);
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 60.0f, 0.0f);
 
             }
-          
-            VP.Play();
+            if(CurrentClipNumber == 3)
+           {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, -150.0f, 0.0f);
+
+           }
+        if (CurrentClipNumber == 4)
+        {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+
+        }
+        if (CurrentClipNumber == 9)
+        {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 110.0f, 0.0f);
+
+        }
+        VP.Play();
             yield return new WaitForSeconds(0.2f);
             VP.Pause();
 
