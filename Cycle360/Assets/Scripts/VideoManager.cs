@@ -38,6 +38,7 @@ public class VideoManager : MonoBehaviour
     string NextVideo;
     public string RootPath;
     public GameObject ResetButton;
+    public GameObject PlayerObject;
 
     public GameObject NextObject;
     public GameObject BackgroundImage;
@@ -379,7 +380,7 @@ public class VideoManager : MonoBehaviour
 
             
             CheckIfAnswerIsCorrect();
-            if (CurrentClipNumber-1 == 3 || CurrentClipNumber-1==13)
+            if (CurrentClipNumber == 3 || CurrentClipNumber==14)
             {
                 // FinalResult
                 FinalResult();
@@ -390,7 +391,7 @@ public class VideoManager : MonoBehaviour
         else if (AnswerStatus.gameObject.activeSelf)
         {
             //THERE ARE TWO HERE RECHECK;
-            if (CurrentClipNumber == 13)
+            if (CurrentClipNumber == 14)
             {
                 NextObject.gameObject.SetActive(false);
                 
@@ -410,17 +411,8 @@ public class VideoManager : MonoBehaviour
 
     IEnumerator LoadAtStart()
     {
-
-        if (CurrentClipNumber == 1)
-        {
-          //  PlayerObject.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
-
-        }
-        if (CurrentClipNumber >= 2)
-        {
-         //   PlayerObject.transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
-
-        }
+        adjustRotation();
+     
         VideoIsPreparing = false;
 
         VPlayer.Play();
@@ -432,6 +424,67 @@ public class VideoManager : MonoBehaviour
         isReady = true;
         IsCorrect = false;
 
+
+    }
+
+    public void adjustRotation()
+    {
+        switch (CurrentClipNumber)
+        {
+            case 1:
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 65.0f, 0.0f);
+                break;
+            case 2:
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 65.0f, 0.0f);
+
+                break;
+            case 3:
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 65.0f, 0.0f);
+
+                break;
+            case 4:
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 65.0f, 0.0f);
+
+                break;
+            case 5:
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 65.0f, 0.0f);
+
+                break;
+            case 6:
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+
+                break;
+            case 7:
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 65.0f, 0.0f);
+
+
+                break;
+            case 8:
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 65.0f, 0.0f);
+
+                break;
+            case 9:
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 65.0f, 0.0f);
+
+                break;
+            case 10:
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 65.0f, 0.0f);
+
+                break;
+            case 11:
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 65.0f, 0.0f);
+
+                break;
+            case 12:
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+
+                break;
+            case 13:
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 65.0f, 0.0f);
+
+                break;
+
+        }
 
     }
 

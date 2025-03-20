@@ -1690,13 +1690,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764487422}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.19620277, z: 0, w: 0.9805634}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 794785803}
-  m_LocalEulerAnglesHint: {x: 0, y: -22.63, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &764487425
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2316,6 +2316,7 @@ MonoBehaviour:
   AnswerStatus: {fileID: 561612211}
   RootPath: 
   ResetButton: {fileID: 1425905615}
+  PlayerObject: {fileID: 794785801}
   NextObject: {fileID: 521193987}
   BackgroundImage: {fileID: 298617669}
   DeviceInstructions: {fileID: 355402735}
@@ -2339,7 +2340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1093818483
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2379,7 +2380,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
