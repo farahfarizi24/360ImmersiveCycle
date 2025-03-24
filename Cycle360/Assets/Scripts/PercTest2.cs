@@ -168,7 +168,7 @@ public void showResult()
         else if (AnswerFeedback.gameObject.activeSelf)
         { //TO CHANGE LATER-> This will switch to Dynamic Perception Test when triggered
           
-            if (CurrentClipNumber == 3)
+            if (CurrentClipNumber == 7)
             {
 
                 //Add more in the feedback
@@ -209,7 +209,8 @@ public void showResult()
     {
        
         score = 0;
-        string tempPath = Path.Combine(RootPath, "PerceptionTest" + CurrentClipNumber + ".mp4");
+        string tempPath = Path.Combine(RootPath, "Freeze " + CurrentClipNumber + " - Perception Test.mp4");
+        //string tempPath = Path.Combine(RootPath, "Test.mp4");
         VPlayer.url = tempPath;
         VPlayer.Prepare();
 
@@ -260,6 +261,14 @@ public void showResult()
         BackgroundImage.gameObject.SetActive(false);
 
         isReady = true;
+    }
+
+    IEnumerator answerCountdown()
+
+    {
+        VPlayer.Pause();
+        yield return new WaitForSeconds(6.0f);
+
     }
     public void PauseVid()
     {
