@@ -116,6 +116,7 @@ public class PercTest2 : MonoBehaviour
         CurrentClipNumber = 1;
     }
 
+    //After answer stage
 public void showResult()
     {
         ResetScenarioObject.SetActive(false);
