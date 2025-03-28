@@ -14,7 +14,7 @@ public class VideoPlayerScript : MonoBehaviour
 
     public HazardTracker ParkedCar_hazardTracker;
     public bool HazardisSet_PC;
-     
+
     public HazardTracker Roundabout_hazardTracker;
     public bool HazardisSet_Roundabout;
 
@@ -35,23 +35,23 @@ public class VideoPlayerScript : MonoBehaviour
     private int HazardTotalCount;
     public float curFrame;
     public string RootPath;
-   // public string WhichScene;
+    // public string WhichScene;
     public VideoPlayer video;
     public bool isPlaying;
     public bool isReady = false;
-    public int CurPlayingClip=0;
+    public int CurPlayingClip = 0;
     public VideoClip[] Projectionclips;
     public GameObject PlayerObject;
     public GameObject DeviceInstruction;
     public GameObject ResetButton;
-   
+
     //  public TextMeshProUGUI pauseButton;
     // Start is called before the first frame update
 
 
     void Start()
     {
-      
+
         SetStartComponents();
 
     }
@@ -60,7 +60,7 @@ public class VideoPlayerScript : MonoBehaviour
     public void RetrieveClips()
     {
         RootPath = Application.persistentDataPath;
-        for(int i = 0; i <=3; i++)
+        for (int i = 0; i <= 3; i++)
         {
             string tempPath = Path.Combine(RootPath, "Perception_test_P" + i + ".mp4");
             if (File.Exists(tempPath))
@@ -77,7 +77,7 @@ public class VideoPlayerScript : MonoBehaviour
     {
         RootPath = Application.persistentDataPath;
 
-        PlayerObject.transform.eulerAngles = new Vector3 (0.0f,90.0f,0.0f);
+        PlayerObject.transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
         //CurPlayingClip = 0;
         HazardisSet_RC = false;
         RedCar_hazardTracker.gameObject.SetActive(false);
@@ -85,14 +85,14 @@ public class VideoPlayerScript : MonoBehaviour
         ParkedCar_hazardTracker.gameObject.SetActive(false);
         HazardisSet_Roundabout = false;
         Roundabout_hazardTracker.gameObject.SetActive(false);
-       Instruction_1.gameObject.SetActive(true);
+        Instruction_1.gameObject.SetActive(true);
         Instruction_2.gameObject.SetActive(false);
         IntermissionScene.gameObject.SetActive(false);
         NextButton.gameObject.SetActive(true);
-        NextButton.gameObject.GetComponentInChildren <TextMeshProUGUI>().text = "Next";
+        NextButton.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Next";
         DeviceInstruction.SetActive(false);
         ResetButton.SetActive(false);
-    isReady = false;
+        isReady = false;
         curFrame = 0;
         isPlaying = false;
 
@@ -102,11 +102,11 @@ public class VideoPlayerScript : MonoBehaviour
     {
         if (Instruction_1.activeSelf)
         {
-            Instruction_1 .SetActive(false);
-            Instruction_2 .SetActive(true);
+            Instruction_1.SetActive(false);
+            Instruction_2.SetActive(true);
 
         }
-        else if (Instruction_2.activeSelf) 
+        else if (Instruction_2.activeSelf)
         {
             Instruction_2.SetActive(false);
             DeviceInstruction.SetActive(true);
@@ -121,13 +121,13 @@ public class VideoPlayerScript : MonoBehaviour
             LoadVid();
 
         }
-        else  if (TestFeedback.gameObject.activeSelf)
+        else if (TestFeedback.gameObject.activeSelf)
         {
-            if (CurPlayingClip ==13) 
+            if (CurPlayingClip == 13)
             {//NextButton.gameObject.SetActive(false);
-               
-                FinalFeedback.gameObject.SetActive(false) ;
-                TestFeedback.gameObject.SetActive(false) ;
+
+                FinalFeedback.transform.parent.gameObject.SetActive(false);
+                TestFeedback.transform.parent.gameObject.SetActive(false);
                 //FinalScene
             }
             else
@@ -137,24 +137,24 @@ public class VideoPlayerScript : MonoBehaviour
 
 
 
-                TestFeedback.gameObject.SetActive(false);
+                TestFeedback.transform.parent.gameObject.SetActive(false);
                 DeviceInstruction.SetActive(true);
 
                 //SetHazardAllToNull and BoolTo false
                 //
                 CurPlayingClip++;
 
-                if(CurPlayingClip >= 1)
+                if (CurPlayingClip >= 1)
                 {
                     PlayerObject.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
                 }
 
-               
+
             }
-      
-            
-            
-            
+
+
+
+
             //Load next;
         }
     }
@@ -184,23 +184,25 @@ public class VideoPlayerScript : MonoBehaviour
     {
         curFrame = (float)video.time;
         Debug.Log("Time:" + curFrame);
-    
-                PerceptionVP();
-         //       video.loopPointReached += ShowEndScene;
-            
-        
+
+        PerceptionVP();
+        //       video.loopPointReached += ShowEndScene;
+
+
     }
 
     #region PlaybackMethods
     public void PlaybackManager()
     {
-        if (isPlaying) 
+        if (isPlaying)
         { PauseVid(); }
-        else { ContinueVid();
+        else
+        {
+            ContinueVid();
             ResetButton.SetActive(true);
         }
     }
-    
+
     public void LoadVid()
     {
         int VidToPlay = CurPlayingClip + 1;
@@ -219,7 +221,7 @@ public class VideoPlayerScript : MonoBehaviour
     }
     public void ContinueVid()
     {
-       video.Play();
+        video.Play();
         isPlaying = true;
 
 
@@ -282,8 +284,8 @@ public class VideoPlayerScript : MonoBehaviour
                         Roundabout_hazardTracker.gameObject.SetActive(true);
                         Roundabout_hazardTracker.StartMove(new Vector3(14.1499996f, 0.200000003f, -7.05999994f)
         , new Vector3(3.07999992f, 0.939999998f, -9.89999962f)
-        , 9.0f); 
-                        
+        , 9.0f);
+
                         SaveObj.TotalHazardWithinQuestion = 3;
                         HazardTotalCount += SaveObj.TotalHazardWithinQuestion;
                         HazardisSet_Roundabout = true;
@@ -298,17 +300,17 @@ public class VideoPlayerScript : MonoBehaviour
                 }
 
                 break;
-                case 1:
+            case 1:
 
 
                 Debug.Log("Prac 2 is active");
-                if ( Prac2Hazards[0]!=null)
+                if (Prac2Hazards[0] != null)
                 {
                     if (curFrame >= 7.7f && !Prac2HazardisSet[0])
                     {
 
                         Prac2Hazards[0].gameObject.SetActive(true);
-                        Prac2Hazards[0].StartMove(new Vector3(43.5f, -7.8f, - 151.2f), 
+                        Prac2Hazards[0].StartMove(new Vector3(43.5f, -7.8f, -151.2f),
                             new Vector3(65.7f, -29.387f, -46.4487f), 1.8f);
                         Prac2HazardisSet[0] = true;
                         //   question++;
@@ -319,13 +321,13 @@ public class VideoPlayerScript : MonoBehaviour
                     }
                 }
 
-                if (  Prac2Hazards[1] != null)
+                if (Prac2Hazards[1] != null)
                 {
                     if (curFrame >= 10.0f && !Prac2HazardisSet[1])
                     {
 
                         Prac2Hazards[1].gameObject.SetActive(true);
-                        Prac2Hazards[1].StartMove(new Vector3(-32.7f, -1.19f, -142.54f), 
+                        Prac2Hazards[1].StartMove(new Vector3(-32.7f, -1.19f, -142.54f),
                             new Vector3(-12.06f, -14.02f, -65.47f), 8.0f);
                         Prac2HazardisSet[1] = true;
                         //   question++;
@@ -335,14 +337,14 @@ public class VideoPlayerScript : MonoBehaviour
                         Prac2Hazards[1].gameObject.SetActive(false);
                     }
                 }
-                if ( Prac2Hazards[2] != null)
+                if (Prac2Hazards[2] != null)
                 {
                     if (curFrame >= 16.0f && !Prac2HazardisSet[2])
                     {
 
                         Prac2Hazards[2].gameObject.SetActive(true);
-                        Prac2Hazards[2].StartMove(new Vector3(-152.99f, -5.67f, -244.257f), 
-                            new Vector3(-13.49f, -10.72f, -110.633f),7.5f);
+                        Prac2Hazards[2].StartMove(new Vector3(-152.99f, -5.67f, -244.257f),
+                            new Vector3(-13.49f, -10.72f, -110.633f), 7.5f);
                         Prac2HazardisSet[2] = true;
                         //   question++;
                     }
@@ -351,13 +353,13 @@ public class VideoPlayerScript : MonoBehaviour
                         Prac2Hazards[2].gameObject.SetActive(false);
                     }
                 }
-                if ( Prac2Hazards[3] != null)
+                if (Prac2Hazards[3] != null)
                 {
                     if (curFrame >= 14.0f && !Prac2HazardisSet[3])
                     {
 
                         Prac2Hazards[3].gameObject.SetActive(true);
-                        Prac2Hazards[3].StartMove(new Vector3(-46.99f, 14.01f, -532.77f), 
+                        Prac2Hazards[3].StartMove(new Vector3(-46.99f, 14.01f, -532.77f),
                             new Vector3(-8.89f, 9.41f, -125.77f), 9.0f);
                         Prac2HazardisSet[3] = true;
                         //   question++;
@@ -366,15 +368,15 @@ public class VideoPlayerScript : MonoBehaviour
                     }
                     if (curFrame >= 23.0f && Prac2HazardisSet[3])
                     {
-                     
+
                         Prac2Hazards[3].gameObject.SetActive(false);
                     }
                 }
 
                 break;
-                case 2:
+            case 2:
                 Debug.Log("Prac 3 is active");
-        
+
 
 
                 if (Prac3Hazards[0] != null)
@@ -452,7 +454,7 @@ public class VideoPlayerScript : MonoBehaviour
 
 
 
-       
+
         video.loopPointReached += EndofQuestion;
 
 
@@ -468,15 +470,15 @@ public class VideoPlayerScript : MonoBehaviour
 
 
 
-    
+
     #endregion
-    
 
 
- 
-public void ShowEndScene(VideoPlayer vp)
+
+
+    public void ShowEndScene(VideoPlayer vp)
     {
-        FinalFeedback.gameObject.SetActive(true);
+        FinalFeedback.transform.parent.gameObject.SetActive(true);
         SaveObj.TotalHazardOnTheTest = HazardTotalCount;
         if (CurPlayingClip == 2)
         {
@@ -488,8 +490,8 @@ public void ShowEndScene(VideoPlayer vp)
         {
             NextButton.GetComponentInChildren<TMP_Text>().text = "Complete Test";
         }
-   
-      
+
+
 
     }
 
@@ -500,11 +502,11 @@ public void ShowEndScene(VideoPlayer vp)
 
         BackgroundUI.gameObject.SetActive(true);
         NextButton.gameObject.SetActive(true);
-       TestFeedback.gameObject.SetActive(true);
+        TestFeedback.transform.parent.gameObject.SetActive(true);
         TestFeedback.text = "You identified " + SaveObj.TotalCorrectWithinQuestions + " out of " +
           SaveObj.TotalHazardWithinQuestion + " hazards in the video";
 
-        if(CurPlayingClip==2 || CurPlayingClip == 13)
+        if (CurPlayingClip == 2 || CurPlayingClip == 13)
         {
             ShowEndScene(vp);
         }

@@ -36,7 +36,7 @@ public class PercTest2 : MonoBehaviour
     public GameObject DeviceInstructions;
     public GameObject IntroductionText_1;
     public GameObject ResetScenarioObject;
-  //  public GameObject IntroductionText_2;
+    //  public GameObject IntroductionText_2;
     public TMP_Text TimerObject;
     public GameObject AnswerFeedback;
     public int score;
@@ -102,12 +102,12 @@ public class PercTest2 : MonoBehaviour
         //CurPlayingClip = 0;
 
         IntroductionText_1.gameObject.SetActive(true);
-       
+
         DeviceInstructions.gameObject.SetActive(false);
         //NextObject.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Next";
         BackgroundImage.SetActive(true);
         NextObject.gameObject.SetActive(true);
-        AnswerFeedback.SetActive(false);
+        AnswerFeedback.transform.parent.gameObject.SetActive(false);
         timer = 0;
         ResponseTime = 0.0f;
         isReady = false;
@@ -117,7 +117,7 @@ public class PercTest2 : MonoBehaviour
     }
 
     //After answer stage
-public void showResult()
+    public void showResult()
     {
         ResetScenarioObject.SetActive(false);
 
@@ -130,8 +130,8 @@ public void showResult()
             int efficiency = saveDatas.TotalCorrectClick / saveDatas.TotalNumberofClick * 100;
 
             AnswerFeedback.GetComponent<TMP_Text>().text = "You detected " + score + " from " + totalQuestion + " hazards" + "\n" +
-              saveDatas.TotalCorrectClick + "hazards correctly identified out of 10 Hazards in the test. Your efficiency is " + efficiency +"%";
-               
+              saveDatas.TotalCorrectClick + "hazards correctly identified out of 10 Hazards in the test. Your efficiency is " + efficiency + "%";
+
             //ADD overall efficiency
 
 
@@ -141,10 +141,10 @@ public void showResult()
             AnswerFeedback.GetComponent<TMP_Text>().text = "You detected " + score + " from " + totalQuestion + " hazards";
 
         }
-        AnswerFeedback.SetActive(true);
+        AnswerFeedback.transform.parent.gameObject.SetActive(true);
         NextObject.SetActive(true);
 
-        
+
     }
     public void NextButtonClicked()
     {
@@ -166,14 +166,14 @@ public void showResult()
 
         }
 
-        else if (AnswerFeedback.gameObject.activeSelf)
+        else if (AnswerFeedback.transform.parent.gameObject.activeSelf)
         { //TO CHANGE LATER-> This will switch to Dynamic Perception Test when triggered
-          
+
             if (CurrentClipNumber == 7)
             {
 
                 //Add more in the feedback
-                AnswerFeedback.gameObject.SetActive(false);
+                AnswerFeedback.transform.parent.gameObject.SetActive(false);
                 SceneManager.LoadScene(1);
                 //NextButton.gameObject.SetActive(false);
                 //FinalScene
@@ -185,7 +185,7 @@ public void showResult()
 
 
 
-                AnswerFeedback.gameObject.SetActive(false);
+                AnswerFeedback.transform.parent.gameObject.SetActive(false);
                 DeviceInstructions.SetActive(true);
                 //SetHazardAllToNull and BoolTo false
                 //
@@ -199,7 +199,7 @@ public void showResult()
             }
 
 
-            
+
 
             //Load next;
         }
@@ -208,7 +208,7 @@ public void showResult()
 
     public void LoadVid()
     {
-       
+
         score = 0;
         string tempPath = Path.Combine(RootPath, "Freeze " + CurrentClipNumber + " - Perception Test.mp4");
         //string tempPath = Path.Combine(RootPath, "Test.mp4");
@@ -233,7 +233,7 @@ public void showResult()
         }
         if (CurrentClipNumber == 2)
         {
-             PlayerObject.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
         }
         if (CurrentClipNumber == 3)
         {
