@@ -28,6 +28,11 @@ public class PercTest2 : MonoBehaviour
     public GameObject[] Prac1_Hazards;//Hazards0-4 Q1
     public GameObject[] Prac2_Hazards;
     public GameObject[] Prac3_Hazards;
+    public GameObject[] Q1_Hazards;
+    public GameObject[] Q2_Hazards;
+    public GameObject[] Q3_Hazards;
+    public GameObject[] Q4_Hazards;
+    public GameObject[] Q5_Hazards;
     public string RootPath;
     public GameObject CompleteAnswerButton;
     public GameObject PlayerObject;
@@ -36,7 +41,7 @@ public class PercTest2 : MonoBehaviour
     public GameObject DeviceInstructions;
     public GameObject IntroductionText_1;
     public GameObject ResetScenarioObject;
-  //  public GameObject IntroductionText_2;
+    //  public GameObject IntroductionText_2;
     public TMP_Text TimerObject;
     public GameObject AnswerFeedback;
     public int score;
@@ -102,7 +107,7 @@ public class PercTest2 : MonoBehaviour
         //CurPlayingClip = 0;
 
         IntroductionText_1.gameObject.SetActive(true);
-       
+
         DeviceInstructions.gameObject.SetActive(false);
         //NextObject.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Next";
         BackgroundImage.SetActive(true);
@@ -116,6 +121,9 @@ public class PercTest2 : MonoBehaviour
         CurrentClipNumber = 1;
     }
 
+    public void cancelTimer() {
+        StopCoroutine(answerCountdown());
+        }
     //After answer stage
 public void showResult()
     {
@@ -125,7 +133,7 @@ public void showResult()
 
         CompleteAnswerButton.SetActive(false);
         BackgroundImage.SetActive(true);
-        if (CurrentClipNumber == 3)
+        if (CurrentClipNumber == 7)
         {
             int efficiency = saveDatas.TotalCorrectClick / saveDatas.TotalNumberofClick * 100;
 
@@ -210,20 +218,20 @@ public void showResult()
     {
        
         score = 0;
-        string tempPath = Path.Combine(RootPath, "Ordered_Freeze " + CurrentClipNumber + ".mp4");
+        string tempPath = Path.Combine(RootPath, "Ordered_Freeze" + CurrentClipNumber + ".mp4");
         //string tempPath = Path.Combine(RootPath, "Test.mp4");
         VPlayer.url = tempPath;
         VPlayer.Prepare();
 
 
-        if (CurrentClipNumber <= 3)
+        if (CurrentClipNumber <= 2)
         {
             VideoID = "Practice" + CurrentClipNumber.ToString();
         }
         else
         {
-            int tempID = CurrentClipNumber - 3;
-            VideoID = tempID.ToString();
+            int tempID = CurrentClipNumber - 2;
+            VideoID = "Question"+ tempID.ToString();
         }
         VideoIsPreparing = true;
 
@@ -271,6 +279,7 @@ public void showResult()
         VPlayer.Pause();
         yield return new WaitForSeconds(6.0f);
         //Finish
+        showResult();
 
     }
     public void PauseVid()
@@ -302,7 +311,7 @@ public void showResult()
                 break;
             case 2:
 
-                if (curVideoTime >= 17.0f && VPlayer.isPlaying)
+                if (curVideoTime >= 15.0f && VPlayer.isPlaying)
                 {
                     HazardContainer[CurrentClipNumber - 1].SetActive(true);
 
@@ -321,15 +330,15 @@ public void showResult()
 
                 break;
             case 3:
-                if (curVideoTime >= 17.0f && VPlayer.isPlaying)
+                if (curVideoTime >= 21.0f && VPlayer.isPlaying)
                 {
                     HazardContainer[CurrentClipNumber - 1].SetActive(true);
 
                     PauseVid();
 
-                    for (int i = 0; i < Prac3_Hazards.Length; i++)
+                    for (int i = 0; i < Q1_Hazards.Length; i++)
                     {
-                        Prac3_Hazards[i].SetActive(true);
+                        Q1_Hazards[i].SetActive(true);
                     }
                     totalQuestion = Prac3_Hazards.Length;
                     StartCoroutine(answerCountdown());
@@ -338,25 +347,74 @@ public void showResult()
                 }
                 break;
             case 4:
+                if (curVideoTime >= 17.0f && VPlayer.isPlaying)
+                {
+                    HazardContainer[CurrentClipNumber - 1].SetActive(true);
+
+                    PauseVid();
+
+                    for (int i = 0; i < Q2_Hazards.Length; i++)
+                    {
+                        Prac3_Hazards[i].SetActive(true);
+                    }
+                    totalQuestion = Q2_Hazards.Length;
+                    StartCoroutine(answerCountdown());
+
+                    CompleteAnswerButton.SetActive(true);
+                }
                 break;
             case 5:
+                if (curVideoTime >= 18.0f && VPlayer.isPlaying)
+                {
+                    HazardContainer[CurrentClipNumber - 1].SetActive(true);
+
+                    PauseVid();
+
+                    for (int i = 0; i < Q3_Hazards.Length; i++)
+                    {
+                        Q3_Hazards[i].SetActive(true);
+                    }
+                    totalQuestion = Q3_Hazards.Length;
+                    StartCoroutine(answerCountdown());
+
+                    CompleteAnswerButton.SetActive(true);
+                }
                 break;
             case 6:
+                if (curVideoTime >= 11.0f && VPlayer.isPlaying)
+                {
+                    HazardContainer[CurrentClipNumber - 1].SetActive(true);
+
+                    PauseVid();
+
+                    for (int i = 0; i < Q4_Hazards.Length; i++)
+                    {
+                        Q4_Hazards[i].SetActive(true);
+                    }
+                    totalQuestion = Q4_Hazards.Length;
+                    StartCoroutine(answerCountdown());
+
+                    CompleteAnswerButton.SetActive(true);
+                }
                 break;
             case 7:
+                if (curVideoTime >= 8.0f && VPlayer.isPlaying)
+                {
+                    HazardContainer[CurrentClipNumber - 1].SetActive(true);
+
+                    PauseVid();
+
+                    for (int i = 0; i < Q5_Hazards.Length; i++)
+                    {
+                        Q5_Hazards[i].SetActive(true);
+                    }
+                    totalQuestion = Q5_Hazards.Length;
+                    StartCoroutine(answerCountdown());
+
+                    CompleteAnswerButton.SetActive(true);
+                }
                 break;
-            case 8:
-                break;
-            case 9:
-                break;
-            case 10:
-                break;
-            case 11:
-                break;
-            case 12:
-                break;
-            case 13:
-                break;
+         
         }
     }
     void GetSaveFile()
