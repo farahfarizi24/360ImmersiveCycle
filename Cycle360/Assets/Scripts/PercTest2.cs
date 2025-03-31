@@ -210,7 +210,7 @@ public void showResult()
     {
        
         score = 0;
-        string tempPath = Path.Combine(RootPath, "Freeze " + CurrentClipNumber + " - Perception Test.mp4");
+        string tempPath = Path.Combine(RootPath, "Ordered_Freeze " + CurrentClipNumber + ".mp4");
         //string tempPath = Path.Combine(RootPath, "Test.mp4");
         VPlayer.url = tempPath;
         VPlayer.Prepare();
@@ -249,6 +249,7 @@ public void showResult()
         NextObject.SetActive(true);
         BackgroundImage.SetActive(true);
         ResetScenarioObject.SetActive(false);
+        StopCoroutine(answerCountdown());
     }
 
     IEnumerator LoadAtStart()
@@ -259,7 +260,7 @@ public void showResult()
         yield return new WaitForSeconds(0.2f);
         VPlayer.Pause();
         //  isReady = true;
-        BackgroundImage.gameObject.SetActive(false);
+        BackgroundImage.gameObject.SetActive(false);  
 
         isReady = true;
     }
@@ -269,6 +270,7 @@ public void showResult()
     {
         VPlayer.Pause();
         yield return new WaitForSeconds(6.0f);
+        //Finish
 
     }
     public void PauseVid()
@@ -294,6 +296,7 @@ public void showResult()
                         Prac1_Hazards[i].SetActive(true);
                     }
                     totalQuestion = Prac1_Hazards.Length;
+                    StartCoroutine(answerCountdown());
                     CompleteAnswerButton.SetActive(true);
                 }
                 break;
@@ -310,6 +313,7 @@ public void showResult()
                         Prac2_Hazards[i].SetActive(true);
                     }
                     totalQuestion = Prac2_Hazards.Length;
+                    StartCoroutine(answerCountdown());
 
                     CompleteAnswerButton.SetActive(true);
                 }
@@ -328,6 +332,7 @@ public void showResult()
                         Prac3_Hazards[i].SetActive(true);
                     }
                     totalQuestion = Prac3_Hazards.Length;
+                    StartCoroutine(answerCountdown());
 
                     CompleteAnswerButton.SetActive(true);
                 }

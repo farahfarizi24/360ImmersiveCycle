@@ -62,7 +62,7 @@ public class VideoPlayerScript : MonoBehaviour
         RootPath = Application.persistentDataPath;
         for(int i = 0; i <=3; i++)
         {
-            string tempPath = Path.Combine(RootPath, "Perception_test_P" + i + ".mp4");
+            string tempPath = Path.Combine(RootPath, "Ordered_Dynamic" + i + ".mp4");
             if (File.Exists(tempPath))
             {
                 video.url = tempPath;
@@ -204,7 +204,7 @@ public class VideoPlayerScript : MonoBehaviour
     public void LoadVid()
     {
         int VidToPlay = CurPlayingClip + 1;
-        string tempPath = Path.Combine(RootPath, "PerceptionTest" + VidToPlay + ".mp4");
+        string tempPath = Path.Combine(RootPath, "Ordered_Dynamic" + VidToPlay + ".mp4");
         video.url = tempPath;
         //video.clip = Projectionclips[CurPlayingClip];
         video.Prepare();
