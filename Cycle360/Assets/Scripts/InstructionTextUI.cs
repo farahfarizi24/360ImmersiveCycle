@@ -8,18 +8,20 @@ public class InstructionTextUI : MonoBehaviour
     private int index = 0;
     public GameObject[] Instructions;
     public GameObject nextButton;
+    public GameObject Bg;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Bg.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    public void NextHit() {
+    public void NextHit()
+    {
         index++;
         ChangeUI(index);
     }
@@ -28,10 +30,11 @@ public class InstructionTextUI : MonoBehaviour
     public void ChangeUI(int i)
     {
         int temp = i - 1;
+        Bg.SetActive(true);
         switch (i)
         {
             case 0:
-              
+
                 Instructions[temp].SetActive(false);
                 Instructions[i].SetActive(true);
                 break;
@@ -41,11 +44,11 @@ public class InstructionTextUI : MonoBehaviour
                 Instructions[temp].SetActive(false);
                 Instructions[i].SetActive(true);
                 break;
-                case 2:
+            case 2:
                 Instructions[temp].SetActive(false);
                 Instructions[i].SetActive(true);
                 break;
-                case 3:    
+            case 3:
                 Instructions[temp].SetActive(false);
                 Instructions[i].SetActive(true);
                 nextButton.SetActive(false);
