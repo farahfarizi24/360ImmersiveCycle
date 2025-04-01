@@ -145,6 +145,7 @@ public class VideoPlayerScript : MonoBehaviour
                 //
                 CurPlayingClip++;
 
+
               
 
                
@@ -213,6 +214,10 @@ public class VideoPlayerScript : MonoBehaviour
         if (VidToPlay == 3)
         {
             PlayerObject.transform.eulerAngles = new Vector3(0.0f, -180.0f, 0.0f);
+        }
+        if (VidToPlay == 4)
+        {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 80.0f, 0.0f);
         }
         video.Prepare();
         StartCoroutine(LoadAtStart());
@@ -798,7 +803,7 @@ public void ShowEndScene(VideoPlayer vp)
 
         if(CurPlayingClip==2 || CurPlayingClip == 13)
         {
-            ShowEndScene(vp);
+           // ShowEndScene(vp);
         }
 
     }
