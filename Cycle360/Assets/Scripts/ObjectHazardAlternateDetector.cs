@@ -31,13 +31,19 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
                         // VPscript.PauseVid();
                         CorrectBeep.Play();
                         Debug.Log(hit.collider.gameObject.name);
-                        IfCorrectHazardHit(hit.collider.transform.parent.name);
+
+                        if (hit.collider.gameObject.tag =="Hazards")
+                    {
+                        NewHazardHit(hit.collider.transform.parent.name);
+                        // IfCorrectHazardHit(hit.collider.transform.parent.name);
                         GameObject ParentObj = hit.collider.transform.parent.gameObject;
                         ParentObj.GetComponent<MeshRenderer>().enabled = true;
-                       // IfCorrectHazardHit(hit.collider.gameObject.name);
+                        // IfCorrectHazardHit(hit.collider.gameObject.name);
                         savingScript.TotalCorrectWithinTheTest++;
                         savingScript.TotalCorrectWithinQuestions++;
                         Destroy(hit.collider.gameObject);
+                    }
+                  
 
                     }
 
@@ -71,14 +77,17 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
 
                     CorrectBeep.Play();
                     Debug.Log(hit.collider.gameObject.name);
-                    IfCorrectHazardHit(hit.collider.transform.parent.name);
-                    GameObject ParentObj = hit.collider.transform.parent.gameObject;
-                    ParentObj.GetComponent<MeshRenderer>().enabled = true;
-                    //   IfCorrectHazardHit(hit.collider.gameObject.name);
-                    Destroy(hit.collider.gameObject);
-                    savingScript.TotalCorrectWithinTheTest++;
-                    savingScript.TotalCorrectWithinQuestions++;
-                    //save data 
+                    if (hit.collider.gameObject.tag == "Hazards")
+                    {
+                        NewHazardHit(hit.collider.transform.parent.name);
+                        // IfCorrectHazardHit(hit.collider.transform.parent.name);
+                        GameObject ParentObj = hit.collider.transform.parent.gameObject;
+                        ParentObj.GetComponent<MeshRenderer>().enabled = true;
+                        // IfCorrectHazardHit(hit.collider.gameObject.name);
+                        savingScript.TotalCorrectWithinTheTest++;
+                        savingScript.TotalCorrectWithinQuestions++;
+                        Destroy(hit.collider.gameObject);
+                    }
 
                 }
 
@@ -95,6 +104,11 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
         }
 
 #endif
+    }
+
+    public void NewHazardHit(string HazardName)
+    {
+        Debug.Log("Hit " + HazardName);
     }
 
 

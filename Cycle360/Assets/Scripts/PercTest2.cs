@@ -199,10 +199,7 @@ public void showResult()
                 //
                 CurrentClipNumber++;
 
-                if (CurrentClipNumber >= 2)
-                {
-                    PlayerObject.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
-                }
+               
 
             }
 
@@ -241,11 +238,27 @@ public void showResult()
         }
         if (CurrentClipNumber == 2)
         {
-             PlayerObject.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+             PlayerObject.transform.eulerAngles = new Vector3(0.0f, 200.0f, 0.0f);
         }
         if (CurrentClipNumber == 3)
         {
-            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, -70.0f, 0.0f);
+        }
+        if (CurrentClipNumber == 4)
+        {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, -100.0f, 0.0f);
+        }
+        if (CurrentClipNumber == 5)
+        {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, -290.0f, 0.0f);
+        }
+        if (CurrentClipNumber == 6)
+        {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 70.0f, 0.0f);
+        }
+        if (CurrentClipNumber == 7)
+        {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 160.0f, 0.0f);
         }
     }
 
@@ -311,8 +324,9 @@ public void showResult()
                 break;
             case 2:
 
-                if (curVideoTime >= 15.0f && VPlayer.isPlaying)
+                if (curVideoTime >= 14.8f && VPlayer.isPlaying)
                 {
+                    Debug.Log("Case 2 triggered");
                     HazardContainer[CurrentClipNumber - 1].SetActive(true);
 
                     PauseVid();
@@ -323,14 +337,13 @@ public void showResult()
                     }
                     totalQuestion = Prac2_Hazards.Length;
                     StartCoroutine(answerCountdown());
-
                     CompleteAnswerButton.SetActive(true);
                 }
 
 
                 break;
             case 3:
-                if (curVideoTime >= 21.0f && VPlayer.isPlaying)
+                if (curVideoTime >= 20.8f && VPlayer.isPlaying)
                 {
                     HazardContainer[CurrentClipNumber - 1].SetActive(true);
 
@@ -347,7 +360,7 @@ public void showResult()
                 }
                 break;
             case 4:
-                if (curVideoTime >= 17.0f && VPlayer.isPlaying)
+                if (curVideoTime >= 16.8f && VPlayer.isPlaying)
                 {
                     HazardContainer[CurrentClipNumber - 1].SetActive(true);
 
@@ -355,7 +368,7 @@ public void showResult()
 
                     for (int i = 0; i < Q2_Hazards.Length; i++)
                     {
-                        Prac3_Hazards[i].SetActive(true);
+                        Q2_Hazards[i].SetActive(true);
                     }
                     totalQuestion = Q2_Hazards.Length;
                     StartCoroutine(answerCountdown());
@@ -381,7 +394,7 @@ public void showResult()
                 }
                 break;
             case 6:
-                if (curVideoTime >= 11.0f && VPlayer.isPlaying)
+                if (curVideoTime >= 10.8f && VPlayer.isPlaying)
                 {
                     HazardContainer[CurrentClipNumber - 1].SetActive(true);
 
