@@ -307,6 +307,7 @@ public class VideoManager : MonoBehaviour
     }
     IEnumerator CountdownToStartVid()
     {
+        TimerObject.transform.parent.gameObject.SetActive(true);
         while (timer > 0)
         {
             isReady = false;
@@ -322,6 +323,7 @@ public class VideoManager : MonoBehaviour
         //yield return new WaitForSeconds(3f);
         yield return new WaitForSeconds(1f);
         TimerObject.text = "";
+        TimerObject.transform.parent.gameObject.SetActive(false);
         //StopButton.gameObject.SetActive(true);
         VPlayer.Play();
         // isReady = false;
@@ -352,11 +354,11 @@ public class VideoManager : MonoBehaviour
             DeviceInstructions.SetActive(true);
             StartObject.SetActive(false);
         }
-        else if (QuestionText.gameObject.activeSelf)
+        else if (QObj.gameObject.activeSelf)
         {
             NextObject.GetComponentInChildren<TMP_Text>().text = "Record Answer";
             NextObject.gameObject.SetActive(true);
-            QuestionText.gameObject.SetActive(false);
+            QObj.gameObject.SetActive(false);
             ConfidenceSlider.transform.parent.gameObject.SetActive(true);
 
         }

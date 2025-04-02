@@ -297,7 +297,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1037017982}
+      - m_Target: {fileID: 581201746}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -309,7 +309,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1095600181}
+      - m_Target: {fileID: 1007843197}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -800,8 +800,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 502, y: 610}
-  m_SizeDelta: {x: 300, y: 100}
+  m_AnchoredPosition: {x: -42, y: 218}
+  m_SizeDelta: {x: 600, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &521193989
 MonoBehaviour:
@@ -1206,10 +1206,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
+  m_fontSize: 72
   m_fontSizeBase: 55
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -1804,7 +1804,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1037017982}
+      - m_Target: {fileID: 581201746}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -1816,7 +1816,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1095600181}
+      - m_Target: {fileID: 1007843197}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -2161,7 +2161,7 @@ MonoBehaviour:
   isReady: 0
   timer: 0
   ResponseTime: 0
-  QObj: {fileID: 1095600181}
+  QObj: {fileID: 1007843197}
   QuestionText: {fileID: 1095600183}
   ChoiceText_1: {fileID: 2112715079}
   ChoiceText_2: {fileID: 1904680683}
@@ -2174,10 +2174,10 @@ MonoBehaviour:
   PlayerObject: {fileID: 794785801}
   NextObject: {fileID: 521193987}
   BackgroundImage: {fileID: 298617669}
-  DeviceInstructions: {fileID: 0}
-  IntroductionText: {fileID: 4821443057751814593}
+  DeviceInstructions: {fileID: 1306658075368291983}
+  IntroductionText: {fileID: 292094499675919104}
   StartObject: {fileID: 1318842608}
-  TimerObject: {fileID: 0}
+  TimerObject: {fileID: 1910244582}
 --- !u!1 &1095600181
 GameObject:
   m_ObjectHideFlags: 0
@@ -2400,6 +2400,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5435790355317238288, guid: 543ca1ff235b0410f80b9502030e3bcd, type: 3}
+      propertyPath: m_text
+      value: GO!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5435790355317238288, guid: 543ca1ff235b0410f80b9502030e3bcd, type: 3}
+      propertyPath: m_fontSize
+      value: 95.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5435790355317238288, guid: 543ca1ff235b0410f80b9502030e3bcd, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 122.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5435790355317238288, guid: 543ca1ff235b0410f80b9502030e3bcd, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6851201658562763049, guid: 543ca1ff235b0410f80b9502030e3bcd, type: 3}
       propertyPath: m_Name
       value: CountdownTimer (1)
@@ -2587,7 +2603,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 245, y: 0}
+  m_AnchoredPosition: {x: -494, y: 705}
   m_SizeDelta: {x: 253.30005, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1425905617
@@ -2762,7 +2778,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 10
 --- !u!222 &1428757235
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3023,7 +3039,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1037017982}
+      - m_Target: {fileID: 581201746}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -3035,7 +3051,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1095600181}
+      - m_Target: {fileID: 1007843197}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -3338,7 +3354,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1037017982}
+      - m_Target: {fileID: 581201746}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -3350,7 +3366,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1095600181}
+      - m_Target: {fileID: 1007843197}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -3830,6 +3846,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1909188901}
   m_CullTransparentMesh: 1
+--- !u!114 &1910244582 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5435790355317238288, guid: 543ca1ff235b0410f80b9502030e3bcd, type: 3}
+  m_PrefabInstance: {fileID: 1214536333}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2004619475
 GameObject:
   m_ObjectHideFlags: 0
