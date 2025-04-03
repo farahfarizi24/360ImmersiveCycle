@@ -480,7 +480,7 @@ public class VideoManager : MonoBehaviour
 
                 break;
             case 13:
-                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 65.0f, 0.0f);
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
 
                 break;
 
