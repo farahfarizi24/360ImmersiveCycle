@@ -533,7 +533,7 @@ public class VideoPlayerScript : MonoBehaviour
 
                         Q2Hazards[0].gameObject.SetActive(true);
                         Q2Hazards[0].StartMove(new Vector3(165.3f, -10.3f, -8.3f),
-                            new Vector3(62.92f, -26.691f, -59.5f), 6.0f);
+                            new Vector3(62.92f, -26.691f, -59.5f), 6.8f);
                         Q2HazardisSet[0] = true;
                         //   question++;
                     }
@@ -640,12 +640,12 @@ public class VideoPlayerScript : MonoBehaviour
                         Q4Hazards[0].gameObject.SetActive(true);
                         Q4Hazards[0].StartMove(
                             new Vector3(194.8f, 5f, -27.1f),
-                            new Vector3(118.800003f, -6.89268875f, -110.348824f)
-                            , 7.0f);
+                            new Vector3(150.91f, -2.17f, -34.7f)
+                            , 5.0f);
                         Q4HazardisSet[0] = true;
                         //   question++;
                     }
-                    if (curFrame >= 7.6f && Q4HazardisSet[0])
+                    if (curFrame >= 6.0f && Q4HazardisSet[0])
                     {
                         Q4Hazards[0].gameObject.SetActive(false);
                     }
@@ -704,14 +704,15 @@ public class VideoPlayerScript : MonoBehaviour
                 break;
                 case 6:
                 Debug.Log("Q5 is active");
-                if (Q5Hazards[0] != null)
+                if (Q5Hazards[0] != null)//cone
                 {
                     if (curFrame >= 2.0f && !Q5HazardisSet[0])
                     {
 
                         Q5Hazards[0].gameObject.SetActive(true);
-                        Q5Hazards[0].StartMove(new Vector3(43.5f, -7.8f, -151.2f),
-                            new Vector3(65.7f, -29.387f, -46.4487f), 5.0f);
+                        Q5Hazards[0].StartMove(
+                            new Vector3(185.94f, -10.5f, -31.2f),
+                            new Vector3(-53.2f, -24.1f, -83.8f), 5.0f);
                         Q5HazardisSet[0] = true;
                         //   question++;
                     }
@@ -720,30 +721,33 @@ public class VideoPlayerScript : MonoBehaviour
                         Q5Hazards[0].gameObject.SetActive(false);
                     }
                 }
-                if (Q5Hazards[1] != null)
+                if (Q5Hazards[1] != null)//speedbump
                 {
                     if (curFrame >= 11.0f && !Q5HazardisSet[1])
                     {
 
                         Q5Hazards[1].gameObject.SetActive(true);
-                        Q5Hazards[1].StartMove(new Vector3(43.5f, -7.8f, -151.2f),
-                            new Vector3(65.7f, -29.387f, -46.4487f), 4.8f);
+                        Q5Hazards[1].StartMove(
+                            new Vector3(237.8f, -17.3f, -0.89f),
+                            new Vector3(73.4400024f, -20.2000008f, -10.5f)
+                            , 4.8f);
                         Q5HazardisSet[1] = true;
                         //   question++;
                     }
-                    if (curFrame >= 16.0f && Q5HazardisSet[1])
+                    if (curFrame >= 15.0f && Q5HazardisSet[1])
                     {
                         Q5Hazards[1].gameObject.SetActive(false);
                     }
                 }
-                if (Q5Hazards[2] != null)
+                if (Q5Hazards[2] != null)//pedestrian
                 {
                     if (curFrame >= 17.0f && !Q5HazardisSet[2])
                     {
 
                         Q5Hazards[2].gameObject.SetActive(true);
-                        Q5Hazards[2].StartMove(new Vector3(43.5f, -7.8f, -151.2f),
-                            new Vector3(65.7f, -29.387f, -46.4487f), 1.8f);
+                        Q5Hazards[2].StartMove(
+                            new Vector3(112.129997f, -7.78000021f, 20.0699997f),
+                            new Vector3(48.1500015f, -7.78000021f, 35.2999992f), 1.8f);
                         Q5HazardisSet[2] = true;
                         //   question++;
                     }
@@ -758,8 +762,9 @@ public class VideoPlayerScript : MonoBehaviour
                     {
 
                         Q5Hazards[3].gameObject.SetActive(true);
-                        Q5Hazards[3].StartMove(new Vector3(43.5f, -7.8f, -151.2f),
-                            new Vector3(65.7f, -29.387f, -46.4487f), 2.8f);
+                        Q5Hazards[3].StartMove(
+                            new Vector3(192.419998f, -10.5f, 27.2999992f),
+                            new Vector3(87.5999985f, -10.5f, 27.2999992f), 2.8f);
                         Q5HazardisSet[3] = true;
                         //   question++;
                     }

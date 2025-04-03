@@ -1624,8 +1624,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -111.70001, y: 84.787094, z: 180.87047}
-  m_LocalScale: {x: 31.1, y: 39.7, z: 31.500002}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 35, y: 44.67846, z: 35.450165}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 86284522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4475,7 +4475,7 @@ MonoBehaviour:
   video: {fileID: 1530920188}
   isPlaying: 0
   isReady: 0
-  CurPlayingClip: 0
+  CurPlayingClip: 5
   Projectionclips: []
   PlayerObject: {fileID: 1750846833}
   DeviceInstruction: {fileID: 1521551970}
