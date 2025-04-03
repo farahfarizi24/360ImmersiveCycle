@@ -259,9 +259,10 @@ public class ProjTestVer2 : MonoBehaviour
 
     public void CalculateScore(float startTime, float endTime, float ButtonPressTime)
     {
+        ResOutcome = "none";
         if (ButtonPressTime < startTime || ButtonPressTime > endTime)
         {
-            ThisQuestionScore = 0.0f;
+          
             if(ButtonPressTime < startTime)
             {
                 ResOutcome = "Early";
@@ -272,6 +273,7 @@ public class ProjTestVer2 : MonoBehaviour
                 ResOutcome = "Very late";
                 QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You responded too late";
             }
+            ThisQuestionScore = 0.0f;
             return;
         }
             
@@ -290,13 +292,17 @@ public class ProjTestVer2 : MonoBehaviour
             QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You responded late";
             return;
         }
-          
 
-        ThisQuestionScore = 10 - 9 * (ButtonPressTime - startTime) / (endTime - startTime);
-        ResOutcome = "Correct";
-        QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You responded correctly and in a safe manner, well done";
+        if (ResOutcome == "none") 
+        {
+            ThisQuestionScore = 10 - 9 * (ButtonPressTime - startTime) / (endTime - startTime);
+            ResOutcome = "Correct";
+            QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You responded correctly and in a safe manner, well done";
 
-        return;
+            return;
+        }
+
+      
     }
     public void ResetScenario()
     {
@@ -327,7 +333,8 @@ public class ProjTestVer2 : MonoBehaviour
         isChanging = false;
         CountdownTimer = 3;
         ResetButton.SetActive(true);
-        StopCoroutine(CountdownToStartVid());
+        QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You did not respond";
+       StopCoroutine(CountdownToStartVid());
 
 
     }
