@@ -28,6 +28,11 @@ public class PercTest2 : MonoBehaviour
     public GameObject[] Prac1_Hazards;//Hazards0-4 Q1
     public GameObject[] Prac2_Hazards;
     public GameObject[] Prac3_Hazards;
+    public GameObject[] Q1_Hazards;
+    public GameObject[] Q2_Hazards;
+    public GameObject[] Q3_Hazards;
+    public GameObject[] Q4_Hazards;
+    public GameObject[] Q5_Hazards;
     public string RootPath;
     public GameObject CompleteAnswerButton;
     public GameObject PlayerObject;
@@ -70,7 +75,6 @@ public class PercTest2 : MonoBehaviour
 
     IEnumerator CountdownToStartVid()
     {
-        TimerObject.transform.parent.gameObject.SetActive(true);
         while (timer > 0)
         {
             isReady = false;
@@ -86,9 +90,12 @@ public class PercTest2 : MonoBehaviour
         //yield return new WaitForSeconds(3f);
         yield return new WaitForSeconds(1f);
         TimerObject.text = "";
-        TimerObject.transform.parent.gameObject.SetActive(false);
         //StopButton.gameObject.SetActive(true);
+            
+          
+
         VPlayer.Play();
+        //VPlayer.SetDirectAudioMute(0,false); // Mute track 0
         ResetScenarioObject.SetActive(true);
         // isReady = false;
         timer = 3;
@@ -109,7 +116,7 @@ public class PercTest2 : MonoBehaviour
         //NextObject.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Next";
         BackgroundImage.SetActive(true);
         NextObject.gameObject.SetActive(true);
-        AnswerFeedback.transform.parent.gameObject.SetActive(false);
+        AnswerFeedback.SetActive(false);
         timer = 0;
         ResponseTime = 0.0f;
         isReady = false;
@@ -118,8 +125,11 @@ public class PercTest2 : MonoBehaviour
         CurrentClipNumber = 1;
     }
 
+    public void cancelTimer() {
+        StopCoroutine(answerCountdown());
+        }
     //After answer stage
-    public void showResult()
+public void showResult()
     {
         ResetScenarioObject.SetActive(false);
 
@@ -127,13 +137,13 @@ public class PercTest2 : MonoBehaviour
 
         CompleteAnswerButton.SetActive(false);
         BackgroundImage.SetActive(true);
-        if (CurrentClipNumber == 3)
+        if (CurrentClipNumber == 7)
         {
             int efficiency = saveDatas.TotalCorrectClick / saveDatas.TotalNumberofClick * 100;
 
             AnswerFeedback.GetComponent<TMP_Text>().text = "You detected " + score + " from " + totalQuestion + " hazards" + "\n" +
-              saveDatas.TotalCorrectClick + "hazards correctly identified out of 10 Hazards in the test. Your efficiency is " + efficiency + "%";
-
+              saveDatas.TotalCorrectClick + "hazards correctly identified out of 10 Hazards in the test. Your efficiency is " + efficiency +"%";
+               
             //ADD overall efficiency
 
 
@@ -143,10 +153,10 @@ public class PercTest2 : MonoBehaviour
             AnswerFeedback.GetComponent<TMP_Text>().text = "You detected " + score + " from " + totalQuestion + " hazards";
 
         }
-        AnswerFeedback.transform.parent.gameObject.SetActive(true);
+        AnswerFeedback.SetActive(true);
         NextObject.SetActive(true);
 
-
+        
     }
     public void NextButtonClicked()
     {
@@ -168,14 +178,14 @@ public class PercTest2 : MonoBehaviour
 
         }
 
-        else if (AnswerFeedback.transform.parent.gameObject.activeSelf)
+        else if (AnswerFeedback.gameObject.activeSelf)
         { //TO CHANGE LATER-> This will switch to Dynamic Perception Test when triggered
-
+          
             if (CurrentClipNumber == 7)
             {
 
                 //Add more in the feedback
-                AnswerFeedback.transform.parent.gameObject.SetActive(false);
+                AnswerFeedback.gameObject.SetActive(false);
                 SceneManager.LoadScene(1);
                 //NextButton.gameObject.SetActive(false);
                 //FinalScene
@@ -187,21 +197,18 @@ public class PercTest2 : MonoBehaviour
 
 
 
-                AnswerFeedback.transform.parent.gameObject.SetActive(false);
+                AnswerFeedback.gameObject.SetActive(false);
                 DeviceInstructions.SetActive(true);
                 //SetHazardAllToNull and BoolTo false
                 //
                 CurrentClipNumber++;
 
-                if (CurrentClipNumber >= 2)
-                {
-                    PlayerObject.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
-                }
+               
 
             }
 
 
-
+            
 
             //Load next;
         }
@@ -210,22 +217,25 @@ public class PercTest2 : MonoBehaviour
 
     public void LoadVid()
     {
-
+       
         score = 0;
-        string tempPath = Path.Combine(RootPath, "Freeze " + CurrentClipNumber + " - Perception Test.mp4");
+        string tempPath = Path.Combine(RootPath, "Ordered_Freeze" + CurrentClipNumber + ".mp4");
         //string tempPath = Path.Combine(RootPath, "Test.mp4");
         VPlayer.url = tempPath;
+        
+        VPlayer.controlledAudioTrackCount = 1;
+
         VPlayer.Prepare();
+      
 
-
-        if (CurrentClipNumber <= 3)
+        if (CurrentClipNumber <= 2)
         {
             VideoID = "Practice" + CurrentClipNumber.ToString();
         }
         else
         {
-            int tempID = CurrentClipNumber - 3;
-            VideoID = tempID.ToString();
+            int tempID = CurrentClipNumber - 2;
+            VideoID = "Question"+ tempID.ToString();
         }
         VideoIsPreparing = true;
 
@@ -235,11 +245,27 @@ public class PercTest2 : MonoBehaviour
         }
         if (CurrentClipNumber == 2)
         {
-            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+             PlayerObject.transform.eulerAngles = new Vector3(0.0f, 200.0f, 0.0f);
         }
         if (CurrentClipNumber == 3)
         {
-            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, -70.0f, 0.0f);
+        }
+        if (CurrentClipNumber == 4)
+        {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, -100.0f, 0.0f);
+        }
+        if (CurrentClipNumber == 5)
+        {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, -290.0f, 0.0f);
+        }
+        if (CurrentClipNumber == 6)
+        {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 70.0f, 0.0f);
+        }
+        if (CurrentClipNumber == 7)
+        {
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 160.0f, 0.0f);
         }
     }
 
@@ -251,6 +277,7 @@ public class PercTest2 : MonoBehaviour
         NextObject.SetActive(true);
         BackgroundImage.SetActive(true);
         ResetScenarioObject.SetActive(false);
+        StopCoroutine(answerCountdown());
     }
 
     IEnumerator LoadAtStart()
@@ -261,7 +288,7 @@ public class PercTest2 : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         VPlayer.Pause();
         //  isReady = true;
-        BackgroundImage.gameObject.SetActive(false);
+        BackgroundImage.gameObject.SetActive(false);  
 
         isReady = true;
     }
@@ -271,6 +298,8 @@ public class PercTest2 : MonoBehaviour
     {
         VPlayer.Pause();
         yield return new WaitForSeconds(6.0f);
+        //Finish
+        showResult();
 
     }
     public void PauseVid()
@@ -296,13 +325,15 @@ public class PercTest2 : MonoBehaviour
                         Prac1_Hazards[i].SetActive(true);
                     }
                     totalQuestion = Prac1_Hazards.Length;
+                    StartCoroutine(answerCountdown());
                     CompleteAnswerButton.SetActive(true);
                 }
                 break;
             case 2:
 
-                if (curVideoTime >= 17.0f && VPlayer.isPlaying)
+                if (curVideoTime >= 14.8f && VPlayer.isPlaying)
                 {
+                    Debug.Log("Case 2 triggered");
                     HazardContainer[CurrentClipNumber - 1].SetActive(true);
 
                     PauseVid();
@@ -312,48 +343,98 @@ public class PercTest2 : MonoBehaviour
                         Prac2_Hazards[i].SetActive(true);
                     }
                     totalQuestion = Prac2_Hazards.Length;
-
+                    StartCoroutine(answerCountdown());
                     CompleteAnswerButton.SetActive(true);
                 }
 
 
                 break;
             case 3:
-                if (curVideoTime >= 17.0f && VPlayer.isPlaying)
+                if (curVideoTime >= 20.8f && VPlayer.isPlaying)
                 {
                     HazardContainer[CurrentClipNumber - 1].SetActive(true);
 
                     PauseVid();
 
-                    for (int i = 0; i < Prac3_Hazards.Length; i++)
+                    for (int i = 0; i < Q1_Hazards.Length; i++)
                     {
-                        Prac3_Hazards[i].SetActive(true);
+                        Q1_Hazards[i].SetActive(true);
                     }
                     totalQuestion = Prac3_Hazards.Length;
+                    StartCoroutine(answerCountdown());
 
                     CompleteAnswerButton.SetActive(true);
                 }
                 break;
             case 4:
+                if (curVideoTime >= 16.8f && VPlayer.isPlaying)
+                {
+                    HazardContainer[CurrentClipNumber - 1].SetActive(true);
+
+                    PauseVid();
+
+                    for (int i = 0; i < Q2_Hazards.Length; i++)
+                    {
+                        Q2_Hazards[i].SetActive(true);
+                    }
+                    totalQuestion = Q2_Hazards.Length;
+                    StartCoroutine(answerCountdown());
+
+                    CompleteAnswerButton.SetActive(true);
+                }
                 break;
             case 5:
+                if (curVideoTime >= 18.0f && VPlayer.isPlaying)
+                {
+                    HazardContainer[CurrentClipNumber - 1].SetActive(true);
+
+                    PauseVid();
+
+                    for (int i = 0; i < Q3_Hazards.Length; i++)
+                    {
+                        Q3_Hazards[i].SetActive(true);
+                    }
+                    totalQuestion = Q3_Hazards.Length;
+                    StartCoroutine(answerCountdown());
+
+                    CompleteAnswerButton.SetActive(true);
+                }
                 break;
             case 6:
+                if (curVideoTime >= 10.8f && VPlayer.isPlaying)
+                {
+                    HazardContainer[CurrentClipNumber - 1].SetActive(true);
+
+                    PauseVid();
+
+                    for (int i = 0; i < Q4_Hazards.Length; i++)
+                    {
+                        Q4_Hazards[i].SetActive(true);
+                    }
+                    totalQuestion = Q4_Hazards.Length;
+                    StartCoroutine(answerCountdown());
+
+                    CompleteAnswerButton.SetActive(true);
+                }
                 break;
             case 7:
+                if (curVideoTime >= 8.0f && VPlayer.isPlaying)
+                {
+                    HazardContainer[CurrentClipNumber - 1].SetActive(true);
+
+                    PauseVid();
+
+                    for (int i = 0; i < Q5_Hazards.Length; i++)
+                    {
+                        Q5_Hazards[i].SetActive(true);
+                    }
+                    totalQuestion = Q5_Hazards.Length;
+                    StartCoroutine(answerCountdown());
+
+                    CompleteAnswerButton.SetActive(true);
+                }
                 break;
-            case 8:
-                break;
-            case 9:
-                break;
-            case 10:
-                break;
-            case 11:
-                break;
-            case 12:
-                break;
-            case 13:
-                break;
+         
         }
     }
     void GetSaveFile()

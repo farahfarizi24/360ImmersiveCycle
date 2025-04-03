@@ -12,7 +12,7 @@ public class VideoManager : MonoBehaviour
 {
     public SaveDatas saveDatas;
     public float curVideoTime;
-    public VideoPlayer VPlayer;
+    public VideoPlayer VPlayer; 
     public bool isPlaying;
     public int CurrentClipNumber;
 
@@ -25,7 +25,7 @@ public class VideoManager : MonoBehaviour
     public bool IsCorrect;
     public bool VideoIsPreparing;
     public bool isReady;
-    public int timer = 3;
+    public int timer=3;
     public float ResponseTime;
     public GameObject QObj;
     public TextMeshProUGUI QuestionText;
@@ -54,9 +54,9 @@ public class VideoManager : MonoBehaviour
 
         //3seconds freeze frame
         //After the freeze frame done GetSaveFile();
-
-        SetStartComponent();
-    }
+      
+       SetStartComponent();
+}
 
     public void SetStartComponent()
     {
@@ -72,29 +72,28 @@ public class VideoManager : MonoBehaviour
         score = 0;
         totalQuestion = 0;
         QObj.SetActive(false);
-        AnswerStatus.transform.parent.gameObject.SetActive(false);
-        isReady = false;
+        AnswerStatus.gameObject.SetActive(false);
+        isReady = false;    
         BackgroundImage.SetActive(true);
 
-        DeviceInstructions.SetActive(false);
+        DeviceInstructions.SetActive(false );
     }
 
 
 
     // Update is called once per frame
     void Update()
-    {
-        curVideoTime = (float)VPlayer.time;
+    {   curVideoTime = (float)VPlayer.time;
         UpdateVideo();
-
+      
         if (VPlayer.isPrepared && VideoIsPreparing)
         {
             StartCoroutine(LoadAtStart());
-            // VideoIsPreparing = false;
+           // VideoIsPreparing = false;
         }
         if (isReady)
         {
-            isReady = false;
+          isReady = false;
             NextObject.SetActive(false);
             timer = 3;
             StartCoroutine(CountdownToStartVid());
@@ -113,12 +112,12 @@ public class VideoManager : MonoBehaviour
     void UpdateVideo()
     {
         switch (CurrentClipNumber)
-
+        
         {
 
             case 1:
                 //Need to write which vid here
-
+                
                 QuestionText.text = "What intersection are you approaching?";
                 ChoiceText_1.text = "a) T Junction";
                 ChoiceText_2.text = "b) Roundabout";
@@ -126,12 +125,12 @@ public class VideoManager : MonoBehaviour
                 ChoiceText_4.text = "d) I am not approaching a junction";
 
                 CorrectAnswer = "B";
-
+           
 
                 VPlayer.loopPointReached += PauseVid;
 
-
-
+              
+                
                 break;
 
             case 2:
@@ -186,7 +185,7 @@ public class VideoManager : MonoBehaviour
                 ChoiceText_4.text = "d) There is a stopped vehicle in the right-hand lane waiting to turn right";
 
 
-
+                
 
                 CorrectAnswer = "D";
                 VPlayer.loopPointReached += PauseVid;
@@ -226,7 +225,7 @@ public class VideoManager : MonoBehaviour
                 ChoiceText_2.text = "b) There is a parked car immediately after the corner on your side of the road";
                 ChoiceText_3.text = "c) There is cyclist ahead slowing to take the corner";
                 ChoiceText_4.text = "d) There is an intersection immediately after the corner";
-
+       
 
                 CorrectAnswer = "A";
                 VPlayer.loopPointReached += PauseVid;
@@ -234,12 +233,12 @@ public class VideoManager : MonoBehaviour
             case 9:
 
                 QuestionText.text = "Is it safe to move round the cyclist who stopped?";
-
+     
                 ChoiceText_1.text = "a) Yes, there is no oncoming traffic and no cyclist close behind";
                 ChoiceText_2.text = "b) No, there is an oncoming cyclist";
                 ChoiceText_3.text = "c) No, there is a cyclist behind who is about to overtake";
                 ChoiceText_4.text = "d) No, there is not enough space to pass";
-
+                 
                 CorrectAnswer = "A";
                 VPlayer.loopPointReached += PauseVid;
                 break;
@@ -253,7 +252,7 @@ public class VideoManager : MonoBehaviour
                 ChoiceText_4.text = "d) The car overtaking the cyclists because they will be the first to the intersection";
 
 
-                CorrectAnswer = "B";
+              CorrectAnswer = "B";
                 VPlayer.loopPointReached += PauseVid;
                 break;
             case 11:
@@ -264,7 +263,7 @@ public class VideoManager : MonoBehaviour
                 ChoiceText_2.text = "b) Go straight over because the light was about to turn Green";
                 ChoiceText_3.text = "c) Stop because the light was about to turn Red";
                 ChoiceText_4.text = "d) Go straight over because the light was on Yellow and there was time";
-
+        
                 CorrectAnswer = "C";
                 VPlayer.loopPointReached += PauseVid;
                 break;
@@ -289,25 +288,24 @@ public class VideoManager : MonoBehaviour
                 ChoiceText_3.text = "c) No, only cars are excepted ahead because there is no bike lane";
                 ChoiceText_4.text = "d) Yes, all traffic can go straight ahead";
 
-
+    
 
                 CorrectAnswer = "A";
                 VPlayer.loopPointReached += PauseVid;
                 FinalResult();
 
                 break;
-
-
-
-
+        
+        
+        
+        
         }
 
 
-
+        
     }
     IEnumerator CountdownToStartVid()
     {
-        TimerObject.transform.parent.gameObject.SetActive(true);
         while (timer > 0)
         {
             isReady = false;
@@ -315,7 +313,7 @@ public class VideoManager : MonoBehaviour
             Debug.Log("Timer start " + timer);
             TimerObject.text = timer.ToString();
             yield return new WaitForSeconds(1f);
-
+            
             timer--;
         }
         TimerObject.text = "Go!";
@@ -323,10 +321,9 @@ public class VideoManager : MonoBehaviour
         //yield return new WaitForSeconds(3f);
         yield return new WaitForSeconds(1f);
         TimerObject.text = "";
-        TimerObject.transform.parent.gameObject.SetActive(false);
         //StopButton.gameObject.SetActive(true);
         VPlayer.Play();
-        // isReady = false;
+       // isReady = false;
         timer = 3;
         ResetButton.SetActive(true);
 
@@ -352,14 +349,14 @@ public class VideoManager : MonoBehaviour
 
             NextObject.gameObject.SetActive(true);
             DeviceInstructions.SetActive(true);
-            StartObject.SetActive(false);
+            StartObject.SetActive(false );
         }
-        else if (QObj.gameObject.activeSelf)
+        else if (QuestionText.gameObject.activeSelf)
         {
             NextObject.GetComponentInChildren<TMP_Text>().text = "Record Answer";
             NextObject.gameObject.SetActive(true);
-            QObj.gameObject.SetActive(false);
-            ConfidenceSlider.transform.parent.gameObject.SetActive(true);
+            QuestionText.gameObject.SetActive(false);
+            ConfidenceSlider.gameObject.SetActive(true);
 
         }
         else if (DeviceInstructions.activeSelf)
@@ -370,39 +367,39 @@ public class VideoManager : MonoBehaviour
             DeviceInstructions.SetActive(false);
             BackgroundImage.SetActive(false);
             LoadClip();
-            //
-            //isReady = true;
+           //
+           //isReady = true;
         }
 
-        else if (ConfidenceSlider.transform.parent.gameObject.activeSelf)
+        else if (ConfidenceSlider.gameObject.activeSelf)
         {
             NextObject.GetComponentInChildren<TMP_Text>().text = "Next";
 
-            ConfidenceSlider.transform.parent.gameObject.SetActive(false);
+            ConfidenceSlider.gameObject.SetActive(false);
             NextObject.gameObject.SetActive(true);
 
-
+            
             CheckIfAnswerIsCorrect();
-            if (CurrentClipNumber == 3 || CurrentClipNumber == 14)
+            if (CurrentClipNumber == 3 || CurrentClipNumber==14)
             {
                 // FinalResult
                 FinalResult();
             }
-            AnswerStatus.transform.parent.gameObject.SetActive(true);
+            AnswerStatus.gameObject.SetActive(true);
 
         }
-        else if (AnswerStatus.transform.parent.gameObject.activeSelf)
+        else if (AnswerStatus.gameObject.activeSelf)
         {
             //THERE ARE TWO HERE RECHECK;
             if (CurrentClipNumber == 14)
             {
                 NextObject.gameObject.SetActive(false);
-
+                
             }
             else
             {
 
-                AnswerStatus.transform.parent.gameObject.SetActive(false);
+                AnswerStatus.gameObject.SetActive(false);
                 DeviceInstructions.gameObject.SetActive(true);
                 NextObject.GetComponentInChildren<TMP_Text>().text = "Continue";
                 NextObject.gameObject.SetActive(true);
@@ -415,13 +412,13 @@ public class VideoManager : MonoBehaviour
     IEnumerator LoadAtStart()
     {
         adjustRotation();
-
+     
         VideoIsPreparing = false;
 
         VPlayer.Play();
         yield return new WaitForSeconds(0.2f);
         VPlayer.Pause();
-        //  isReady = true;
+      //  isReady = true;
         BackgroundImage.gameObject.SetActive(false);
 
         isReady = true;
@@ -483,7 +480,7 @@ public class VideoManager : MonoBehaviour
 
                 break;
             case 13:
-                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 65.0f, 0.0f);
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
 
                 break;
 
@@ -496,6 +493,8 @@ public class VideoManager : MonoBehaviour
         score = 0;
         string tempPath = Path.Combine(RootPath, "ComprehensionTest" + CurrentClipNumber + ".mp4");
         VPlayer.url = tempPath;
+        VPlayer.controlledAudioTrackCount = 1;
+
         VPlayer.Prepare();
 
         // StartCoroutine(LoadAtStart());
@@ -515,7 +514,7 @@ public class VideoManager : MonoBehaviour
     {
         ResponseTime = Time.deltaTime;
     }
-
+   
 
     public void PauseVid(VideoPlayer vp)
     {
@@ -527,7 +526,7 @@ public class VideoManager : MonoBehaviour
         ChoiceText_3.gameObject.SetActive(true);
         ChoiceText_4.gameObject.SetActive(true);
         ResetButton.SetActive(false);
-        // VPlayer.Pause();
+       // VPlayer.Pause();
         isPlaying = false;
     }
     public void ContinueVid()
@@ -537,47 +536,49 @@ public class VideoManager : MonoBehaviour
 
 
     }
+  
 
-
-
+   
 
     //OnlyCheckThisWhenTheConfidenceIsRated
     public void CheckIfAnswerIsCorrect()
     {
         if (ChoiceASelected && CorrectAnswer == "A")
         {
-            OnCorrectAnswer();
+           OnCorrectAnswer();
             IsCorrect = true;
-
+            return;
         }
-
-
+      
+      
 
         if (ChoiceBSelected && CorrectAnswer == "B")
         {
-            OnCorrectAnswer();
+             OnCorrectAnswer();
             IsCorrect = true;
 
-
+            return ;
         }
+       
 
         if (ChoiceCSelected && CorrectAnswer == "C")
         {
             OnCorrectAnswer();
             IsCorrect = true;
-
+            return;
         }
+       
 
         if (ChoiceDSelected && CorrectAnswer == "D")
         {
             OnCorrectAnswer();
             IsCorrect = true;
-
-
+            return;
         }
+       
 
-        if (!IsCorrect)
-
+        if (!IsCorrect) 
+        
         {
             IsCorrect = false;
             saveDatas.OnComprehensionTestIncorrect(ResponseTime.ToString(), VideoID, CorrectAnswer, ConfidenceSlider.value.ToString());
@@ -586,17 +587,17 @@ public class VideoManager : MonoBehaviour
             timer = 0;
             ResponseTime = 0;
             AnswerStatus.text = "That answer is incorrect!";
-
+            ConfidenceSlider.gameObject.SetActive(false);
+            CurrentClipNumber++;
+            // VideoID = NextVideo;
+            totalQuestion++;
+            //DeviceInstructions.gameObject.SetActive(true);
+            AnswerStatus.gameObject.SetActive(true);
+            BackgroundImage.gameObject.SetActive(true);
+            NextObject.gameObject.SetActive(true);
+            //OTHERWISE IT IS INCORRECT
         }
-        ConfidenceSlider.transform.parent.gameObject.SetActive(false);
-        CurrentClipNumber++;
-        // VideoID = NextVideo;
-        totalQuestion++;
-        //DeviceInstructions.gameObject.SetActive(true);
-        AnswerStatus.transform.parent.gameObject.SetActive(true);
-        BackgroundImage.gameObject.SetActive(true);
-        NextObject.gameObject.SetActive(true);
-        //OTHERWISE IT IS INCORRECT
+
     }
 
 
@@ -610,21 +611,29 @@ public class VideoManager : MonoBehaviour
         timer = 0;
         ResponseTime = 0;
         score++;
+        ConfidenceSlider.gameObject.SetActive(false);
+        CurrentClipNumber++;
+        // VideoID = NextVideo;
+        totalQuestion++;
+        //DeviceInstructions.gameObject.SetActive(true);
+        AnswerStatus.gameObject.SetActive(true);
+        BackgroundImage.gameObject.SetActive(true);
+        NextObject.gameObject.SetActive(true);
+        //OTHERWISE IT IS INCORRECT
     }
 
     void TurnOffAllChoice()
-    {
-        IsCorrect = false;
-        ChoiceASelected = false;
-        ChoiceBSelected = false;
-        ChoiceCSelected = false;
-        ChoiceDSelected = false;
+    {IsCorrect = false;
+        ChoiceASelected=false;
+        ChoiceBSelected=false;
+        ChoiceCSelected=false;
+        ChoiceDSelected=false;
     }
 
     public void FinalResult()
     {
-
-        AnswerStatus.text = AnswerStatus.text + "\n" + "You got " + score + " out of " + totalQuestion + "right!";
+   
+        AnswerStatus.text = "You got "+ score +" out of " + totalQuestion + "right!";
         NextObject.SetActive(true);
     }
 
@@ -648,7 +657,7 @@ public class VideoManager : MonoBehaviour
     }
     public void AnswerIsC()
     {
-        ChoiceCSelected = true;
+        ChoiceCSelected = true; 
     }
 
     public void AnswerIsD()

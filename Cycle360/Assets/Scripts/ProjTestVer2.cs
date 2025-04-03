@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
 using UnityEngine.Video;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ProjTestVer2 : MonoBehaviour
 {
@@ -16,10 +17,9 @@ public class ProjTestVer2 : MonoBehaviour
     public GameObject PlayerObject;
     public int CurrentClipNumber;
     public TMP_Text TimerText;
-    public GameObject TimerParent;
     public int CountdownTimer;
     public VideoPlayer VP;
-    public bool isChanging = false;
+    public bool isChanging=false;
     public bool isReady = false;
     SaveDatas savingScript;
     public string QuestionID;
@@ -42,7 +42,7 @@ public class ProjTestVer2 : MonoBehaviour
     void Start()
     {
         SetStartComponent();
-
+      
     }
 
     public void SetStartComponent()
@@ -61,7 +61,7 @@ public class ProjTestVer2 : MonoBehaviour
         RootPath = Application.persistentDataPath;
         // StartCoroutine(LoadAtStart());
         SetDeviceInstruction.gameObject.SetActive(false);
-        isReady = false;
+        isReady = false ;
         InstructionText.gameObject.SetActive(true);
         NextButton.GetComponentInChildren<TMP_Text>().text = "Start";
         NextButton.gameObject.SetActive(true);
@@ -81,7 +81,7 @@ public class ProjTestVer2 : MonoBehaviour
         if (VP.isPrepared && VideoBeingPrepared)
         {
             StartCoroutine(LoadAtStart());
-            VideoBeingPrepared = false;
+            VideoBeingPrepared=false;
         }
         if (isReady)
         {
@@ -98,10 +98,10 @@ public class ProjTestVer2 : MonoBehaviour
             StopButton.gameObject.SetActive(false);
             EndofVid();
             // isChanging = true;
-            //   OnNoButtonPress();
+         //   OnNoButtonPress();
         }
 
-
+      
 
 
     }
@@ -128,8 +128,8 @@ public class ProjTestVer2 : MonoBehaviour
             NextButton.GetComponentInChildren<TMP_Text>().text = "Next";
 
         }
-
-
+     
+      
     }
     public void OnStopButtonPress()
     {
@@ -147,11 +147,11 @@ public class ProjTestVer2 : MonoBehaviour
         totalScore += ThisQuestionScore;
         ResetButton.SetActive(false);
 
-        savingScript.OnProjectionTestResponse(QuestionID, "Stop", ResOutcome, ThisQuestionScore, curVidTime);
+        savingScript.OnProjectionTestResponse(QuestionID, "Stop", ResOutcome, ThisQuestionScore,curVidTime);
 
         EndofVid();
 
-
+        
     }
 
     public void EndofVid()
@@ -171,7 +171,7 @@ public class ProjTestVer2 : MonoBehaviour
             QuestionFeedback.SetActive(true);
             BackgroundUI.SetActive(true);
             CurrentClipNumber++;
-            // LoadClip();
+           // LoadClip();
 
         }
 
@@ -187,31 +187,31 @@ public class ProjTestVer2 : MonoBehaviour
             QuestionFeedback.SetActive(true);
             FinalFeedback.SetActive(true);
             BackgroundUI.SetActive(true);
-
+            
             //SHOWCASE END SCREEN
         }
     }
 
     public float CalculateScore()
     {
-
+      
         switch (CurrentClipNumber)
         {
             case 1:
 
-                CalculateScore(13.0f, 16.0f, buttonHitTime);
+                CalculateScore(13.0f,16.0f,buttonHitTime);
                 break;
 
 
-            case 2:
+                case 2:
                 CalculateScore(8.0f, 10.0f, buttonHitTime);
                 break;
-
-            case 3:
+                
+                case 3:
                 CalculateScore(9.0f, 12.0f, buttonHitTime);
 
                 break;
-            case 4:
+                case 4:
                 CalculateScore(9.0f, 11.0f, buttonHitTime);
 
                 break;
@@ -219,35 +219,35 @@ public class ProjTestVer2 : MonoBehaviour
                 CalculateScore(8.0f, 10.0f, buttonHitTime);
 
                 break;
-            case 6:
+                case 6:
                 CalculateScore(13.0f, 15.0f, buttonHitTime);
 
                 break;
-            case 7:
+                case 7:
                 CalculateScore(7.0f, 10.0f, buttonHitTime);
 
                 break;
-            case 8:
+                case 8:
                 CalculateScore(8.0f, 10.0f, buttonHitTime);
 
                 break;
-            case 9:
+                case 9:
                 CalculateScore(14.0f, 16.0f, buttonHitTime);
 
                 break;
-            case 10:
+                case 10:
                 CalculateScore(11.0f, 13.0f, buttonHitTime);
 
                 break;
-            case 11:
+                case 11:
                 CalculateScore(8.0f, 10.0f, buttonHitTime);
 
                 break;
-            case 12:
+                case 12:
                 CalculateScore(13.0f, 15.0f, buttonHitTime);
 
                 break;
-            case 13:
+                case 13:
                 CalculateScore(11.0f, 13.0f, buttonHitTime);
 
                 break;
@@ -259,10 +259,11 @@ public class ProjTestVer2 : MonoBehaviour
 
     public void CalculateScore(float startTime, float endTime, float ButtonPressTime)
     {
+        ResOutcome = "none";
         if (ButtonPressTime < startTime || ButtonPressTime > endTime)
         {
-            ThisQuestionScore = 0.0f;
-            if (ButtonPressTime < startTime)
+          
+            if(ButtonPressTime < startTime)
             {
                 ResOutcome = "Early";
                 QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You responded too early";
@@ -272,9 +273,10 @@ public class ProjTestVer2 : MonoBehaviour
                 ResOutcome = "Very late";
                 QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You responded too late";
             }
+            ThisQuestionScore = 0.0f;
             return;
         }
-
+            
         if (ButtonPressTime == startTime)
         {
 
@@ -291,12 +293,16 @@ public class ProjTestVer2 : MonoBehaviour
             return;
         }
 
+        if (ResOutcome == "none") 
+        {
+            ThisQuestionScore = 10 - 9 * (ButtonPressTime - startTime) / (endTime - startTime);
+            ResOutcome = "Correct";
+            QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You responded correctly and in a safe manner, well done";
 
-        ThisQuestionScore = 10 - 9 * (ButtonPressTime - startTime) / (endTime - startTime);
-        ResOutcome = "Correct";
-        QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You responded correctly and in a safe manner, well done";
+            return;
+        }
 
-        return;
+      
     }
     public void ResetScenario()
     {
@@ -308,8 +314,7 @@ public class ProjTestVer2 : MonoBehaviour
     }
     IEnumerator CountdownToStartVid()
     {
-        TimerParent.SetActive(true);
-        while (CountdownTimer > 0)
+        while(CountdownTimer > 0)
         {
             isReady = false;
 
@@ -323,13 +328,13 @@ public class ProjTestVer2 : MonoBehaviour
         //yield return new WaitForSeconds(3f);
         yield return new WaitForSeconds(1f);
         TimerText.text = "";
-        TimerParent.SetActive(false);
         StopButton.gameObject.SetActive(true);
         VP.Play();
         isChanging = false;
         CountdownTimer = 3;
         ResetButton.SetActive(true);
-        StopCoroutine(CountdownToStartVid());
+        QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You did not respond";
+       StopCoroutine(CountdownToStartVid());
 
 
     }
@@ -345,20 +350,19 @@ public class ProjTestVer2 : MonoBehaviour
             InstructionText.gameObject.SetActive(false);
             SetDeviceInstruction.gameObject.SetActive(true);
             //  LoadClip();    IEnumerator CountdownToStartVid()
-            //  StartCoroutine(CountdownToStartVid());
+          //  StartCoroutine(CountdownToStartVid());
 
-        }
-        else if (SetDeviceInstruction.gameObject.activeSelf)
+        }else if (SetDeviceInstruction.gameObject.activeSelf)
         {
             NextButton.gameObject.SetActive(false);
-            //  BackgroundUI.gameObject.SetActive(false);
+          //  BackgroundUI.gameObject.SetActive(false);
             SetDeviceInstruction.gameObject.SetActive(false);
             LoadClip();
 
         }
         else if (QuestionFeedback.gameObject.activeSelf)
         {
-
+           
             if (CurrentClipNumber == 13)
             {
                 NextButton.gameObject.SetActive(false);
@@ -372,7 +376,7 @@ public class ProjTestVer2 : MonoBehaviour
             {
                 QuestionFeedback.gameObject.SetActive(false);
 
-                SetDeviceInstruction.gameObject.SetActive(true);
+                SetDeviceInstruction.gameObject.SetActive(true );
                 NextButton.GetComponentInChildren<TMP_Text>().text = "Continue";
                 //StartCoroutine(CountdownToStartVid());
             }
@@ -381,20 +385,20 @@ public class ProjTestVer2 : MonoBehaviour
     IEnumerator LoadAtStart()
     {
         //ADJUST PLAYER ROTATION
+       
+            if (CurrentClipNumber == 1|| CurrentClipNumber==2 || CurrentClipNumber == 5
+            || CurrentClipNumber == 6 || CurrentClipNumber == 7 || CurrentClipNumber == 8
+            || CurrentClipNumber == 9 || CurrentClipNumber == 10 || CurrentClipNumber == 11
+            || CurrentClipNumber == 12 || CurrentClipNumber == 13)
+            {
+                PlayerObject.transform.eulerAngles = new Vector3(0.0f, 60.0f, 0.0f);
 
-        if (CurrentClipNumber == 1 || CurrentClipNumber == 2 || CurrentClipNumber == 5
-        || CurrentClipNumber == 6 || CurrentClipNumber == 7 || CurrentClipNumber == 8
-        || CurrentClipNumber == 9 || CurrentClipNumber == 10 || CurrentClipNumber == 11
-        || CurrentClipNumber == 12 || CurrentClipNumber == 13)
-        {
-            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 60.0f, 0.0f);
-
-        }
-        if (CurrentClipNumber == 3)
-        {
+            }
+            if(CurrentClipNumber == 3)
+           {
             PlayerObject.transform.eulerAngles = new Vector3(0.0f, -150.0f, 0.0f);
 
-        }
+           }
         if (CurrentClipNumber == 4)
         {
             PlayerObject.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
@@ -406,35 +410,37 @@ public class ProjTestVer2 : MonoBehaviour
 
         }
         VP.Play();
-        yield return new WaitForSeconds(0.2f);
-        VP.Pause();
+            yield return new WaitForSeconds(0.2f);
+            VP.Pause();
 
-        BackgroundUI.gameObject.SetActive(false);
+            BackgroundUI.gameObject.SetActive(false);
 
-        isReady = true;
-
-
-
+            isReady = true;
+        
+       
+        
     }
     public void LoadClip()
     {
         ThisQuestionScore = 0;
         string tempPath = Path.Combine(RootPath, "ProjectionTest" + CurrentClipNumber + ".mp4");
         VP.url = tempPath;
+        VP.controlledAudioTrackCount = 1;
+
         VP.Prepare();
 
-        // StartCoroutine(LoadAtStart());
+       // StartCoroutine(LoadAtStart());
         if (CurrentClipNumber <= 3)
         {
-            QuestionID = "Practice" + CurrentClipNumber.ToString();
+            QuestionID="Practice" + CurrentClipNumber.ToString();
         }
         else
         {
-            int tempID = CurrentClipNumber - 3;
+           int  tempID = CurrentClipNumber - 3;
             QuestionID = tempID.ToString();
         }
         VideoBeingPrepared = true;
-        //  StartCoroutine(LoadAtStart());
+      //  StartCoroutine(LoadAtStart());
         //StartCoroutine(CountdownToStartVid());
     }
 }

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Runtime.CompilerServices;
 using UnityEngine.Playables;
+using Unity.VisualScripting;
 
 public class SaveDatas : MonoBehaviour
 {
@@ -111,6 +112,53 @@ public class SaveDatas : MonoBehaviour
         TotalScore = 0;
        // Debug.Log(theDate + theTime);
       
+    }
+    public void OnFreezePerceptionTestEnter()
+    {
+
+        saveFile = Application.persistentDataPath + "/360Cycle-FreezePerceptionTest.csv";
+        Debug.Log("File is saved at:" + saveFile);
+
+        if (!File.Exists(saveFile))
+        {
+
+            sw = File.AppendText(saveFile);
+
+            sw.WriteLine("ID," + "Date," + "Time," + "Test ID," + "Question ID," + "ResponseTime," + "Object ID," + "Score," + "Total Correct Click," +
+            "Total Incorrect Click," + "Total Number of Click," + "Total Score");
+            sw.Close();
+
+        }
+
+        theDate = System.DateTime.Now.ToString("MM/dd/yyyy");
+        TestID = "Perception";
+        TotalCorrectClick = 0;
+        TotalIncorrectClick = 0;
+        TotalNumberofClick = 0;
+        TotalScore = 0;
+    }
+
+    public void OnFreezePerceptionTestCorrectClick(string QuestionID, string ResponseTime, string ObjectID, int AddScore)
+    {
+        sw = File.AppendText(saveFile);
+        string theTime = System.DateTime.Now.ToString("hh:mm:ss");
+        TotalCorrectClick++;
+        TotalNumberofClick++;
+        TotalScore += AddScore;
+
+        sw.Write(UID + "," + theDate + "," + theTime + "," + TestID + "," + QuestionID + "," + ResponseTime + "," + ObjectID + "," + AddScore + ",");
+        sw.Write(TotalCorrectClick + "," + TotalIncorrectClick + "," + TotalNumberofClick + "," + TotalScore + "\n");
+        sw.Close();
+    }
+    public void OnFreezePerceptionTestWrongClick(string VideoTime)
+    {
+        sw = File.AppendText(saveFile);
+        string theTime = System.DateTime.Now.ToString("hh:mm:ss");
+        TotalIncorrectClick++;
+        TotalNumberofClick++;
+        sw.Write(UID + "," + theDate + "," + theTime + "," + TestID + "," + "wrong" + "," + VideoTime + "," + "wrong" + "," + "0" + ",");
+        sw.Write(TotalCorrectClick + "," + TotalIncorrectClick + "," + TotalNumberofClick + "," + TotalScore + "\n");
+        sw.Close();
     }
 
     public void OnPerceptionTestWrongClick(string VideoTime)
