@@ -493,6 +493,8 @@ public class VideoManager : MonoBehaviour
         score = 0;
         string tempPath = Path.Combine(RootPath, "ComprehensionTest" + CurrentClipNumber + ".mp4");
         VPlayer.url = tempPath;
+        VPlayer.controlledAudioTrackCount = 1;
+
         VPlayer.Prepare();
 
         // StartCoroutine(LoadAtStart());

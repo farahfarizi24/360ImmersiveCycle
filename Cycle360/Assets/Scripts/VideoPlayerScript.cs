@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 using System.IO;
+using static UnityEditor.Experimental.GraphView.GraphView;
 public class VideoPlayerScript : MonoBehaviour
 {
     SaveDatas SaveObj;
@@ -205,6 +206,8 @@ public class VideoPlayerScript : MonoBehaviour
         int VidToPlay = CurPlayingClip + 1;
         string tempPath = Path.Combine(RootPath, "Ordered_Dynamic" + VidToPlay + ".mp4");
         video.url = tempPath;
+        video.controlledAudioTrackCount = 1;
+
         //video.clip = Projectionclips[CurPlayingClip];
         if (VidToPlay == 2)
         {

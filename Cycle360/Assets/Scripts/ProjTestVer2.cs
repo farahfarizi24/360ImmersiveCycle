@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
 using UnityEngine.Video;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ProjTestVer2 : MonoBehaviour
 {
@@ -417,6 +418,8 @@ public class ProjTestVer2 : MonoBehaviour
         ThisQuestionScore = 0;
         string tempPath = Path.Combine(RootPath, "ProjectionTest" + CurrentClipNumber + ".mp4");
         VP.url = tempPath;
+        VP.controlledAudioTrackCount = 1;
+
         VP.Prepare();
 
        // StartCoroutine(LoadAtStart());

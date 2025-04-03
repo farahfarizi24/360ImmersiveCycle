@@ -91,7 +91,11 @@ public class PercTest2 : MonoBehaviour
         yield return new WaitForSeconds(1f);
         TimerObject.text = "";
         //StopButton.gameObject.SetActive(true);
+            
+          
+
         VPlayer.Play();
+        //VPlayer.SetDirectAudioMute(0,false); // Mute track 0
         ResetScenarioObject.SetActive(true);
         // isReady = false;
         timer = 3;
@@ -218,8 +222,11 @@ public void showResult()
         string tempPath = Path.Combine(RootPath, "Ordered_Freeze" + CurrentClipNumber + ".mp4");
         //string tempPath = Path.Combine(RootPath, "Test.mp4");
         VPlayer.url = tempPath;
-        VPlayer.Prepare();
+        
+        VPlayer.controlledAudioTrackCount = 1;
 
+        VPlayer.Prepare();
+      
 
         if (CurrentClipNumber <= 2)
         {
