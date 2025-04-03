@@ -547,7 +547,7 @@ public class VideoManager : MonoBehaviour
         {
            OnCorrectAnswer();
             IsCorrect = true;
-
+            return;
         }
       
       
@@ -557,24 +557,26 @@ public class VideoManager : MonoBehaviour
              OnCorrectAnswer();
             IsCorrect = true;
 
-
+            return ;
         }
+       
 
         if (ChoiceCSelected && CorrectAnswer == "C")
         {
             OnCorrectAnswer();
             IsCorrect = true;
-
+            return;
         }
+       
 
         if (ChoiceDSelected && CorrectAnswer == "D")
         {
             OnCorrectAnswer();
             IsCorrect = true;
-
-
+            return;
         }
        
+
         if (!IsCorrect) 
         
         {
@@ -585,17 +587,17 @@ public class VideoManager : MonoBehaviour
             timer = 0;
             ResponseTime = 0;
             AnswerStatus.text = "That answer is incorrect!";
-
+            ConfidenceSlider.gameObject.SetActive(false);
+            CurrentClipNumber++;
+            // VideoID = NextVideo;
+            totalQuestion++;
+            //DeviceInstructions.gameObject.SetActive(true);
+            AnswerStatus.gameObject.SetActive(true);
+            BackgroundImage.gameObject.SetActive(true);
+            NextObject.gameObject.SetActive(true);
+            //OTHERWISE IT IS INCORRECT
         }
-        ConfidenceSlider.gameObject.SetActive(false);
-        CurrentClipNumber++;
-       // VideoID = NextVideo;
-        totalQuestion++;
-        //DeviceInstructions.gameObject.SetActive(true);
-        AnswerStatus.gameObject.SetActive(true);
-        BackgroundImage.gameObject.SetActive(true);
-        NextObject.gameObject.SetActive(true);
-        //OTHERWISE IT IS INCORRECT
+
     }
 
 
@@ -609,6 +611,15 @@ public class VideoManager : MonoBehaviour
         timer = 0;
         ResponseTime = 0;
         score++;
+        ConfidenceSlider.gameObject.SetActive(false);
+        CurrentClipNumber++;
+        // VideoID = NextVideo;
+        totalQuestion++;
+        //DeviceInstructions.gameObject.SetActive(true);
+        AnswerStatus.gameObject.SetActive(true);
+        BackgroundImage.gameObject.SetActive(true);
+        NextObject.gameObject.SetActive(true);
+        //OTHERWISE IT IS INCORRECT
     }
 
     void TurnOffAllChoice()
@@ -622,7 +633,7 @@ public class VideoManager : MonoBehaviour
     public void FinalResult()
     {
    
-        AnswerStatus.text = AnswerStatus.text + "\n"+ "You got "+ score +" out of " + totalQuestion + "right!";
+        AnswerStatus.text = "You got "+ score +" out of " + totalQuestion + "right!";
         NextObject.SetActive(true);
     }
 
