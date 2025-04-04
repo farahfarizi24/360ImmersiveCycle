@@ -306,6 +306,7 @@ public class VideoManager : MonoBehaviour
     }
     IEnumerator CountdownToStartVid()
     {
+        TimerObject.transform.parent.gameObject.SetActive(true);
         while (timer > 0)
         {
             isReady = false;
@@ -321,6 +322,8 @@ public class VideoManager : MonoBehaviour
         //yield return new WaitForSeconds(3f);
         yield return new WaitForSeconds(1f);
         TimerObject.text = "";
+        TimerObject.transform.parent.gameObject.SetActive(false);
+
         //StopButton.gameObject.SetActive(true);
         VPlayer.Play();
        // isReady = false;
