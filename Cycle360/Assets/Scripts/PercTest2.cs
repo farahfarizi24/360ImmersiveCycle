@@ -41,6 +41,7 @@ public class PercTest2 : MonoBehaviour
     public GameObject AnswerFeedback;
     public int score;
     public int totalQuestion;
+    public AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
@@ -215,6 +216,13 @@ public class PercTest2 : MonoBehaviour
         string tempPath = Path.Combine(RootPath, "Freeze " + CurrentClipNumber + " - Perception Test.mp4");
         //string tempPath = Path.Combine(RootPath, "Test.mp4");
         VPlayer.url = tempPath;
+<<<<<<< Updated upstream
+=======
+        
+        VPlayer.controlledAudioTrackCount = 1;
+        VPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
+        VPlayer.SetTargetAudioSource(0, audio);
+>>>>>>> Stashed changes
         VPlayer.Prepare();
 
 
