@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
 using UnityEngine.Video;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ProjTestVer2 : MonoBehaviour
 {
     //https://discussions.unity.com/t/playing-large-video-files-in-gear-vr-in-unity-project/673596/4
     //https://discussions.unity.com/t/retrieving-and-playing-a-video-file-stored-locally-on-an-android-vr-headset-oculus-quest/224309/3
-
+    public int TotalCorrectResponse;
     public VideoClip[] clip;//There will be 13 video clip 
     public GameObject PlayerObject;
     public int CurrentClipNumber;
@@ -47,6 +47,7 @@ public class ProjTestVer2 : MonoBehaviour
 
     public void SetStartComponent()
     {
+        TotalCorrectResponse = 0;
         VideoBeingPrepared = false;
         GameObject SaveFileObject = GameObject.FindGameObjectWithTag("Manager");
         savingScript = SaveFileObject.GetComponent<SaveDatas>();
@@ -185,6 +186,7 @@ public class ProjTestVer2 : MonoBehaviour
             ResetButton.SetActive(false);
 
             QuestionFeedback.SetActive(true);
+            GenerateFinalFeedback();
             FinalFeedback.SetActive(true);
             BackgroundUI.SetActive(true);
             
@@ -192,6 +194,10 @@ public class ProjTestVer2 : MonoBehaviour
         }
     }
 
+    public void GenerateFinalFeedback()
+    {
+        FinalFeedback.GetComponent<TMP_Text>().text = "Total number of correct responses " + TotalCorrectResponse;
+    }
     public float CalculateScore()
     {
       
@@ -282,6 +288,7 @@ public class ProjTestVer2 : MonoBehaviour
 
             ThisQuestionScore = 10.0f;
             ResOutcome = "Correct";
+            TotalCorrectResponse++;
             QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You responded correctly and in a safe manner, well done";
             return;
         }
@@ -297,6 +304,7 @@ public class ProjTestVer2 : MonoBehaviour
         {
             ThisQuestionScore = 10 - 9 * (ButtonPressTime - startTime) / (endTime - startTime);
             ResOutcome = "Correct";
+            TotalCorrectResponse++;
             QuestionFeedback.GetComponentInChildren<TMP_Text>().text = "You responded correctly and in a safe manner, well done";
 
             return;
@@ -314,6 +322,7 @@ public class ProjTestVer2 : MonoBehaviour
     }
     IEnumerator CountdownToStartVid()
     {
+        TimerText.gameObject.transform.parent.gameObject.SetActive(true);
         while(CountdownTimer > 0)
         {
             isReady = false;
@@ -329,6 +338,8 @@ public class ProjTestVer2 : MonoBehaviour
         yield return new WaitForSeconds(1f);
         TimerText.text = "";
         StopButton.gameObject.SetActive(true);
+        TimerText.gameObject.transform.parent.gameObject.SetActive(false);
+
         VP.Play();
         isChanging = false;
         CountdownTimer = 3;
@@ -365,12 +376,11 @@ public class ProjTestVer2 : MonoBehaviour
            
             if (CurrentClipNumber == 13)
             {
-                NextButton.gameObject.SetActive(false);
-                BackgroundUI.gameObject.SetActive(false);
-                QuestionFeedback.gameObject.SetActive(false);
-                FinalFeedback.gameObject.SetActive(false);
+                NextButton.gameObject.SetActive(true);
+                BackgroundUI.gameObject.SetActive(true);
+                QuestionFeedback.gameObject.SetActive(true);
+                FinalFeedback.gameObject.SetActive(true);
                 //END
-                Application.Quit();
             }
             else
             {
@@ -380,6 +390,11 @@ public class ProjTestVer2 : MonoBehaviour
                 NextButton.GetComponentInChildren<TMP_Text>().text = "Continue";
                 //StartCoroutine(CountdownToStartVid());
             }
+        }
+       if (FinalFeedback.gameObject.activeSelf)
+        {
+            SceneManager.LoadScene(0);
+
         }
     }
     IEnumerator LoadAtStart()

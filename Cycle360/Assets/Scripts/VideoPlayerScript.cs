@@ -6,7 +6,6 @@ using TMPro;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 using System.IO;
-using static UnityEditor.Experimental.GraphView.GraphView;
 public class VideoPlayerScript : MonoBehaviour
 {
     SaveDatas SaveObj;
