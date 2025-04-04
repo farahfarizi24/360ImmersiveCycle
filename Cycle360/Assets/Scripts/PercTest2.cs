@@ -75,6 +75,7 @@ public class PercTest2 : MonoBehaviour
 
     IEnumerator CountdownToStartVid()
     {
+        TimerObject.transform.parent.gameObject.SetActive(true);    
         while (timer > 0)
         {
             isReady = false;
@@ -91,8 +92,9 @@ public class PercTest2 : MonoBehaviour
         yield return new WaitForSeconds(1f);
         TimerObject.text = "";
         //StopButton.gameObject.SetActive(true);
-            
-          
+
+
+        TimerObject.transform.parent.gameObject.SetActive(false);
 
         VPlayer.Play();
         //VPlayer.SetDirectAudioMute(0,false); // Mute track 0
@@ -406,7 +408,7 @@ public void showResult()
                     HazardContainer[CurrentClipNumber - 1].SetActive(true);
 
                     PauseVid();
-
+                    
                     for (int i = 0; i < Q4_Hazards.Length; i++)
                     {
                         Q4_Hazards[i].SetActive(true);

@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -226,7 +227,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 278.00006, y: 82}
+  m_AnchoredPosition: {x: 411, y: 82}
   m_SizeDelta: {x: 284.8, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &145895705
@@ -517,7 +518,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.855, y: 0}
   m_AnchorMax: {x: 0.855, y: 0}
-  m_AnchoredPosition: {x: -35, y: 82}
+  m_AnchoredPosition: {x: -194, y: 82}
   m_SizeDelta: {x: 284.8, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &293124979
@@ -1597,7 +1598,6 @@ MonoBehaviour:
   InstructionTxt1: {fileID: 1279968130}
   NextButton: {fileID: 781054149}
   TitleObject: {fileID: 1219549446}
-  BG: {fileID: 1889791399}
 --- !u!114 &774903431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2084,7 +2084,6 @@ MonoBehaviour:
   - {fileID: 1094156018}
   - {fileID: 502400217}
   nextButton: {fileID: 781054149}
-  Bg: {fileID: 1889791399}
 --- !u!222 &913372187
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3400,7 +3399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.611, y: 0}
   m_AnchorMax: {x: 0.611, y: 0}
-  m_AnchoredPosition: {x: 1.000061, y: 82}
+  m_AnchoredPosition: {x: -152, y: 82}
   m_SizeDelta: {x: 284.8, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1370457254
@@ -4248,7 +4247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1744754301
 RectTransform:
   m_ObjectHideFlags: 0

@@ -21,7 +21,6 @@ public class TimerScript : MonoBehaviour
         {
             VPScript.isReady = false;
             TimerOn = true;
-            
             StartCoroutine(countdownTimer());
         }
     }
