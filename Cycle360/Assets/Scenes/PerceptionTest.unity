@@ -173,6 +173,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 61070577}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &61070580
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -294,6 +296,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 65400979}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &65400982
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -450,6 +454,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 98244520}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &98244523
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -705,6 +711,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 269699742}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &269699745
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -792,7 +800,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &331348879
 Transform:
   m_ObjectHideFlags: 0
@@ -882,6 +890,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 389863570}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &389863573
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1003,6 +1013,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 411174838}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &411174841
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1124,6 +1136,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 457513387}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &457513390
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1644,6 +1658,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 581419990}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &581419993
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1899,6 +1915,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 598249846}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &598249849
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2020,6 +2038,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 677789110}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &677789113
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2141,6 +2161,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 726841372}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &726841375
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2569,6 +2591,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 955795343}
+  initTime: 0
+  despawnTime: 0
 --- !u!1 &975116421
 GameObject:
   m_ObjectHideFlags: 0
@@ -2653,6 +2677,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 979905241}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &979905244
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2774,6 +2800,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 1042113201}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &1042113204
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2952,6 +2980,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VPscript: {fileID: 1530920190}
   CorrectBeep: {fileID: 1886011698}
+  tempObject: {fileID: 0}
+  startHazardTime: 0
+  endHazrdTime: 0
 --- !u!1 &1131091240
 GameObject:
   m_ObjectHideFlags: 0
@@ -3002,6 +3033,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 1131091240}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &1131091243
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3123,6 +3156,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 1164084460}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &1164084463
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3244,6 +3279,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 1203971912}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &1203971915
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3499,6 +3536,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 1310938113}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &1310938116
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3620,6 +3659,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 1350131901}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &1350131904
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4046,6 +4087,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 1541858961}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &1541858964
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4336,6 +4379,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 1571569603}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &1571569606
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4562,6 +4607,8 @@ MonoBehaviour:
   speed: 10000
   time: 5
   Hazard: {fileID: 1647717291}
+  initTime: 0
+  despawnTime: 0
 --- !u!1 &1656401746
 GameObject:
   m_ObjectHideFlags: 0
@@ -5333,6 +5380,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 1916544011}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &1916544014
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5891,6 +5940,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 2007753119}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &2007753122
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6012,6 +6063,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 2012982187}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &2012982190
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6204,6 +6257,8 @@ MonoBehaviour:
   speed: 10000
   time: 5
   Hazard: {fileID: 2075735870}
+  initTime: 0
+  despawnTime: 0
 --- !u!1 &2112216461
 GameObject:
   m_ObjectHideFlags: 0
@@ -6289,6 +6344,8 @@ MonoBehaviour:
   speed: 1
   time: 5
   Hazard: {fileID: 2118109189}
+  initTime: 0
+  despawnTime: 0
 --- !u!65 &2118109192
 BoxCollider:
   m_ObjectHideFlags: 0

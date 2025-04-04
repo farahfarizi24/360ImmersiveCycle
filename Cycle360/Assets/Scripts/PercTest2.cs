@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 using System.IO;
 
 public class PercTest2 : MonoBehaviour
-{
+{public ObjectHazardAlternateDetector detector;
     public SaveDatas saveDatas;
     public float curVideoTime;
     public VideoPlayer VPlayer;
@@ -279,6 +279,7 @@ public void showResult()
         NextObject.SetActive(true);
         BackgroundImage.SetActive(true);
         ResetScenarioObject.SetActive(false);
+        cancelTimer();
         StopCoroutine(answerCountdown());
     }
 
@@ -327,8 +328,10 @@ public void showResult()
                         Prac1_Hazards[i].SetActive(true);
                     }
                     totalQuestion = Prac1_Hazards.Length;
+                    detector.StartTimer();
+
                     StartCoroutine(answerCountdown());
-                    CompleteAnswerButton.SetActive(true);
+                   // CompleteAnswerButton.SetActive(true);
                 }
                 break;
             case 2:
@@ -345,8 +348,10 @@ public void showResult()
                         Prac2_Hazards[i].SetActive(true);
                     }
                     totalQuestion = Prac2_Hazards.Length;
+                    detector.StartTimer();
+
                     StartCoroutine(answerCountdown());
-                    CompleteAnswerButton.SetActive(true);
+                    //CompleteAnswerButton.SetActive(true);
                 }
 
 
@@ -363,9 +368,11 @@ public void showResult()
                         Q1_Hazards[i].SetActive(true);
                     }
                     totalQuestion = Prac3_Hazards.Length;
+                    detector.StartTimer();
+
                     StartCoroutine(answerCountdown());
 
-                    CompleteAnswerButton.SetActive(true);
+                  //  CompleteAnswerButton.SetActive(true);
                 }
                 break;
             case 4:
@@ -380,9 +387,11 @@ public void showResult()
                         Q2_Hazards[i].SetActive(true);
                     }
                     totalQuestion = Q2_Hazards.Length;
+                    detector.StartTimer();
+
                     StartCoroutine(answerCountdown());
 
-                    CompleteAnswerButton.SetActive(true);
+                   // CompleteAnswerButton.SetActive(true);
                 }
                 break;
             case 5:
@@ -397,9 +406,11 @@ public void showResult()
                         Q3_Hazards[i].SetActive(true);
                     }
                     totalQuestion = Q3_Hazards.Length;
+                    detector.StartTimer();
+
                     StartCoroutine(answerCountdown());
 
-                    CompleteAnswerButton.SetActive(true);
+                   // CompleteAnswerButton.SetActive(true);
                 }
                 break;
             case 6:
@@ -414,9 +425,11 @@ public void showResult()
                         Q4_Hazards[i].SetActive(true);
                     }
                     totalQuestion = Q4_Hazards.Length;
+                    detector.StartTimer();
+
                     StartCoroutine(answerCountdown());
 
-                    CompleteAnswerButton.SetActive(true);
+                  //  CompleteAnswerButton.SetActive(true);
                 }
                 break;
             case 7:
@@ -431,9 +444,11 @@ public void showResult()
                         Q5_Hazards[i].SetActive(true);
                     }
                     totalQuestion = Q5_Hazards.Length;
+                    detector.StartTimer();
+
                     StartCoroutine(answerCountdown());
 
-                    CompleteAnswerButton.SetActive(true);
+                 //   CompleteAnswerButton.SetActive(true);
                 }
                 break;
          

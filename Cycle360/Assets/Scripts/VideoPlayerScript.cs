@@ -339,6 +339,8 @@ public class VideoPlayerScript : MonoBehaviour
 
                 if (Prac1Hazards[0] != null)//Ped
                 {
+                    Prac1Hazards[0].initTime = 4.0f;
+                    Prac1Hazards[0].despawnTime = 6.0f;
                     if (curFrame >= 4.0f && !Prac1HazardisSet[0])
                     {
                         
@@ -358,6 +360,8 @@ public class VideoPlayerScript : MonoBehaviour
 
                 if (Prac1Hazards[1] != null)//Speedbump
                 {
+                    Prac1Hazards[1].initTime = 9.0f;
+                    Prac1Hazards[1].despawnTime = 14.5f;
                     if (curFrame >= 9.0f && !Prac1HazardisSet[1])
                     {
 
@@ -378,6 +382,8 @@ public class VideoPlayerScript : MonoBehaviour
 
                 if (Prac1Hazards[2] != null)//PedestrianCrossing
                 {
+                    Prac1Hazards[2].initTime = 13.0f;
+                    Prac1Hazards[2].despawnTime = 19.0f;
                     if (curFrame >= 13.0f && !Prac1HazardisSet[2])
                     {
                       
@@ -396,6 +402,8 @@ public class VideoPlayerScript : MonoBehaviour
 
                 if (Prac1Hazards[3] != null)//Roundabout
                 {
+                    Prac1Hazards[3].initTime = 14.0f;
+                    Prac1Hazards[3].despawnTime = 21.0f;
                     if (curFrame >= 14.0f && !Prac1HazardisSet[3])
                     {
 
@@ -421,6 +429,8 @@ public class VideoPlayerScript : MonoBehaviour
                 Debug.Log("Prac 2 is active");
                 if ( Prac2Hazards[0]!=null)
                 {
+                    Prac2Hazards[0].initTime = 1.0f;
+                    Prac2Hazards[0].despawnTime = 7.0f;
                     if (curFrame >= 1.0f && !Prac2HazardisSet[0])
                     {
 
@@ -438,6 +448,8 @@ public class VideoPlayerScript : MonoBehaviour
 
                 if (  Prac2Hazards[1] != null)//Car
                 {
+                    Prac2Hazards[1].initTime = 5.0f;
+                    Prac2Hazards[1].despawnTime = 14.0f;
                     if (curFrame >= 5.0f && !Prac2HazardisSet[1])
                     {
 
@@ -454,6 +466,8 @@ public class VideoPlayerScript : MonoBehaviour
                 }
                 if ( Prac2Hazards[2] != null)//Pedestrian
                 {
+                    Prac2Hazards[2].initTime = 5.0f;
+                    Prac2Hazards[2].despawnTime = 10.0f;
                     if (curFrame >= 5.0f && !Prac2HazardisSet[2])
                     {
 
@@ -477,6 +491,8 @@ public class VideoPlayerScript : MonoBehaviour
                 {
                     if (curFrame >= 1.0f && !Q1HazardisSet[0])
                     {
+                        Q1Hazards[0].initTime = 1.0f;
+                        Q1Hazards[0].despawnTime = 6.0f;
 
                         Q1Hazards[0].gameObject.SetActive(true);
                         Q1Hazards[0].StartMove(new Vector3(-61f, 10f, -151.2f),
@@ -492,6 +508,8 @@ public class VideoPlayerScript : MonoBehaviour
 
                 if (Q1Hazards[1] != null)//pedestrian1 2 ppl
                 {
+                    Q1Hazards[1].initTime = 3.0f;
+                    Q1Hazards[1].despawnTime = 9.0f;
                     if (curFrame >= 3.0f && !Q1HazardisSet[1])
                     {
 
@@ -509,8 +527,11 @@ public class VideoPlayerScript : MonoBehaviour
 
                 if (Q1Hazards[2] != null)//2nd pedestrian
                 {
+                    Q1Hazards[2].initTime = 12.0f;
+                    Q1Hazards[2].despawnTime = 16.0f;
                     if (curFrame >= 12.0f && !Q1HazardisSet[2])
                     {
+                       
 
                         Q1Hazards[2].gameObject.SetActive(true);
                         Q1Hazards[2].StartMove(new Vector3(-133f, -7.8f, -149.36f),
@@ -528,6 +549,8 @@ public class VideoPlayerScript : MonoBehaviour
                 case 3:
                 if (Q2Hazards[0] != null)//pedestrian
                 {
+                    Q2Hazards[0].initTime = 1.0f;
+                    Q2Hazards[0].despawnTime = 7.0f;
                     if (curFrame >= 1.0f && !Q2HazardisSet[0])
                     {
 
@@ -544,6 +567,8 @@ public class VideoPlayerScript : MonoBehaviour
                 }
                 if (Q2Hazards[1] != null)
                 {
+                    Q2Hazards[1].initTime = 4.0f;
+                    Q2Hazards[1].despawnTime = 7.0f;
                     if (curFrame >= 4.0f && !Q2HazardisSet[1])//cyclist
                     {
 
@@ -560,6 +585,8 @@ public class VideoPlayerScript : MonoBehaviour
                 }
                 if (Q2Hazards[2] != null)//car
                 {
+                    Q2Hazards[2].initTime = 7.0f;
+                    Q2Hazards[2].despawnTime = 10.0f;
                     if (curFrame >= 7.0f && !Q2HazardisSet[2])
                     {
 
@@ -581,6 +608,8 @@ public class VideoPlayerScript : MonoBehaviour
                 Debug.Log("Q3 is active");
                 if (Q3Hazards[0] != null)
                 {
+                    Q3Hazards[0].initTime = 1.0f;
+                    Q3Hazards[0].despawnTime = 6.0f;
                     if (curFrame >= 1.0f && !Q3HazardisSet[0])
                     {
 
@@ -597,6 +626,8 @@ public class VideoPlayerScript : MonoBehaviour
                 }
                 if (Q3Hazards[1] != null)//dog
                 {
+                    Q3Hazards[1].initTime = 8.0f;
+                    Q3Hazards[1].despawnTime = 12.0f;
                     if (curFrame >= 8.0f && !Q3HazardisSet[1])
                     {
 
@@ -614,6 +645,8 @@ public class VideoPlayerScript : MonoBehaviour
                 }
                 if (Q3Hazards[2] != null)
                 {
+                    Q3Hazards[2].initTime = 9.0f;
+                    Q3Hazards[2].despawnTime = 15.0f;
                     if (curFrame >= 9.0f && !Q3HazardisSet[2])
                     {
 
@@ -634,6 +667,8 @@ public class VideoPlayerScript : MonoBehaviour
                 Debug.Log("Q4 is active");
                 if (Q4Hazards[0] != null)//car
                 {
+                    Q4Hazards[0].initTime = 1.0f;
+                    Q4Hazards[0].despawnTime = 6.0f;
                     if (curFrame >= 1.0f && !Q4HazardisSet[0])
                     {
 
@@ -652,6 +687,8 @@ public class VideoPlayerScript : MonoBehaviour
                 }
                 if (Q4Hazards[1] != null)//carLeft
                 {
+                    Q4Hazards[1].initTime = 8.0f;
+                    Q4Hazards[1].despawnTime = 11.0f;
                     if (curFrame >= 8.0f && !Q4HazardisSet[1])
                     {
 
@@ -669,6 +706,8 @@ public class VideoPlayerScript : MonoBehaviour
                 }
                 if (Q4Hazards[2] != null)//car reversing
                 {
+                    Q4Hazards[2].initTime = 7.0f;
+                    Q4Hazards[2].despawnTime = 14.0f;
                     if (curFrame >= 7.0f && !Q4HazardisSet[2])
                     {
 
@@ -686,6 +725,8 @@ public class VideoPlayerScript : MonoBehaviour
                 }
                 if (Q4Hazards[3] != null)
                 {
+                    Q4Hazards[3].initTime = 13.0f;
+                    Q4Hazards[3].despawnTime = 18.0f;
                     if (curFrame >= 13.0f && !Q4HazardisSet[3])
                     {
 
@@ -706,6 +747,8 @@ public class VideoPlayerScript : MonoBehaviour
                 Debug.Log("Q5 is active");
                 if (Q5Hazards[0] != null)//cone
                 {
+                    Q5Hazards[0].initTime = 2.0f;
+                    Q5Hazards[0].despawnTime = 6.0f;
                     if (curFrame >= 2.0f && !Q5HazardisSet[0])
                     {
 
@@ -723,6 +766,8 @@ public class VideoPlayerScript : MonoBehaviour
                 }
                 if (Q5Hazards[1] != null)//speedbump
                 {
+                    Q5Hazards[1].initTime = 11.0f;
+                    Q5Hazards[1].despawnTime = 15.0f;
                     if (curFrame >= 11.0f && !Q5HazardisSet[1])
                     {
 
@@ -741,6 +786,8 @@ public class VideoPlayerScript : MonoBehaviour
                 }
                 if (Q5Hazards[2] != null)//pedestrian
                 {
+                    Q5Hazards[2].initTime = 17.0f;
+                    Q5Hazards[2].despawnTime = 19.0f;
                     if (curFrame >= 17.0f && !Q5HazardisSet[2])
                     {
 
@@ -758,6 +805,8 @@ public class VideoPlayerScript : MonoBehaviour
                 }
                 if (Q5Hazards[3] != null)
                 {
+                    Q5Hazards[3].initTime = 21.0f;
+                    Q5Hazards[3].despawnTime = 24.0f;
                     if (curFrame >= 21.0f && !Q5HazardisSet[3])
                     {
 

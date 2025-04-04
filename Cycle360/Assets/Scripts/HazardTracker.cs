@@ -7,6 +7,9 @@ public class HazardTracker : MonoBehaviour
     public float speed=10000.0f;
     public float time = 5;
     public GameObject Hazard;
+    public float initTime;
+    public float despawnTime;
+
     void Start()
     {
    

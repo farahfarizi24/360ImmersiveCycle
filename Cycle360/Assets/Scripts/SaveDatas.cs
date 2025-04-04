@@ -144,19 +144,19 @@ public class SaveDatas : MonoBehaviour
         string theTime = System.DateTime.Now.ToString("hh:mm:ss");
         TotalCorrectClick++;
         TotalNumberofClick++;
-        TotalScore += AddScore;
+        TotalScore = TotalCorrectClick;
 
         sw.Write(UID + "," + theDate + "," + theTime + "," + TestID + "," + QuestionID + "," + ResponseTime + "," + ObjectID + "," + AddScore + ",");
         sw.Write(TotalCorrectClick + "," + TotalIncorrectClick + "," + TotalNumberofClick + "," + TotalScore + "\n");
         sw.Close();
     }
-    public void OnFreezePerceptionTestWrongClick(string VideoTime)
+    public void OnFreezePerceptionTestWrongClick(string QuestionID, string VideoTime)
     {
         sw = File.AppendText(saveFile);
         string theTime = System.DateTime.Now.ToString("hh:mm:ss");
         TotalIncorrectClick++;
         TotalNumberofClick++;
-        sw.Write(UID + "," + theDate + "," + theTime + "," + TestID + "," + "wrong" + "," + VideoTime + "," + "wrong" + "," + "0" + ",");
+        sw.Write(UID + "," + theDate + "," + theTime + "," + TestID + "," + QuestionID + "," + VideoTime + "," + "wrong" + "," + "0" + ",");
         sw.Write(TotalCorrectClick + "," + TotalIncorrectClick + "," + TotalNumberofClick + "," + TotalScore + "\n");
         sw.Close();
     }

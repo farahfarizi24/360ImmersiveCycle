@@ -2245,6 +2245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca8598df2b510324d9db5de463d98472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detector: {fileID: 203863435}
   saveDatas: {fileID: 0}
   curVideoTime: 0
   VPlayer: {fileID: 587685922}

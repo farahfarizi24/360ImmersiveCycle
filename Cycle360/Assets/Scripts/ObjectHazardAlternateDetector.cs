@@ -7,8 +7,12 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
     public PercTest2 VPscript;
     public AudioSource CorrectBeep;
     SaveDatas savingScript;
+    private float timerDuration = 6f;
+    private float timer;
+    private bool timerRunning = false;
+    public int totalscore;
     // Update is called once per frame
-   // public GameObject[] Prac1Hazards;
+    // public GameObject[] Prac1Hazards;
     private void Awake()
     {
         GameObject SaveFileObject = GameObject.FindGameObjectWithTag("Manager");
@@ -24,21 +28,22 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit))
                 {
-
+                Debug.Log("is click click");
                     if (hit.collider != null)
                     {
                         Debug.Log("Is hit");
                         // VPscript.PauseVid();
-                        CorrectBeep.Play();
                         Debug.Log(hit.collider.gameObject.name);
 
                         if (hit.collider.gameObject.tag =="Hazards")
                     {
+                        CorrectBeep.Play();
+
                         NewHazardHit(hit.collider.transform.parent.name);
-                        // IfCorrectHazardHit(hit.collider.transform.parent.name);
+                         IfCorrectHazardHit(hit.collider.transform.parent.name);
                         GameObject ParentObj = hit.collider.transform.parent.gameObject;
                         ParentObj.GetComponent<MeshRenderer>().enabled = true;
-                        // IfCorrectHazardHit(hit.collider.gameObject.name);
+                         //IfCorrectHazardHit(hit.collider.gameObject.name);
                         savingScript.TotalCorrectWithinTheTest++;
                         savingScript.TotalCorrectWithinQuestions++;
                         Destroy(hit.collider.gameObject);
@@ -50,12 +55,23 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
                 }
                 else
                 {
-
+                Debug.Log("Wrong Click!");
                     IfWrongCLick();
                 }
-            
 
 
+            if (timerRunning)
+            {
+                timer -= Time.deltaTime;
+
+                if (timer <= 0f)
+                {
+                    timerRunning = false;
+                    timer = 0f;
+
+                    OnTimerComplete();
+                }
+            }
 
         }
 
@@ -80,7 +96,7 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
                     if (hit.collider.gameObject.tag == "Hazards")
                     {
                         NewHazardHit(hit.collider.transform.parent.name);
-                        // IfCorrectHazardHit(hit.collider.transform.parent.name);
+                         IfCorrectHazardHit(hit.collider.transform.parent.name);
                         GameObject ParentObj = hit.collider.transform.parent.gameObject;
                         ParentObj.GetComponent<MeshRenderer>().enabled = true;
                         // IfCorrectHazardHit(hit.collider.gameObject.name);
@@ -98,14 +114,36 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
 
                 IfWrongCLick();
             }
+            if (timerRunning)
+            {
+                timer -= Time.deltaTime;
 
+                if (timer <= 0f)
+                {
+                    timerRunning = false;
+                    timer = 0f;
+
+                    OnTimerComplete();
+                }
+            }
 
 
         }
 
 #endif
     }
+    public void StartTimer()
+    {
+        timer = timerDuration;
+        timerRunning = true;
+        Debug.Log("Timer started for 6 seconds.");
+    }
 
+    private void OnTimerComplete()
+    {
+        Debug.Log("Timer finished!");
+        // Add your custom logic here (e.g., trigger an event, change scene, etc.)
+    }
     public void NewHazardHit(string HazardName)
     {
         Debug.Log("Hit " + HazardName);
@@ -115,8 +153,12 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
 
     public void IfCorrectHazardHit(string HazardName)
     {
-        //  GameObject SaveFileObject = GameObject.FindGameObjectWithTag("Manager");
-        //  savingScript = SaveFileObject.GetComponent<SaveDatas>();
+        GameObject SaveFileObject = GameObject.FindGameObjectWithTag("Manager");
+        savingScript = SaveFileObject.GetComponent<SaveDatas>();
+        VPscript.score++;
+        totalscore++;
+        savingScript.OnFreezePerceptionTestCorrectClick(VPscript.CurrentClipNumber.ToString(),timer.ToString(),HazardName,1);
+
         //Need fixing
 
 
@@ -125,6 +167,6 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
 
     public void IfWrongCLick()
     {
-        savingScript.OnPerceptionTestWrongClick(VPscript.curVideoTime.ToString());
+        savingScript.OnFreezePerceptionTestWrongClick(VPscript.CurrentClipNumber.ToString(),VPscript.curVideoTime.ToString());
     }
 }
