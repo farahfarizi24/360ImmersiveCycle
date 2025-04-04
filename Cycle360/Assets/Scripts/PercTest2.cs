@@ -131,7 +131,19 @@ public class PercTest2 : MonoBehaviour
         StopCoroutine(answerCountdown());
         }
     //After answer stage
-public void showResult()
+
+    public static int CalculateEffiency(int A, int B)
+    {
+        if (B == 0)
+        {
+            Debug.LogWarning("Cannot divide by zero! Returning 0%");
+            return 0;
+        }
+
+        int percentage = Mathf.RoundToInt(((float)A / B) * 100); // Ensures correct calculation
+        return percentage;
+    }
+    public void showResult()
     {
         ResetScenarioObject.SetActive(false);
 
@@ -141,10 +153,10 @@ public void showResult()
         BackgroundImage.SetActive(true);
         if (CurrentClipNumber == 7)
         {
-            int efficiency = saveDatas.TotalCorrectClick / saveDatas.TotalNumberofClick * 100;
+            int efficiency = CalculateEffiency(saveDatas.TotalCorrectClick, saveDatas.TotalNumberofClick);
 
-            AnswerFeedback.GetComponent<TMP_Text>().text = "You detected " + score + " from " + totalQuestion + " hazards" + "\n" +
-              saveDatas.TotalCorrectClick + "hazards correctly identified out of 10 Hazards in the test. Your efficiency is " + efficiency +"%";
+            AnswerFeedback.GetComponent<TMP_Text>().text = "You identified " + score + " from " + totalQuestion + " hazards" + "\n" +
+              saveDatas.TotalCorrectClick + " hazards correctly identified within the test." + "\n" + "Your efficiency is " + efficiency +"%";
                
             //ADD overall efficiency
 

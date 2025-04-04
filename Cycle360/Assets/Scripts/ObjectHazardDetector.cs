@@ -55,7 +55,11 @@ public class ObjectHazardDetector : MonoBehaviour
                 else
                 {
 
-                    IfWrongCLick();
+                    if (!VPscript.BackgroundUI.activeSelf && VPscript.video.isPlaying)
+                    {
+                        IfWrongCLick();
+                        Debug.Log("is click!");
+                    }
                 }
             }
           
@@ -92,9 +96,13 @@ public class ObjectHazardDetector : MonoBehaviour
             }
             else
             {
-                Debug.Log("is click!");
+                if (!VPscript.BackgroundUI.activeSelf && VPscript.video.isPlaying)
+                {
+                    IfWrongCLick();
+                    Debug.Log("is click!");
+                }
+           
 
-                IfWrongCLick();
             }
 
 

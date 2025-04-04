@@ -90,7 +90,7 @@ public class SaveDatas : MonoBehaviour
 
     public void OnPerceptionTestEnter()
     {
-        saveFile = Application.persistentDataPath + "/360Cycle-PerceptionTest.csv";
+        saveFile = Application.persistentDataPath + "/360Cycle-DynamicPerceptionTest.csv";
         Debug.Log("File is saved at:" + saveFile);
 
         if (!File.Exists(saveFile))

@@ -127,10 +127,10 @@ public class VideoPlayerScript : MonoBehaviour
         }
         else  if (TestFeedback.gameObject.activeSelf)
         {
-            if (CurPlayingClip ==7) 
+            if (CurPlayingClip ==6) 
             {//NextButton.gameObject.SetActive(false);
-               
-                FinalFeedback.gameObject.SetActive(false) ;
+
+                ShowEndScene();
                 TestFeedback.gameObject.SetActive(false) ;
                 //FinalScene
             }
@@ -147,17 +147,14 @@ public class VideoPlayerScript : MonoBehaviour
                 //SetHazardAllToNull and BoolTo false
                 //
                 CurPlayingClip++;
-
-
-              
-
-               
             }
-      
-            
-            
-            
+ 
             //Load next;
+        }
+        else if (FinalFeedback.gameObject.activeSelf)
+        {
+            SceneManager.LoadScene(0);
+
         }
     }
     public void ResetScenario()
@@ -210,7 +207,8 @@ public class VideoPlayerScript : MonoBehaviour
         string tempPath = Path.Combine(RootPath, "Ordered_Dynamic" + VidToPlay + ".mp4");
         video.url = tempPath;
         video.controlledAudioTrackCount = 1;
-
+        SaveObj.TotalCorrectWithinQuestions = 0;
+        SaveObj.TotalHazardWithinQuestion = 0;
         //video.clip = Projectionclips[CurPlayingClip];
         if (VidToPlay == 2)
         {
@@ -366,7 +364,7 @@ public class VideoPlayerScript : MonoBehaviour
         {
             case 0:
                 //Practice 1
-
+                SaveObj.TotalHazardWithinQuestion = Prac1HazardisSet.Length;
                 if (Prac1Hazards[0] != null)//Ped
                 {
                     Prac1Hazards[0].initTime = 4.0f;
@@ -454,6 +452,7 @@ public class VideoPlayerScript : MonoBehaviour
         
                 break;
                 case 1:
+                SaveObj.TotalHazardWithinQuestion = Prac2HazardisSet.Length;
 
 
                 Debug.Log("Prac 2 is active");
@@ -517,6 +516,8 @@ public class VideoPlayerScript : MonoBehaviour
                 break;
                 case 2:
                 Debug.Log("Q1 is active");
+                SaveObj.TotalHazardWithinQuestion = Q1HazardisSet.Length;
+
                 if (Q1Hazards[0] != null)//light
                 {
                     if (curFrame >= 1.0f && !Q1HazardisSet[0])
@@ -577,6 +578,8 @@ public class VideoPlayerScript : MonoBehaviour
                
                 break;
                 case 3:
+                SaveObj.TotalHazardWithinQuestion = Q2HazardisSet.Length;
+
                 if (Q2Hazards[0] != null)//pedestrian
                 {
                     Q2Hazards[0].initTime = 1.0f;
@@ -635,6 +638,8 @@ public class VideoPlayerScript : MonoBehaviour
                 Debug.Log("Q2 is active");
                 break;
                 case 4:
+                SaveObj.TotalHazardWithinQuestion = Q3HazardisSet.Length;
+
                 Debug.Log("Q3 is active");
                 if (Q3Hazards[0] != null)
                 {
@@ -694,6 +699,8 @@ public class VideoPlayerScript : MonoBehaviour
                 }
                 break;
                 case 5:
+                SaveObj.TotalHazardWithinQuestion = Q4HazardisSet.Length;
+
                 Debug.Log("Q4 is active");
                 if (Q4Hazards[0] != null)//car
                 {
@@ -774,6 +781,8 @@ public class VideoPlayerScript : MonoBehaviour
                 }
                 break;
                 case 6:
+                SaveObj.TotalHazardWithinQuestion = Q5HazardisSet.Length;
+
                 Debug.Log("Q5 is active");
                 if (Q5Hazards[0] != null)//cone
                 {
@@ -873,26 +882,35 @@ public class VideoPlayerScript : MonoBehaviour
 
 
 
-    
+
     #endregion
-    
 
 
- 
-public void ShowEndScene(VideoPlayer vp)
+
+    public static int CalculateEffiency(int A, int B)
     {
+        if (B == 0)
+        {
+            Debug.LogWarning("Cannot divide by zero! Returning 0%");
+            return 0;
+        }
+
+        int percentage = Mathf.RoundToInt(((float)A / B) * 100); // Ensures correct calculation
+        return percentage;
+    }
+    public void ShowEndScene()
+    {
+        int efficiency = CalculateEffiency(SaveObj.TotalCorrectClick, SaveObj.TotalNumberofClick);
+
         FinalFeedback.gameObject.SetActive(true);
         SaveObj.TotalHazardOnTheTest = HazardTotalCount;
-        if (CurPlayingClip == 2)
-        {
+       
             FinalFeedback.text = "You identified " + SaveObj.TotalCorrectWithinTheTest + " out of " +
-     SaveObj.TotalHazardOnTheTest + " hazards in the practice test.";
-            NextButton.GetComponentInChildren<TMP_Text>().text = "Start Test";
-        }
-        else
-        {
+        SaveObj.TotalHazardOnTheTest + " hazards in the practice test."
+         +"\n"+ "Your hazard detection efficiency is " + efficiency +"%";
+          
             NextButton.GetComponentInChildren<TMP_Text>().text = "Complete Test";
-        }
+        
    
       
 
@@ -900,12 +918,12 @@ public void ShowEndScene(VideoPlayer vp)
 
     void EndofQuestion(VideoPlayer vp)
     {
-        GetSaveFile();
+        //GetSaveFile();
         isPlaying = false;
 
         BackgroundUI.gameObject.SetActive(true);
         NextButton.gameObject.SetActive(true);
-       TestFeedback.gameObject.SetActive(true);
+        TestFeedback.gameObject.SetActive(true);
         TestFeedback.text = "You identified " + SaveObj.TotalCorrectWithinQuestions + " out of " +
           SaveObj.TotalHazardWithinQuestion + " hazards in the video";
 
@@ -921,7 +939,6 @@ public void ShowEndScene(VideoPlayer vp)
 
         GameObject SaveFileObject = GameObject.FindGameObjectWithTag("Manager");
         SaveObj = SaveFileObject.GetComponent<SaveDatas>();
-        SaveObj.TotalCorrectWithinQuestions = 0;
-        SaveObj.TotalHazardWithinQuestion = 0;
+       
     }
 }
