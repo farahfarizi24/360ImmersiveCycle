@@ -301,6 +301,7 @@ public void showResult()
     {
         VPlayer.Pause();
         yield return new WaitForSeconds(6.0f);
+        detector.OnTimerComplete();
         //Finish
         showResult();
 

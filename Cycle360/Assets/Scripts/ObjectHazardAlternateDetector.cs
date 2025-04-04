@@ -7,7 +7,7 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
     public PercTest2 VPscript;
     public AudioSource CorrectBeep;
     SaveDatas savingScript;
-    private float timerDuration = 6f;
+    private float timerDuration = 6.0f;
     private float timer;
     private bool timerRunning = false;
     public int totalscore;
@@ -55,9 +55,13 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
                 }
                 else
                 {
-                Debug.Log("Wrong Click!");
+                if (timerRunning && !VPscript.BackgroundImage.activeSelf)
+                {
+                    Debug.Log("is click!");
+
                     IfWrongCLick();
                 }
+            }
 
 
             if (timerRunning)
@@ -110,9 +114,13 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
             }
             else
             {
-                Debug.Log("is click!");
+                if (timerRunning && !VPscript.BackgroundImage.activeSelf)
+                {
+                    Debug.Log("is click!");
 
-                IfWrongCLick();
+                    IfWrongCLick();
+                }
+              
             }
             if (timerRunning)
             {
@@ -139,8 +147,9 @@ public class ObjectHazardAlternateDetector : MonoBehaviour
         Debug.Log("Timer started for 6 seconds.");
     }
 
-    private void OnTimerComplete()
+    public void OnTimerComplete()
     {
+        timerRunning=false;
         Debug.Log("Timer finished!");
         // Add your custom logic here (e.g., trigger an event, change scene, etc.)
     }

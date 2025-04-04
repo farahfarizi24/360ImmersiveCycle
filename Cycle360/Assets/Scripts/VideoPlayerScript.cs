@@ -260,32 +260,62 @@ public class VideoPlayerScript : MonoBehaviour
     {
         for(int i = 0; i < Prac1Hazards.Length; i++)
         {
-            Prac1Hazards[i].gameObject.SetActive(false);
+            if ((Prac1Hazards[i])!= null)
+            {
+                Prac1Hazards[i].gameObject.SetActive(false);
+
+            }
         }
         for (int i = 0; i < Prac2Hazards.Length; i++)
         {
-            Prac2Hazards[i].gameObject.SetActive(false);
+            if ((Prac2Hazards[i]) != null)
+            {
+                Prac2Hazards[i].gameObject.SetActive(false);
+
+            }
         }
         for (int i = 0; i < Q1Hazards.Length; i++)
         {
-            Q1Hazards[i].gameObject.SetActive(false);
+            if ((Q1Hazards[i]) != null)
+            {
+                Q1Hazards[i].gameObject.SetActive(false);
+
+            }
         }
         for (int i = 0; i < Q2Hazards.Length; i++)
         {
-            Q2Hazards[i].gameObject.SetActive(false);
+            if ((Q2Hazards[i]) != null)
+            {
+                Q2Hazards[i].gameObject.SetActive(false);
+
+            }
         }
         for (int i = 0; i < Q3Hazards.Length; i++)
         {
-            Q3Hazards[i].gameObject.SetActive(false);
+            if ((Q3Hazards[i]) != null)
+            {
+                Q3Hazards[i].gameObject.SetActive(false);
+
+            }
         }
         for (int i = 0; i < Q4Hazards.Length; i++)
         {
-            Q4Hazards[i].gameObject.SetActive(false);
+            if ((Q4Hazards[i]) != null)
+            {
+                Q4Hazards[i].gameObject.SetActive(false);
+
+            }
         }
         for (int i = 0; i < Q5Hazards.Length; i++)
         {
-            Q5Hazards[i].gameObject.SetActive(false);
+            if ((Q5Hazards[i]) != null)
+            {
+                Q5Hazards[i].gameObject.SetActive(false);
+
+            }
         }
+        
+        
         for (int i = 0; i < Prac1HazardisSet.Length; i++)
         {
             Prac1HazardisSet[i] = false;
