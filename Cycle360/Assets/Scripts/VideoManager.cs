@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+
 using System.IO;
 public class VideoManager : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class VideoManager : MonoBehaviour
     public VideoPlayer VPlayer; 
     public bool isPlaying;
     public int CurrentClipNumber;
-
+    public int totalScore;
     public string VideoID;
     public string CorrectAnswer;
     public bool ChoiceASelected;
@@ -39,7 +40,7 @@ public class VideoManager : MonoBehaviour
     public string RootPath;
     public GameObject ResetButton;
     public GameObject PlayerObject;
-
+    public bool isFinal;
     public GameObject NextObject;
     public GameObject BackgroundImage;
     public GameObject DeviceInstructions;
@@ -51,7 +52,7 @@ public class VideoManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        isFinal = false;
         //3seconds freeze frame
         //After the freeze frame done GetSaveFile();
       
@@ -352,7 +353,7 @@ public class VideoManager : MonoBehaviour
 
             NextObject.gameObject.SetActive(true);
             DeviceInstructions.SetActive(true);
-            StartObject.SetActive(false );
+            StartObject.SetActive(false);
         }
         else if (QuestionText.gameObject.activeSelf)
         {
@@ -370,8 +371,8 @@ public class VideoManager : MonoBehaviour
             DeviceInstructions.SetActive(false);
             BackgroundImage.SetActive(false);
             LoadClip();
-           //
-           //isReady = true;
+            //
+            //isReady = true;
         }
 
         else if (ConfidenceSlider.gameObject.activeSelf)
@@ -381,9 +382,9 @@ public class VideoManager : MonoBehaviour
             ConfidenceSlider.gameObject.SetActive(false);
             NextObject.gameObject.SetActive(true);
 
-            
+
             CheckIfAnswerIsCorrect();
-            if (CurrentClipNumber == 3 || CurrentClipNumber==14)
+            if (CurrentClipNumber == 14)
             {
                 // FinalResult
                 FinalResult();
@@ -394,10 +395,11 @@ public class VideoManager : MonoBehaviour
         else if (AnswerStatus.gameObject.activeSelf)
         {
             //THERE ARE TWO HERE RECHECK;
-            if (CurrentClipNumber == 14)
+            if (isFinal)
             {
                 NextObject.gameObject.SetActive(false);
-                
+                SceneManager.LoadScene(0);
+
             }
             else
             {
@@ -410,6 +412,8 @@ public class VideoManager : MonoBehaviour
 
             }
         }
+       
+        
     }
 
     IEnumerator LoadAtStart()
@@ -614,6 +618,8 @@ public class VideoManager : MonoBehaviour
         timer = 0;
         ResponseTime = 0;
         score++;
+        totalScore++;
+
         ConfidenceSlider.gameObject.SetActive(false);
         CurrentClipNumber++;
         // VideoID = NextVideo;
@@ -636,7 +642,8 @@ public class VideoManager : MonoBehaviour
     public void FinalResult()
     {
    
-        AnswerStatus.text = "You got "+ score +" out of " + totalQuestion + "right!";
+        AnswerStatus.text = "You got "+ totalScore +" out of " + totalQuestion + "right!";
+        isFinal = true;
         NextObject.SetActive(true);
     }
 
