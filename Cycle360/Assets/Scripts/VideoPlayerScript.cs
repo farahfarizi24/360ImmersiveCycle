@@ -905,8 +905,7 @@ public class VideoPlayerScript : MonoBehaviour
         FinalFeedback.gameObject.SetActive(true);
         SaveObj.TotalHazardOnTheTest = HazardTotalCount;
        
-            FinalFeedback.text = "You identified " + SaveObj.TotalCorrectWithinTheTest + " out of " +
-        SaveObj.TotalHazardOnTheTest + " hazards in the practice test."
+            FinalFeedback.text = "You identified " + SaveObj.TotalCorrectWithinTheTest + " out of 24 hazards."
          +"\n"+ "Your hazard detection efficiency is " + efficiency +"%";
           
             NextButton.GetComponentInChildren<TMP_Text>().text = "Complete Test";
