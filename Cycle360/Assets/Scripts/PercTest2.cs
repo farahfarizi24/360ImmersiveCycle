@@ -10,7 +10,8 @@ using UnityEngine.UIElements;
 using System.IO;
 
 public class PercTest2 : MonoBehaviour
-{public ObjectHazardAlternateDetector detector;
+{
+    public ObjectHazardAlternateDetector detector;
     public SaveDatas saveDatas;
     public float curVideoTime;
     public VideoPlayer VPlayer;
@@ -75,7 +76,7 @@ public class PercTest2 : MonoBehaviour
 
     IEnumerator CountdownToStartVid()
     {
-        TimerObject.transform.parent.gameObject.SetActive(true);    
+        TimerObject.transform.parent.gameObject.SetActive(true);
         while (timer > 0)
         {
             isReady = false;
@@ -127,9 +128,10 @@ public class PercTest2 : MonoBehaviour
         CurrentClipNumber = 1;
     }
 
-    public void cancelTimer() {
+    public void cancelTimer()
+    {
         StopCoroutine(answerCountdown());
-        }
+    }
     //After answer stage
 
     public static int CalculateEffiency(int A, int B)
@@ -156,8 +158,8 @@ public class PercTest2 : MonoBehaviour
             int efficiency = CalculateEffiency(saveDatas.TotalCorrectClick, saveDatas.TotalNumberofClick);
 
             AnswerFeedback.GetComponent<TMP_Text>().text = "You identified " + score + " from " + totalQuestion + " hazards" + "\n" +
-              saveDatas.TotalCorrectClick + " hazards correctly identified within the test." + "\n" + "Your efficiency is " + efficiency +"%";
-               
+              saveDatas.TotalCorrectClick + " hazards correctly identified within the test." + "\n" + "Your efficiency is " + efficiency + "%";
+
             //ADD overall efficiency
 
 
@@ -170,7 +172,7 @@ public class PercTest2 : MonoBehaviour
         AnswerFeedback.SetActive(true);
         NextObject.SetActive(true);
 
-        
+
     }
     public void NextButtonClicked()
     {
@@ -194,7 +196,7 @@ public class PercTest2 : MonoBehaviour
 
         else if (AnswerFeedback.gameObject.activeSelf)
         { //TO CHANGE LATER-> This will switch to Dynamic Perception Test when triggered
-          
+
             if (CurrentClipNumber == 7)
             {
 
@@ -217,12 +219,12 @@ public class PercTest2 : MonoBehaviour
                 //
                 CurrentClipNumber++;
 
-               
+
 
             }
 
 
-            
+
 
             //Load next;
         }
@@ -231,16 +233,16 @@ public class PercTest2 : MonoBehaviour
 
     public void LoadVid()
     {
-       
+
         score = 0;
         string tempPath = Path.Combine(RootPath, "Ordered_Freeze" + CurrentClipNumber + ".mp4");
         //string tempPath = Path.Combine(RootPath, "Test.mp4");
         VPlayer.url = tempPath;
-        
+
         VPlayer.controlledAudioTrackCount = 1;
 
         VPlayer.Prepare();
-      
+
 
         if (CurrentClipNumber <= 2)
         {
@@ -249,7 +251,7 @@ public class PercTest2 : MonoBehaviour
         else
         {
             int tempID = CurrentClipNumber - 2;
-            VideoID = "Question"+ tempID.ToString();
+            VideoID = "Question" + tempID.ToString();
         }
         VideoIsPreparing = true;
 
@@ -259,7 +261,7 @@ public class PercTest2 : MonoBehaviour
         }
         if (CurrentClipNumber == 2)
         {
-             PlayerObject.transform.eulerAngles = new Vector3(0.0f, 200.0f, 0.0f);
+            PlayerObject.transform.eulerAngles = new Vector3(0.0f, 200.0f, 0.0f);
         }
         if (CurrentClipNumber == 3)
         {
@@ -303,7 +305,7 @@ public class PercTest2 : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         VPlayer.Pause();
         //  isReady = true;
-        BackgroundImage.gameObject.SetActive(false);  
+        BackgroundImage.gameObject.SetActive(false);
 
         isReady = true;
     }
@@ -344,7 +346,7 @@ public class PercTest2 : MonoBehaviour
                     detector.StartTimer();
 
                     StartCoroutine(answerCountdown());
-                   // CompleteAnswerButton.SetActive(true);
+                    // CompleteAnswerButton.SetActive(true);
                 }
                 break;
             case 2:
@@ -385,7 +387,7 @@ public class PercTest2 : MonoBehaviour
 
                     StartCoroutine(answerCountdown());
 
-                  //  CompleteAnswerButton.SetActive(true);
+                    //  CompleteAnswerButton.SetActive(true);
                 }
                 break;
             case 4:
@@ -404,7 +406,7 @@ public class PercTest2 : MonoBehaviour
 
                     StartCoroutine(answerCountdown());
 
-                   // CompleteAnswerButton.SetActive(true);
+                    // CompleteAnswerButton.SetActive(true);
                 }
                 break;
             case 5:
@@ -423,7 +425,7 @@ public class PercTest2 : MonoBehaviour
 
                     StartCoroutine(answerCountdown());
 
-                   // CompleteAnswerButton.SetActive(true);
+                    // CompleteAnswerButton.SetActive(true);
                 }
                 break;
             case 6:
@@ -432,7 +434,7 @@ public class PercTest2 : MonoBehaviour
                     HazardContainer[CurrentClipNumber - 1].SetActive(true);
 
                     PauseVid();
-                    
+
                     for (int i = 0; i < Q4_Hazards.Length; i++)
                     {
                         Q4_Hazards[i].SetActive(true);
@@ -442,7 +444,7 @@ public class PercTest2 : MonoBehaviour
 
                     StartCoroutine(answerCountdown());
 
-                  //  CompleteAnswerButton.SetActive(true);
+                    //  CompleteAnswerButton.SetActive(true);
                 }
                 break;
             case 7:
@@ -461,10 +463,10 @@ public class PercTest2 : MonoBehaviour
 
                     StartCoroutine(answerCountdown());
 
-                 //   CompleteAnswerButton.SetActive(true);
+                    //   CompleteAnswerButton.SetActive(true);
                 }
                 break;
-         
+
         }
     }
     void GetSaveFile()
