@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 using System.IO;
+using System.Numerics;
 public class VideoManager : MonoBehaviour
 {
     public SaveDatas saveDatas;
@@ -154,12 +155,13 @@ public class VideoManager : MonoBehaviour
                 break;
             case 3:
 
-                QuestionText.text = "The bike lane has ended, is it legal to ride in the bus lane?";
+                QuestionText.text = "The bike lane has ended, what should you do?";
 
-                ChoiceText_1.text = "a) Yes, cyclists can ride in all bus lanes across Australia";
-                ChoiceText_2.text = "b) No, cyclists are never allowed to ride in bus lanes";
-                ChoiceText_3.text = "c) It depends, cyclists can use bus lanes but only during peak hours";
-                ChoiceText_4.text = "d) It depends, there are different laws for riding in bus lanes in the different the states and territories";
+                ChoiceText_1.text = "a) Dismount and walk on the footpath until the bike lane reappears";
+                ChoiceText_2.text = "b) Check behind and merge on to the footpath as this is allowed unless a sign specifically prohibits it";
+                ChoiceText_3.text = "c) Continue straight and use the bus lane as this is allowed unless a sign specifically prohibits it";
+                ChoiceText_4.text = "d) Check behind and merge right to join the traffic when safe";
+                
 
 
                 CorrectAnswer = "D";
