@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 using System.IO;
-using System.Numerics;
+//using System.Numerics;
 public class VideoManager : MonoBehaviour
 {
     public SaveDatas saveDatas;
