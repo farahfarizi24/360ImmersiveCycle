@@ -45,6 +45,7 @@ public class PercTest2 : MonoBehaviour
     //  public GameObject IntroductionText_2;
     public TMP_Text TimerObject;
     public GameObject AnswerFeedback;
+    public GameObject AnswerFeedbackParent;
     public int score;
     public int totalQuestion;
     // Start is called before the first frame update
@@ -119,7 +120,7 @@ public class PercTest2 : MonoBehaviour
         //NextObject.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Next";
         BackgroundImage.SetActive(true);
         NextObject.gameObject.SetActive(true);
-        AnswerFeedback.SetActive(false);
+        AnswerFeedbackParent.SetActive(false);
         timer = 0;
         ResponseTime = 0.0f;
         isReady = false;
@@ -169,7 +170,7 @@ public class PercTest2 : MonoBehaviour
             AnswerFeedback.GetComponent<TMP_Text>().text = "You detected " + score + " from " + totalQuestion + " hazards";
 
         }
-        AnswerFeedback.SetActive(true);
+        AnswerFeedbackParent.SetActive(true);
         NextObject.SetActive(true);
 
 
@@ -194,14 +195,14 @@ public class PercTest2 : MonoBehaviour
 
         }
 
-        else if (AnswerFeedback.gameObject.activeSelf)
+        else if (AnswerFeedbackParent.gameObject.activeSelf)
         { //TO CHANGE LATER-> This will switch to Dynamic Perception Test when triggered
 
             if (CurrentClipNumber == 7)
             {
 
                 //Add more in the feedback
-                AnswerFeedback.gameObject.SetActive(false);
+                AnswerFeedbackParent.gameObject.SetActive(false);
                 SceneManager.LoadScene(1);
                 //NextButton.gameObject.SetActive(false);
                 //FinalScene
@@ -213,7 +214,7 @@ public class PercTest2 : MonoBehaviour
 
 
 
-                AnswerFeedback.gameObject.SetActive(false);
+                AnswerFeedbackParent.gameObject.SetActive(false);
                 DeviceInstructions.SetActive(true);
                 //SetHazardAllToNull and BoolTo false
                 //

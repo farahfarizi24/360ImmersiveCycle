@@ -1809,6 +1809,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7703005954058015468, guid: 7779d16e8bbf74cc090284b92d6eb49a, type: 3}
   m_PrefabInstance: {fileID: 540351048}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &540351051 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7860263537830351957, guid: 7779d16e8bbf74cc090284b92d6eb49a, type: 3}
+  m_PrefabInstance: {fileID: 540351048}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &553713743
 GameObject:
   m_ObjectHideFlags: 0
@@ -2197,7 +2202,8 @@ MonoBehaviour:
   IntroductionText_1: {fileID: 1857440204}
   ResetScenarioObject: {fileID: 857268207}
   TimerObject: {fileID: 1581809550}
-  AnswerFeedback: {fileID: 540351050}
+  AnswerFeedback: {fileID: 540351051}
+  AnswerFeedbackParent: {fileID: 540351050}
   score: 0
   totalQuestion: 0
 --- !u!82 &587685925

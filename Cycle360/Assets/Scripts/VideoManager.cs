@@ -602,7 +602,7 @@ public class VideoManager : MonoBehaviour
             timer = 0;
             ResponseTime = 0;
             AnswerStatus.text = "That answer is incorrect!";
-            ConfidenceSlider.gameObject.SetActive(false);
+            ConfidenceSlider.transform.parent.gameObject.SetActive(false);
             CurrentClipNumber++;
             // VideoID = NextVideo;
             totalQuestion++;
@@ -628,7 +628,7 @@ public class VideoManager : MonoBehaviour
         score++;
         totalScore++;
 
-        ConfidenceSlider.gameObject.SetActive(false);
+        ConfidenceSlider.transform.parent.gameObject.SetActive(false);
         CurrentClipNumber++;
         // VideoID = NextVideo;
         totalQuestion++;
